@@ -1,5 +1,5 @@
 --- 
-title: "Bioconductor Package Guidelines for Developers and Reviewers"
+title: "Bioconductor Guidelines for Mentors and Mentees"
 author:
   - Kevin Rue-Albrecht
 date: "`r Sys.Date()`"
