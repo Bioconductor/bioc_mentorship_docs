@@ -1,0 +1,13 @@
+Package: placeholder
+Type: Book
+Title: Does not matter.
+Version: 1.0.0
+Date: 2021-07-27
+Suggests:
+  bookdown,
+  downlit,
+  xml2,
+  bslib,
+  BiocManager,
+  BiocStyle,
+  r-lib/downlit
