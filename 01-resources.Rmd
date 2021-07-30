@@ -1,0 +1,13 @@
+# (PART) Resources {-}
+
+# Overview {.unnumbered #resources-overview}
+
+The following sections contain teachable materials for the mentorship programme.
+For more technical information about Bioconductor package requirements inspected during the formal review process for new Bioconductor, please consult the [Bioconductor Package Guidelines for Developers and Reviewers](http://contributions.bioconductor.org/).
+
+Mentors are encouraged to update and contribute new materials in this book from their experience.
+
+Mentees are encouraged to provide feedback indicating areas of interest and topics that should be expanded or clarified.
+
+Contributions to this book are expected through [pull requests](https://github.com/kevinrue/bioc-mentorship-docs/pulls).
+Suggestions and feedback are expected through [issues](https://github.com/kevinrue/bioc-mentorship-docs/issues).
