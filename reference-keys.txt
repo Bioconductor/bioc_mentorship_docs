@@ -7,5 +7,8 @@ bioc-package
 biocthis
 bioc-review
 bioc-workshop
+maintenance
+publish
+package-community
 booknews
 version-1.0.0-2021-07-27
