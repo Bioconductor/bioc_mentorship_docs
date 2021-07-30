@@ -1,0 +1,9 @@
+# Maintaining a Bioconductor package {#bioc-workshop}
+
+> Contribute!
+> 
+> Introduce and discuss the points below.
+
+- Bioc credential
+- Single developer on <git.bioconductor.org>
+- Multiple developers on <github.org>
