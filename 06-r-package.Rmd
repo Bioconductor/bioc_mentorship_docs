@@ -7,3 +7,5 @@ The following resources form a trove of information for new and experienced pack
 
 - The [R Packages](https://r-pkgs.org/) book
 - The [rOpenSci Packages: Development, Maintenance, and Peer Review](https://devguide.ropensci.org/building.html) book
+
+<!-- Curtis Kephart is the outreach officer for RStudio and has developed RStudio, basic R workshop. Might be worth a link (or contacting). -->
