@@ -1,4 +1,4 @@
-# Build your package community {#publish}
+# Build your package community {#package-community}
 
 > Contribute!
 > 
