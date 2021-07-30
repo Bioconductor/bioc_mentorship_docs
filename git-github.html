@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 2 The Bioconductor Coding Style Guide | Bioconductor Guidelines for Mentors and Mentees</title>
+<title>Chapter 4 Git and GitHub | Bioconductor Guidelines for Mentors and Mentees</title>
 <meta name="author" content="Kevin Rue-Albrecht">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -35,9 +35,9 @@
 <li class="book-part">Resources</li>
 <li><a class="" href="resources-overview.html">Overview</a></li>
 <li><a class="" href="community.html"><span class="header-section-number">1</span> Welcome to the Bioconductor Community</a></li>
-<li><a class="active" href="style-guide.html"><span class="header-section-number">2</span> The Bioconductor Coding Style Guide</a></li>
+<li><a class="" href="style-guide.html"><span class="header-section-number">2</span> The Bioconductor Coding Style Guide</a></li>
 <li><a class="" href="s4.html"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></li>
-<li><a class="" href="git-github.html"><span class="header-section-number">4</span> Git and GitHub</a></li>
+<li><a class="active" href="git-github.html"><span class="header-section-number">4</span> Git and GitHub</a></li>
 <li class="book-part">Mentors</li>
 <li><a class="" href="mentors-overview.html">Overview</a></li>
 <li class="book-part">Mentees</li>
@@ -52,27 +52,32 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="style-guide" class="section level1" number="2">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="git-github" class="section level1" number="4">
 <h1>
-<span class="header-section-number">2</span> The Bioconductor Coding Style Guide<a class="anchor" aria-label="anchor" href="#style-guide"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Git and GitHub<a class="anchor" aria-label="anchor" href="#git-github"><i class="fas fa-link"></i></a>
 </h1>
-<p>The Bioconductor project maintains a coding style guide that promotes good practices for package readability, and guides the review process for new package contributions.</p>
-<p>In particular, encouraging a community of developers to respect a shared coding style guide facilitate contributions and bug fixes to existing packages from community members who may not have been involved in the initial package development, but recognize familiar coding patterns.</p>
-<p>The current version of the official Bioconductor coding style is available from the <a href="https://bioconductor.org/developers/how-to/coding-style/">Bioconductor website</a>.
-Additional information is also available from the <a href="http://contributions.bioconductor.org/">Bioconductor Package Guidelines for Developers and Reviewers</a>.</p>
+<p>The Bioconductor project uses the <a href="https://git-scm.com/">Git</a> software for version control of its central code repository.</p>
+<div class="inline-figure"><img src="https://pbs.twimg.com/media/E1RiGCWWQAAPVy7?format=png&amp;name=medium" height="500px" style="display: block; margin: auto;"></div>
+<p>Many developers also use the <a href="https://github.com/">GitHub</a> website to develop, test, and manage their packages source code outside the Bioconductor build system.
+Once a package was accepted on the Bioconductor repository, developers may continue to use GitHub, but should remember to regularly push their changes to the Bioconductor repository in order to publish new versions of their packages through the Bioconductor installation machinery.</p>
+<p>It is important to note that packages released and installed through the Bioconductor machinery (e.g., <code>BiocManager::install('Biobase')</code>) come from the central Bioconductor repository, unless the name of the package to install is provided in the format of a gitHub repository <code>user/repo</code> (e.g., <code>BiocManager::install('Bioconductor/Biobase')</code>).</p>
+<p>The <a href="https://code.bioconductor.org/">Bioc::CodeExplore</a> app was developed by <a href="https://github.com/grimbough">Mike Smith</a> as a convenient web-interface to efficiently browse and search the Bioconductor Git repository.</p>
 
 </div>
+
+
+
   <div class="chapter-nav">
-<div class="prev"><a href="community.html"><span class="header-section-number">1</span> Welcome to the Bioconductor Community</a></div>
-<div class="next"><a href="s4.html"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></div>
+<div class="prev"><a href="s4.html"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></div>
+<div class="next"><a href="mentors-overview.html">Overview</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#style-guide"><span class="header-section-number">2</span> The Bioconductor Coding Style Guide</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#git-github"><span class="header-section-number">4</span> Git and GitHub</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/kevinrue/bioc-mentorship-docs/blob/master/03-style-guide.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/kevinrue/bioc-mentorship-docs/edit/master/03-style-guide.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/kevinrue/bioc-mentorship-docs/blob/master/05-git-github.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/kevinrue/bioc-mentorship-docs/edit/master/05-git-github.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

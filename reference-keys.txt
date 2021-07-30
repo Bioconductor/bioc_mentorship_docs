@@ -1,5 +1,6 @@
 community
 style-guide
 s4
+git-github
 booknews
 version-1.0.0-2021-07-27
