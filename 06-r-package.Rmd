@@ -1,0 +1,9 @@
+# Making an R package {#r-package}
+
+Bioconductor packages are first and foremost R packages.
+Before considering guidelines specific to the Bioconductor project, developers should familiarize themselves with best practices for R packages generally.
+
+The following resources form a trove of information for new and experienced package developers:
+
+- The [R Packages](https://r-pkgs.org/) book
+- The [rOpenSci Packages: Development, Maintenance, and Peer Review](https://devguide.ropensci.org/building.html) book
