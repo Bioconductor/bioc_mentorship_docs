@@ -1,5 +1,5 @@
-# (PART) Part II {-}
+# (PART) Mentees {-}
 
-# Overview {.unnumbered #part2-overview}
+# Overview {.unnumbered #mentee-overview}
 
-The following sections contain ...
+The following sections contain information and advice to mentees.
