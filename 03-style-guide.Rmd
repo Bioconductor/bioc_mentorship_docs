@@ -1,0 +1,8 @@
+# The Bioconductor Coding Style Guide {#style-guide}
+
+The Bioconductor project maintains a coding style guide that promotes good practices for package readability, and guides the review process for new package contributions.
+
+In particular, encouraging a community of developers to respect a shared coding style guide facilitate contributions and bug fixes to existing packages from community members who may not have been involved in the initial package development, but recognize familiar coding patterns.
+
+The current version of the official Bioconductor coding style is available from the [Bioconductor website](https://bioconductor.org/developers/how-to/coding-style/).
+Additional information is also available from the [Bioconductor Package Guidelines for Developers and Reviewers](http://contributions.bioconductor.org/).
