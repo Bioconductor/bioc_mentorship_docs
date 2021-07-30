@@ -1,0 +1,10 @@
+# Making a Bioconductor workshop {#bioc-workshop}
+
+> Contribute!
+> 
+> Introduce and discuss the links below.
+
+- The [Orchestra](http://app.orchestra.cancerdatasci.org/) website.
+  + Using [GitHub Actions](https://github.com/features/actions)
+  + The [template workshop package](https://github.com/seandavi/BuildABiocWorkshop)
+- The [BuildACarpentriesWorkshop](https://github.com/jdrnevich/BuildACarpentriesWorkshop) workshop
