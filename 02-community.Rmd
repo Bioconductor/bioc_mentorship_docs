@@ -1,4 +1,4 @@
-# Welcome to the Bioconductor Community {.unnumbered #mentors-overview}
+# Welcome to the Bioconductor Community {#community}
 
 The Bioconductor community comprises users and developers, and the goal of the mentorship programme is to make the transition from user to developer as smooth and enjoyable as possible.
 
