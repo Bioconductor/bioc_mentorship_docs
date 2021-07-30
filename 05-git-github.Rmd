@@ -1,0 +1,14 @@
+# Git and GitHub {#git-github}
+
+The Bioconductor project uses the [Git](https://git-scm.com/) software for version control of its central code repository.
+
+```{r, echo=FALSE, out.height='500px', fig.align='center'}
+knitr::include_graphics('https://pbs.twimg.com/media/E1RiGCWWQAAPVy7?format=png&name=medium')
+```
+
+Many developers also use the [GitHub](https://github.com/) website to develop, test, and manage their packages source code outside the Bioconductor build system.
+Once a package was accepted on the Bioconductor repository, developers may continue to use GitHub, but should remember to regularly push their changes to the Bioconductor repository in order to publish new versions of their packages through the Bioconductor installation machinery.
+
+It is important to note that packages released and installed through the Bioconductor machinery (e.g., `BiocManager::install('Biobase')`) come from the central Bioconductor repository, unless the name of the package to install is provided in the format of a gitHub repository `user/repo` (e.g., `BiocManager::install('Bioconductor/Biobase')`).
+
+The [Bioc::CodeExplore](https://code.bioconductor.org/) app was developed by [Mike Smith](https://github.com/grimbough) as a convenient web-interface to efficiently browse and search the Bioconductor Git repository.
