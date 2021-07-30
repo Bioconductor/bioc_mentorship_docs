@@ -1,0 +1,17 @@
+# The Bioconductor Package Review Process {#bioc-review}
+
+> Contribute!
+> 
+> Introduce and discuss the links below.
+
+The Bioconductor package review process provides feedback encouraging best practices in terms of:
+
+- package size
+- re-use of existing Bioconductor classes and methods
+- general respect of the Bioconductor package guidelines and coding style
+
+> Contribute!
+> 
+> Discuss what to expect as far as the submission process and how feedback works.
+
+In particular, developers are encouraged to consult the [Bioconductor Package Guidelines for Developers and Reviewers](http://contributions.bioconductor.org/).
