@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 2 The Bioconductor Coding Style Guide | Bioconductor Guidelines for Mentors and Mentees</title>
+<title>Chapter 3 Bioconductor and S4 classes | Bioconductor Guidelines for Mentors and Mentees</title>
 <meta name="author" content="Kevin Rue-Albrecht">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -35,8 +35,8 @@
 <li class="book-part">Resources</li>
 <li><a class="" href="resources-overview.html">Overview</a></li>
 <li><a class="" href="community.html"><span class="header-section-number">1</span> Welcome to the Bioconductor Community</a></li>
-<li><a class="active" href="style-guide.html"><span class="header-section-number">2</span> The Bioconductor Coding Style Guide</a></li>
-<li><a class="" href="s4.html"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></li>
+<li><a class="" href="style-guide.html"><span class="header-section-number">2</span> The Bioconductor Coding Style Guide</a></li>
+<li><a class="active" href="s4.html"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></li>
 <li class="book-part">Mentors</li>
 <li><a class="" href="mentors-overview.html">Overview</a></li>
 <li class="book-part">Mentees</li>
@@ -51,27 +51,34 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="style-guide" class="section level1" number="2">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="s4" class="section level1" number="3">
 <h1>
-<span class="header-section-number">2</span> The Bioconductor Coding Style Guide<a class="anchor" aria-label="anchor" href="#style-guide"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3</span> Bioconductor and S4 classes<a class="anchor" aria-label="anchor" href="#s4"><i class="fas fa-link"></i></a>
 </h1>
-<p>The Bioconductor project maintains a coding style guide that promotes good practices for package readability, and guides the review process for new package contributions.</p>
-<p>In particular, encouraging a community of developers to respect a shared coding style guide facilitate contributions and bug fixes to existing packages from community members who may not have been involved in the initial package development, but recognize familiar coding patterns.</p>
-<p>The current version of the official Bioconductor coding style is available from the <a href="https://bioconductor.org/developers/how-to/coding-style/">Bioconductor website</a>.
-Additional information is also available from the <a href="http://contributions.bioconductor.org/">Bioconductor Package Guidelines for Developers and Reviewers</a>.</p>
+<p>Bioconductor widely uses the S4 object system.</p>
+<p>In particular, developers are strongly encouraged to re-use existing <a href="https://bioconductor.org/developers/how-to/commonMethodsAndClasses/">Common Bioconductor Methods and Classes</a> where possible.</p>
+<p>The need for new classes may occasionally be identified (e.g., new technology or data type).
+Often, new classes are derived from existing classes (i.e., inheriting slots from a parent class), while adding new functionality under the form of new slots and/or methods.</p>
+<blockquote>
+<p>Contribute:</p>
+<p>Link to conference workshops.</p>
+</blockquote>
 
 </div>
+
+
+
   <div class="chapter-nav">
-<div class="prev"><a href="community.html"><span class="header-section-number">1</span> Welcome to the Bioconductor Community</a></div>
-<div class="next"><a href="s4.html"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></div>
+<div class="prev"><a href="style-guide.html"><span class="header-section-number">2</span> The Bioconductor Coding Style Guide</a></div>
+<div class="next"><a href="mentors-overview.html">Overview</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#style-guide"><span class="header-section-number">2</span> The Bioconductor Coding Style Guide</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#s4"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/kevinrue/bioc-mentorship-docs/blob/master/03-style-guide.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/kevinrue/bioc-mentorship-docs/edit/master/03-style-guide.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/kevinrue/bioc-mentorship-docs/blob/master/04-s4.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/kevinrue/bioc-mentorship-docs/edit/master/04-s4.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
