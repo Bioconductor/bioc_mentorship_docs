@@ -5,5 +5,6 @@ git-github
 r-package
 bioc-package
 biocthis
+bioc-review
 booknews
 version-1.0.0-2021-07-27
