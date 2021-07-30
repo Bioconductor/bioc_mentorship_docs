@@ -3,5 +3,7 @@ style-guide
 s4
 git-github
 r-package
+bioc-package
+biocthis
 booknews
 version-1.0.0-2021-07-27
