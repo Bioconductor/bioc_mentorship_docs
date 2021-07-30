@@ -11,13 +11,13 @@ link-citations: yes
 description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
 
-**version `r read.dcf("DESCRIPTION")[,"Version"]` (`r read.dcf("DESCRIPTION")[, "Date"]`)**
-
 # About Bioconductor {-}
 
 ```{r, fig.align='center', echo=FALSE, out.height="200px"}
 knitr::include_graphics("https://raw.githubusercontent.com/Bioconductor/BiocStickers/master/Bioconductor/Bioconductor.png")
 ```
+
+**version `r read.dcf("DESCRIPTION")[,"Version"]` (`r read.dcf("DESCRIPTION")[, "Date"]`)**
 
 [_Bioconductor_](https://bioconductor.org/) provides tools for the analysis and comprehension of high-throughput genomic data [@orchestrating2015].
 
