@@ -1,0 +1,7 @@
+# Publishing a Bioconductor package {#bioc-workshop}
+
+> Contribute!
+> 
+> Introduce and discuss the points below.
+
+- F1000 and other places to publish
