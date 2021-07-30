@@ -1,0 +1,12 @@
+# Bioconductor and S4 classes {#s4}
+
+Bioconductor widely uses the S4 object system.
+
+In particular, developers are strongly encouraged to re-use existing [Common Bioconductor Methods and Classes](https://bioconductor.org/developers/how-to/commonMethodsAndClasses/) where possible.
+
+The need for new classes may occasionally be identified (e.g., new technology or data type).
+Often, new classes are derived from existing classes (i.e., inheriting slots from a parent class), while adding new functionality under the form of new slots and/or methods.
+
+> Contribute:
+> 
+> Link to conference workshops.
