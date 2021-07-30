@@ -1,4 +1,4 @@
-# Publishing a Bioconductor package {#bioc-workshop}
+# Publishing a Bioconductor package {#publish}
 
 > Contribute!
 > 

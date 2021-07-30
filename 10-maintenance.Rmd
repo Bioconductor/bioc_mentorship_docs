@@ -1,4 +1,4 @@
-# Maintaining a Bioconductor package {#bioc-workshop}
+# Maintaining a Bioconductor package {#maintenance}
 
 > Contribute!
 > 

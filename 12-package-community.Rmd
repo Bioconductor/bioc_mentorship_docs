@@ -1,0 +1,18 @@
+# Build your package community {#publish}
+
+> Contribute!
+> 
+> Introduce and discuss the points and links below.
+
+- Supporting your users
+  + Inclusive web design
+  + [blog with suggestions](https://uxdesign.cc/designing-for-all-a-detailed-guide-to-designing-for-disabilities-aa92f5dcc49b)
+  + The [Bioconductor code of conduct](http://www.bioconductor.org/about/code-of-conduct/)
+- Connecting with other package developers
+  + R Devel mailing list
+  + Slack
+- Contributing to Bioconductor
+  + GitHub
+  + Advisory boards (e.g., CAB, TAB)
+- Supporting a global Bioconductor community
+  + [Carpentries glossario](https://carpentries.github.io/glosario/) provides translation of technical terms related to R and Python.
