@@ -1,0 +1,22 @@
+# Making an Bioconductor package {#bioc-package}
+
+> Contribute!
+> 
+> Introduce and discuss the links below.
+
+- [Link to Kayla’s from Bioc2020](TODO)
+- [BJ’s Boston Meetup](TODO)
+- [Saskia’s video](TODO)
+- [Template Bioconductor package (in development)](https://github.com/kevinrue/BiocPackageSofwareTemplate)
+- [Bioconductor Package Guidelines for Developers and Reviewers](https://github.com/kevinrue/bioc_package_guide)
+- [Building a Bioconductor package using RStudio](https://github.com/SaskiaFreytag/making_bioconductor_pkg)
+- [lshep/MakeAPackage](https://github.com/lshep/MakeAPackage)
+
+## biocthis
+
+The `r BiocStyle::Biocpkg('biocthis')` package provide convenient utilities to automate package and project setup for Bioconductor packages.
+
+- [`biocthis::use_bioc_pkg_templates()`](https://lcolladotor.github.io/biocthis/reference/use_bioc_pkg_templates.html) creates 4 `dev/*.R` scripts that guide you in the process of setting up an RStudio project for a Bioconductor-friendly R package. 
+- 2021-01-28 [two minute video](https://youtu.be/3fLNsLchPnI) in Spanish for ConectaR 2021.     + Slides in Spanish: https://speakerdeck.com/lcolladotor/biocthis-conectar2021. 
+- 2020-11-05 [slides in English](https://speakerdeck.com/lcolladotor/biocthis-tab) for the Bioconductor Technical Advisory Board. 
+- 2020-09-10 [55 minute video in English](https://speakerdeck.com/lcolladotor/making-bioc-packages-with-biocthis). https://youtu.be/aMTxkYsM-8o. Slides in English.
