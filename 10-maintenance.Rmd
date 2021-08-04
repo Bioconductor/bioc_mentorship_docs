@@ -5,5 +5,5 @@
 > Introduce and discuss the points below.
 
 - Bioc credential
-- Single developer on <git.bioconductor.org>
-- Multiple developers on <github.org>
+- Single developer on the Bioconductor Git repository `git.bioconductor.org`
+- Multiple developers on <http://github.com/>
