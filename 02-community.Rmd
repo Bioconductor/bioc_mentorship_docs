@@ -8,7 +8,7 @@ A number of platforms are available for community members to interact with each 
 - [Twitter](https://twitter.com/Bioconductor)
 - [Bioconductor Support Site](https://support.bioconductor.org/)
 
-Teaching materials and resources are also available to learn abou the Bioconductor project:
+Teaching materials and resources are also available to learn about the Bioconductor project:
 
 - [The Bioconductor project (Carpentries lesson, in development)](https://carpentries-incubator.github.io/bioc-project/)
 - [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/course_spring_2020/index.html)
