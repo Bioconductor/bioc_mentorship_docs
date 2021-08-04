@@ -1,9 +1,5 @@
 # The Bioconductor Package Review Process {#bioc-review}
 
-> Contribute!
-> 
-> Introduce and discuss the links below.
-
 The Bioconductor package review process provides feedback encouraging best practices in terms of:
 
 - package size
