@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Bioconductor and S4 classes | Bioconductor Guidelines for Mentors and Mentees</title>
+<title>Chapter 12 Removing a package from CRAN | Bioconductor Guidelines for Mentors and Mentees</title>
 <meta name="author" content="Kevin Rue-Albrecht">
-<meta name="description" content="Bioconductor widely uses the S4 object system. In particular, developers are strongly encouraged to re-use existing Common Bioconductor Methods and Classes where possible. The need for new classes...">
+<meta name="description" content="Simply put, the name of a package must be unique across the CRAN and Bioconductor repositories. From the CRAN repository policy: Packages should be named in a way that does not conflict...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Bioconductor and S4 classes | Bioconductor Guidelines for Mentors and Mentees">
+<meta property="og:title" content="Chapter 12 Removing a package from CRAN | Bioconductor Guidelines for Mentors and Mentees">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Bioconductor widely uses the S4 object system. In particular, developers are strongly encouraged to re-use existing Common Bioconductor Methods and Classes where possible. The need for new classes...">
+<meta property="og:description" content="Simply put, the name of a package must be unique across the CRAN and Bioconductor repositories. From the CRAN repository policy: Packages should be named in a way that does not conflict...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Bioconductor and S4 classes | Bioconductor Guidelines for Mentors and Mentees">
-<meta name="twitter:description" content="Bioconductor widely uses the S4 object system. In particular, developers are strongly encouraged to re-use existing Common Bioconductor Methods and Classes where possible. The need for new classes...">
+<meta name="twitter:title" content="Chapter 12 Removing a package from CRAN | Bioconductor Guidelines for Mentors and Mentees">
+<meta name="twitter:description" content="Simply put, the name of a package must be unique across the CRAN and Bioconductor repositories. From the CRAN repository policy: Packages should be named in a way that does not conflict...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -44,7 +44,7 @@
 <li><a class="" href="resources-overview.html">Overview</a></li>
 <li><a class="" href="community.html"><span class="header-section-number">1</span> Welcome to the Bioconductor Community</a></li>
 <li><a class="" href="style-guide.html"><span class="header-section-number">2</span> The Bioconductor Coding Style Guide</a></li>
-<li><a class="active" href="s4.html"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></li>
+<li><a class="" href="s4.html"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></li>
 <li><a class="" href="git-github.html"><span class="header-section-number">4</span> Git and GitHub</a></li>
 <li><a class="" href="r-package.html"><span class="header-section-number">5</span> Making an R package</a></li>
 <li><a class="" href="bioc-package.html"><span class="header-section-number">6</span> Making an Bioconductor package</a></li>
@@ -53,7 +53,7 @@
 <li><a class="" href="maintenance.html"><span class="header-section-number">9</span> Maintaining a Bioconductor package</a></li>
 <li><a class="" href="publish.html"><span class="header-section-number">10</span> Publishing a Bioconductor package</a></li>
 <li><a class="" href="package-community.html"><span class="header-section-number">11</span> Build your package community</a></li>
-<li><a class="" href="remove-from-cran.html"><span class="header-section-number">12</span> Removing a package from CRAN</a></li>
+<li><a class="active" href="remove-from-cran.html"><span class="header-section-number">12</span> Removing a package from CRAN</a></li>
 <li class="book-part">Mentors</li>
 <li><a class="" href="mentors-overview.html">Overview</a></li>
 <li class="book-part">Mentees</li>
@@ -68,31 +68,50 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="s4" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="remove-from-cran" class="section level1" number="12">
 <h1>
-<span class="header-section-number">3</span> Bioconductor and S4 classes<a class="anchor" aria-label="anchor" href="#s4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12</span> Removing a package from CRAN<a class="anchor" aria-label="anchor" href="#remove-from-cran"><i class="fas fa-link"></i></a>
 </h1>
-<p>Bioconductor widely uses the S4 object system.</p>
-<p>In particular, developers are strongly encouraged to re-use existing <a href="https://bioconductor.org/developers/how-to/commonMethodsAndClasses/">Common Bioconductor Methods and Classes</a> where possible.</p>
-<p>The need for new classes may occasionally be identified (e.g., new technology or data type).
-Often, new classes are derived from existing classes (i.e., inheriting slots from a parent class), while adding new functionality under the form of new slots and/or methods.</p>
+<p>Simply put, the name of a package must be unique across the <a href="https://cran.r-project.org/">CRAN</a>
+and <a href="https://bioconductor.org/">Bioconductor</a> repositories.</p>
+<p>From the <a href="https://cran.r-project.org/web/packages/policies.html">CRAN repository policy</a>:</p>
 <blockquote>
-<p>Contribute:</p>
-<p>Link to conference workshops.</p>
+<p>Packages should be named in a way that does not conflict (irrespective of
+case) with any current or past CRAN package (the Archive area can be
+consulted), nor any current Bioconductor package.</p>
+</blockquote>
+<p>And the <a href="http://contributions.bioconductor.org/package-name.html">Bioconductor repository policy</a>:</p>
+<blockquote>
+<p>A package name should be descriptive and should not already exist as a current
+package (case-insensitive) in Bioconductor nor CRAN.</p>
+</blockquote>
+<p>As such, in the event where the maintainer of package available on the
+<a href="https://cran.r-project.org/">CRAN</a> repository wishes to move it to the
+<a href="https://bioconductor.org/">Bioconductor</a> repository, said maintainer will need to
+first request the archival of the package on the <a href="https://cran.r-project.org/">CRAN</a> repository
+before submitting the package for review and inclusion in the
+<a href="https://bioconductor.org/">Bioconductor</a> repository.</p>
+<blockquote>
+<p>Contribute!</p>
+<p>Describe the process of archival on CRAN (e.g., emails, actions) and
+any impact on the Bioconductor package review.</p>
 </blockquote>
 
 </div>
+
+
+
   <div class="chapter-nav">
-<div class="prev"><a href="style-guide.html"><span class="header-section-number">2</span> The Bioconductor Coding Style Guide</a></div>
-<div class="next"><a href="git-github.html"><span class="header-section-number">4</span> Git and GitHub</a></div>
+<div class="prev"><a href="package-community.html"><span class="header-section-number">11</span> Build your package community</a></div>
+<div class="next"><a href="mentors-overview.html">Overview</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#s4"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#remove-from-cran"><span class="header-section-number">12</span> Removing a package from CRAN</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/Bioconductor/bioc_mentorship_docs/blob/master/s4.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/Bioconductor/bioc_mentorship_docs/edit/master/s4.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/Bioconductor/bioc_mentorship_docs/blob/master/remove-from-cran.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/Bioconductor/bioc_mentorship_docs/edit/master/remove-from-cran.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

@@ -10,5 +10,6 @@ bioc-workshop
 maintenance
 publish
 package-community
+remove-from-cran
 booknews
 version-1.0.0-2021-07-27
