@@ -15,9 +15,10 @@ rmd_files: ["index.Rmd",
             "bioc-workshop.Rmd",
             "maintenance.Rmd",
             "publishing.Rmd",
-            "package-community.Rmd",
+            "package-community.Rmd"
+            "remove-from-cran.Rmd",
             "part-mentors.Rmd",
             "part-mentees.Rmd",
-            "appendix.Rmd",
+            "part-appendix.Rmd",
             "news.Rmd",
             "references.Rmd"]

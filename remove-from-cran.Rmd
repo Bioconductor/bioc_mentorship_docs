@@ -1,0 +1,32 @@
+# Removing a package from CRAN {#remove-from-cran}
+
+Simply put, the name of a package must be unique across the [CRAN][cran-website]
+and [Bioconductor][bioconductor-website] repositories.
+
+From the [CRAN repository policy][cran-policy]:
+
+> Packages should be named in a way that does not conflict (irrespective of
+> case) with any current or past CRAN package (the Archive area can be
+> consulted), nor any current Bioconductor package.
+
+And the [Bioconductor repository policy][bioconductor-policy]:
+
+> A package name should be descriptive and should not already exist as a current
+> package (case-insensitive) in Bioconductor nor CRAN.
+
+As such, in the event where the maintainer of package available on the
+[CRAN][cran-website] repository wishes to move it to the
+[Bioconductor][bioconductor-website] repository, said maintainer will need to
+first request the archival of the package on the [CRAN][cran-website] repository
+before submitting the package for review and inclusion in the
+[Bioconductor][bioconductor-website] repository.
+
+> Contribute!
+> 
+> Describe the process of archival on CRAN (e.g., emails, actions) and
+> any impact on the Bioconductor package review.
+
+[cran-website]: https://cran.r-project.org/
+[cran-policy]: https://cran.r-project.org/web/packages/policies.html
+[bioconductor-website]: https://bioconductor.org/
+[bioconductor-policy]: http://contributions.bioconductor.org/package-name.html
