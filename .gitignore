@@ -9,3 +9,5 @@ _bookdown_files/
 renv
 renv.lock
 book_template.log
+book_template.pdf
+book_template.tex
