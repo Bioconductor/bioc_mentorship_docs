@@ -3,3 +3,21 @@ delete_merged_file: true
 language:
   ui:
     chapter_name: "Chapter "
+rmd_files: ["index.Rmd",
+            "part-resources.Rmd",
+            "community.Rmd",
+            "style-guide.Rmd",
+            "s4.Rmd",
+            "git-and-github.Rmd",
+            "r-package.Rmd",
+            "bioc-package.Rmd",
+            "bioc-review.Rmd",
+            "bioc-workshop.Rmd",
+            "maintenance.Rmd",
+            "publishing.Rmd",
+            "package-community.Rmd",
+            "part-mentors.Rmd",
+            "part-mentees.Rmd",
+            "appendix.Rmd",
+            "news.Rmd",
+            "references.Rmd"]

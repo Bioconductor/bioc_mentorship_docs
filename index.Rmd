@@ -11,7 +11,9 @@ link-citations: yes
 description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
 
-# About Bioconductor {-}
+# Preface {-}
+
+## About Bioconductor {-}
 
 ```{r, fig.align='center', echo=FALSE, out.height="200px"}
 knitr::include_graphics("https://raw.githubusercontent.com/Bioconductor/BiocStickers/master/Bioconductor/Bioconductor.png")
@@ -23,7 +25,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/Bioconductor/BiocStic
 
 [_Bioconductor_](https://bioconductor.org/) is also available as [Docker](https://bioconductor.org/help/docker/) images.
 
-# About the mentorship program
+## About the mentorship program {-}
 
 The [_Bioconductor_](https://bioconductor.org/) website includes a page including a description of the [New Developer Program](https://bioconductor.org/developers/new-developer-program/),
 including links to apply as a mentor or a mentee.

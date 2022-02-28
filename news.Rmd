@@ -1,0 +1,5 @@
+# NEWS {#booknews}
+
+## Version 1.0.0 (2021-07-27)
+
+- Initial definition of the mentorship guidelines.
