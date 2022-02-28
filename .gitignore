@@ -8,3 +8,4 @@ _bookdown_files/
 .Rprofile
 renv
 renv.lock
+book_template.log
