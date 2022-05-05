@@ -30,15 +30,15 @@ This workflow was written using R version 4.1.2 (2021-11-01) -- "Bird Hippie".
 
 ## New RStudio project
 
-![RStudio - New Project...](images/new-rstudio-project.png)
+![RStudio - New Project...](images/new-rstudio-project.png){width=66%}
 
-![RStudio - New Project Wizard - Create Project](images/wizard-create-project.png)
+![RStudio - New Project Wizard - Create Project](images/wizard-create-project.png){width=66%}
 
-![RStudio - New Project Wizard - Project type](images/wizard-project-type.png)
+![RStudio - New Project Wizard - Project type](images/wizard-project-type.png){width=66%}
 
-![RStudio - New Project Wizard - Create New Project](images/wizard-create-new-project.png)
+![RStudio - New Project Wizard - Create New Project](images/wizard-create-new-project.png){width=66%}
 
-![Initial state of a new RStudio project.](images/rstudio-project-initial.png)
+![Initial state of a new RStudio project.](images/rstudio-project-initial.png){width=100%}
 
 ## Deprecated
 
