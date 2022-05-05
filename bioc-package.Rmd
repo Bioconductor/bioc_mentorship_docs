@@ -1,4 +1,4 @@
-# Making an Bioconductor package {#bioc-package}
+# Making a Bioconductor package {#bioc-package}
 
 This chapter demonstrates the making of a Bioconductor package using the
 Bioconductor package `r BiocStyle::Biocpkg("biocthis")`.
