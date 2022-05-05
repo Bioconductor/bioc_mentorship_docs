@@ -134,12 +134,103 @@ in the RStudio application.
 biocthis::use_bioc_pkg_templates()
 ```
 
-The function creates a sub-directory and a number of R scripts that are meant
-to help us create our new Bioconductor-friendly package.
+The function creates a sub-directory `dev/` and a number of R scripts that are
+designed to help us create our new Bioconductor-friendly package.
 The RStudio application will automatically open the newly created scripts in the
 Source panel.
 
 In the next sections, we will go through those scripts.
+
+## Create the R package
+
+Open the script  `dev/01_create_pkg.R` and follow instructions therein.
+
+First, the script install the CRAN package `r BiocStyle::CRANpkg("remotes")`,
+if it is not available yet (it is not, as we opted to develop this package
+in a new environment using `r BiocStyle::CRANpkg("renv")`).
+
+```{r, eval=FALSE}
+if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes")
+}
+```
+
+Next, the script immediately used the newly installed package to install a
+number of CRAN packages that will be used to develop the new Bioconductor
+package.
+
+```{r, eval=FALSE}
+remotes::install_cran(
+    c(
+        "available",
+        "BiocManager",
+        "biocthis",
+        "devtools",
+        "knitr",
+        "pkgdown",
+        "RefManageR",
+        "rmarkdown",
+        "rstudioapi",
+        "sessioninfo",
+        "styler",
+        "usethis"
+    )
+)
+```
+
+Next, the script installs the Bioconductor package
+`r BiocStyle::Biocpkg("BiocStyle")`, if it is not installed yet.
+That package will be used for styling the vignettes of the new Bioconductor
+package and linking to other packages.
+
+```{r, eval=FALSE}
+if (!requireNamespace("BiocStyle", quietly = TRUE)) {
+    BiocManager::install("BiocStyle")
+}
+```
+
+Next, the script offers you some code to check whether the name of your package
+is already in use, or has a meaning that you might not be aware of.
+
+Note that the function `available::available()` will display some information in
+the R console of the RStudio application, indicating whether the package name
+is valid and available on CRAN, Bioconductor, and GitHub.
+The function will also open a number of tabs in your default web browser,
+on Wikipedia, Wiktionary, and other websites,
+displaying the result of searches for your package name on those websites.
+It is up to you to check the contents of those pages and decide whether you
+wish to continue the process with that package name.
+
+```{r, eval=FALSE}
+available::available("MyBioconductorPackage")
+```
+
+When we are satisfied with the name of your package, the next step in the script
+creates a package template 
+
+```{r, eval=FALSE}
+usethis::create_package("MyBioconductorPackage")
+```
+
+If prompted whether you want to create a new project nested inside an existing
+project, type the number associated with the positive answer and press the
+Return key.
+
+If prompted whether you want to overwrite the pre-existing `*.Rproj` file, 
+type the number associated with the positive answer and press the Return key.
+
+At this point, the RStudio application will reload and a number of newly created
+files and directories will be visible in the Files panel.
+
+In this example, an empty sub-directory with the name of the name of the package
+was created.
+This sub-directory is a supefluous artifact of the process, which should be
+removed.
+Click on the checkbox next to the sub-directory, click the `Delete` button,
+and click the `Yes` button in the modal to confirm.
+
+![Delete the empty directory.](images/files-package-delete.png)
+
 
 ## Deprecated
 
