@@ -125,6 +125,22 @@ BiocManager::install("biocthis")
 
 If prompted whether you "want to install from sources the package which needs compilation? (Yes/no/cancel)", type `Yes` and press the Return key.
 
+## Create a package template
+
+Call the function `biocthis::use_bioc_pkg_templates()` from the R console panel
+in the RStudio application.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_pkg_templates()
+```
+
+The function creates a sub-directory and a number of R scripts that are meant
+to help us create our new Bioconductor-friendly package.
+The RStudio application will automatically open the newly created scripts in the
+Source panel.
+
+In the next sections, we will go through those scripts.
+
 ## Deprecated
 
 ### usethis
