@@ -96,8 +96,11 @@ The RStudio application may not automatically add the file `.gitignore`,
 in which case you can type it manually yourself on a new line.
 It is recommended to add an empty line at the end of the file.
 
+When you are ready, click the button `Save`.
+
 ![Manually add the file .gitignore to the .gitignore file.](images/git-ignore-gitignore.png){width=66%}
 
+The Git panel of the RStudio application should be empty now.
 
 ## Install BiocManager and biocthis
 
