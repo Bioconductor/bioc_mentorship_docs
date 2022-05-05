@@ -30,15 +30,48 @@ This workflow was written using R version 4.1.2 (2021-11-01) -- "Bird Hippie".
 
 ## New RStudio project
 
+In the top right corner of the RStudio application, click on `New Project...`.
+
 ![RStudio - New Project...](images/new-rstudio-project.png){width=66%}
+
+In the `New Project Wizard`, select the option `New Directory`.
 
 ![RStudio - New Project Wizard - Create Project](images/wizard-create-project.png){width=66%}
 
+Then, click on `New Project`.
+
 ![RStudio - New Project Wizard - Project type](images/wizard-project-type.png){width=66%}
+
+Then, type the name of your package in the field `Directory Name`,
+this will also be used as the name of a new directory in which your package
+will be stored.
+Select a parent directory on your computer where that new directory will be
+created.
+
+In this example, we allow the RStudio application to initialise a
+[git](TODO) repository and a [renv](TODO) environment.
+
+It is recommended to initialise a git repository as early as possible in the
+lifecycle of the package, to facilitate version control.
+
+The `r BiocStyle::CRANpkg("renv")` package is a great option to manage
+the environment in which the package is developped, independently from any other
+RStudio project on your computer.
+
+When you are ready, click the button `Create Project`.
 
 ![RStudio - New Project Wizard - Create New Project](images/wizard-create-new-project.png){width=66%}
 
+The RStudio application should display the newly created project as follows.
+
 ![Initial state of a new RStudio project.](images/rstudio-project-initial.png){width=100%}
+
+Notes:
+
+- In the example above, the file `.gitignore` was created becaused we opted
+  to `Create a git repository`.
+- Similarly, the files and directories `.Rprofile`, `renv/`, and `renv.lock`
+  were created becaused we opted to `Use renv with this project`.
 
 ## Deprecated
 
