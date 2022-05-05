@@ -105,7 +105,23 @@ The Git panel of the RStudio application should be empty now.
 ## Install BiocManager and biocthis
 
 In this example, we use the package `r BiocStyle::CRANpkg("renv")` to create
-and manage the environment of t
+and manage the environment in which the package is developed, independently
+from any other RStudio project on the same computer.
+
+However, a consequence of this is that the newly created environment does not
+contain any R package other than the base R packages.
+
+First, install the CRAN package `r BiocStyle::CRANpkg("BiocManager")`.
+
+```{r, eval=FALSE}
+install.packages("BiocManager")
+```
+
+Then, install the Bioconductor package `r BiocStyle::Biocpkg("biocthis")`.
+
+```{r, eval=FALSE}
+BiocManager::install("biocthis")
+```
 
 ## Deprecated
 
