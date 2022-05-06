@@ -159,6 +159,25 @@ package in a new RStudio application window.
 
 ![Initial state of the RStudio project for the new package.](images/rstudio-package-initial-state.png){width=100%}
 
+The package template provided by the CRAN package
+`r BiocStyle::CRANpkg("usethis")` includes some of the essential files that make
+an R package.
+Alphabetically:
+
+- The optional file `.gitignore` is used to declare file names and patterns that
+  will be ignored by git version control.
+- The optional file `.Rbuildignore` is used to declare file names that will be
+  ignored when the package is built.
+- The essential file `DESCRIPTION` declares information about the package,
+  its authors, licensing, and additional information relevant for package
+  development and documentation.
+- The optional file `MyBioconductorPackage.Rproj` is used by the RStudio
+  application to store project settings.
+- The essential file `NAMESPACE` is used to declare functions imported from
+  other packages (i.e., dependencies) and functions exported by the new package.
+- The essential directory `R/` - initially empty - is used to store R scripts
+  that contain the code of the new package.
+
 ## New RStudio project
 
 In the top right corner of the RStudio application, click on `New Project...`.
