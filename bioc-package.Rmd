@@ -225,6 +225,24 @@ RStudio application, or we can run the last line of code in the script
 rstudioapi::navigateToFile(usethis::proj_path("dev", "02_git_github_setup.R"))
 ```
 
+## Exclude files from git version control
+
+In this example, the first step in the script `02_git_github_setup.R` is
+to add a line in the file `.gitignore`, declaring that any file ending with the
+extension `.Rproj` should be ignored from git version control.
+
+Packages submitted to the Bioconductor repository should not contain files with
+that extension, as those files are only useful on the computer of package
+developers using the RStudio application.
+Those files have no use on the Bioconductor repository.
+
+```{r, eval=FALSE}
+usethis::use_git_ignore("*.Rproj")
+```
+
+If you wish to visualise the change, you can open the file `.gitignore`.
+You will see that the last line of the file now declared `*.Rproj`.
+
 ## First commit
 
 The Git panel of the RStudio application should now list a number of files
