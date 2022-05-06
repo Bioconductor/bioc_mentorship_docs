@@ -263,6 +263,10 @@ It allows package developers to track incremental changes made to the package,
 revert mistakes, and collaborate with other developers working simultaneously
 on the same package.
 
+A git repository can be initialised on the command line in a Unix terminal.
+However, the CRAN package `r BiocStyle::CRANpkg("usethis")` provides a function
+to automate this process from the R console.
+
 ```{r, eval=FALSE}
 usethis::use_git()
 ```
@@ -313,6 +317,52 @@ Note:
 `Show Hidden Files`.
 
 ![Show hidden files.](images/rstudio-show-hidden-files.png)
+
+## Connect the git repository to GitHub
+
+The [GitHub](https://github.com/) website provides a platform to build, ship,
+and maintain software, free of charge for public repositories.
+
+A GitHub repository can be created interactively on the
+[GitHub](https://github.com/) website.
+However, the CRAN package `r BiocStyle::CRANpkg("usethis")` provides
+functionality to automate this process from the R console.
+
+Part of the process adds a couple of lines in the file `DESCRIPTION`,
+declaring URLs for the landing page of the repository, and the web page where
+issues can be reported.
+When prompted whether we wish to commit the changes, we choose the option to
+consent, and press the Return key to confirm.
+
+```{r, eval=FALSE}
+usethis::use_github()
+```
+
+```
+✔ Creating GitHub repository 'kevinrue/MyBioconductorPackage'
+✔ Setting remote 'origin' to 'git@github.com:kevinrue/MyBioconductorPackage.git'
+✔ Setting URL field in DESCRIPTION to 'https://github.com/kevinrue/MyBioconductorPackage'
+✔ Setting BugReports field in DESCRIPTION to 'https://github.com/kevinrue/MyBioconductorPackage/issues'
+There is 1 uncommitted file:
+* 'DESCRIPTION'
+Is it ok to commit it?
+
+1: Absolutely not
+2: Not now
+3: Yup
+
+Selection: 3
+✔ Adding files
+✔ Making a commit with message 'Add GitHub links to DESCRIPTION'
+✔ Pushing 'main' branch to GitHub and setting 'origin/main' as upstream branch
+✔ Opening URL 'https://github.com/kevinrue/MyBioconductorPackage'
+```
+
+Note:
+
+- If this is your first time running `use_github()`, the script provides you
+  some additional commands that you may need to run before the command above
+  can be run successfully.
 
 ## Further reading
 
