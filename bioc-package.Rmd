@@ -268,7 +268,8 @@ usethis::use_git()
 ```
 
 In this example, we are prompted whether we wish to commit some of the files
-that were created. We type `1` and press the Return key to confirm.
+that were created. We choose the option to consent, and press the Return key
+to confirm.
 
 ```
 There are 4 uncommitted files:
@@ -285,6 +286,20 @@ Is it ok to commit them?
 Selection: 1
 ✔ Adding files
 ✔ Making a commit with message 'Initial commit'
+```
+
+When prompted to restart the RStudio application, we choose the option to
+consent and press the Return key confirm.
+
+```
+• A restart of RStudio is required to activate the Git pane
+Restart now?
+
+1: Absolutely not
+2: No way
+3: Yup
+
+Selection: 3
 ```
 
 ## Further reading
