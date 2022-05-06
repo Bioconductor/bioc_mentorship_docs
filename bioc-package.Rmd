@@ -302,6 +302,18 @@ Restart now?
 Selection: 3
 ```
 
+Once the RStudio application has restarted, we can see the Git tab in the
+version control panel, and a `.git` sub-directory in the `Files` pane.
+
+![View of the RStudio application after activating git version control.](images/rstudio-git-tab.png){width=100%}
+
+Note:
+
+- The `.git` sub-directory may not be visible until you enable the option to
+`Show Hidden Files`.
+
+![Show hidden files.](images/rstudio-show-hidden-files.png)
+
 ## Further reading
 
 ### `biocthis`
