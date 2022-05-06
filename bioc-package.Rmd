@@ -463,6 +463,20 @@ and the file `.Rbuildignore` is also updated to ignore the non-standard file
 ✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'
 ```
 
+Next, the field `Encoding` can usually be left at the default value.
+In this example, this is `UTF-8`.
+
+Similarly, the fields `Roxygen` and `RoxygenNote` can usually be left to their
+default value.
+In this example, those were `list(markdown = TRUE)` and `7.1.2`, respectively.
+The former is a list of options passed to the CRAN package
+`r BiocStyle::CRANpkg("roxygen2")` -- used to generate manual pages -- while
+the latter tracks the version of `BiocStyle::CRANpkg("roxygen2")` that was last
+used to manage the documentation in this particular Bioconductor package.
+
+Finally, at this point, the last two fields of the file are `URL` and
+`BugReports`, which were recently added as the result of a call to the function `usethis::use_github()`.
+
 ## Further reading
 
 ### `biocthis`
