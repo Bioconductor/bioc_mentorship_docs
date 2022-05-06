@@ -1,32 +1,163 @@
 # Making a Bioconductor package {#bioc-package}
 
-This chapter demonstrates the making of a Bioconductor package using the
+This chapter demonstrates the making of a Bioconductor package using a workflow
+that includes the CRAN package `r BiocStyle::CRANpkg("usethis")` and the
 Bioconductor package `r BiocStyle::Biocpkg("biocthis")`.
 
 This is just one example of an opinionated workflow for making a
-Bioconductor-friendly package, highlighting a community effort
+Bioconductor-friendly package, highlighting accessory packages
 with the goal of helping automate the process of creating R packages for
 Bioconductor or making them Bioconductor-friendly.
 
 It is not a requirement to follow this workflow when preparing a package for
 submission to the Bioconductor repository.
-Many package developers learn from their earlier experience and develop
-their own personal preferences and templates, when working on their subsequent
-packages.
+Many package developers learn from the experience of developing their first
+packages and develop their own personal preferences and templates,
+when working on their subsequent packages.
 
 Throughout this chapter, this example is used to illustrate essential and
 recommended components for Bioconductor packages, to give readers knowledge
 and information allowing them to develop Bioconductor packages indepedently
 of this workflow, if they so wish.
 
-## Pre-requisites
+## Environment
 
 This workflow was written on the operating system macOS Big Sur.
 Other operating systems may require some adjustments.
 
-This workflow uses [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/).
+This workflow uses
+[RStudio Desktop](https://www.rstudio.com/products/rstudio/download/).
 
 This workflow was written using R version 4.1.2 (2021-11-01) -- "Bird Hippie".
+
+This workflow starts in the RStudio application, outside of any RStudio project.
+
+![Initial state of the RStudio application.](images/rstudio-initial-state.png){width=100%}
+
+## Install accessory packages
+
+First, we install the CRAN package `r BiocStyle::CRANpkg("remotes")`, if it is
+not installed yet.
+
+```{r, eval=FALSE}
+if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes")
+}
+```
+
+Next, we immediately used the newly installed package to install a number of
+CRAN packages that will be used to develop the new Bioconductor package.
+
+```{r, eval=FALSE}
+remotes::install_cran(
+    c(
+        "available",
+        "BiocManager",
+        "biocthis",
+        "devtools",
+        "knitr",
+        "pkgdown",
+        "RefManageR",
+        "rmarkdown",
+        "rstudioapi",
+        "sessioninfo",
+        "styler",
+        "usethis"
+    )
+)
+```
+
+Next, we install the Bioconductor package `r BiocStyle::Biocpkg("BiocStyle")`,
+if it is not installed yet.
+That package will be used for styling the vignettes of the new Bioconductor
+package and linking to other packages.
+
+```{r, eval=FALSE}
+if (!requireNamespace("BiocStyle", quietly = TRUE)) {
+    BiocManager::install("BiocStyle")
+}
+```
+
+## Check if the package name is available on CRAN and Bioconductor
+
+Packages submitted to the Bioconductor repository must have a name that is
+not currently used on neither CRAN nor Bioconductor.
+Furthermore, it is a good idea to check whether the package name exists
+as a GitHub repository, in case another package with that name is being 
+developed and/or submitted.
+
+We use the newly installed CRAN package `r BiocStyle::CRANpkg("available")`
+to check whether the name that we want to give to the new package is already
+in use in either Bioconductor or CRAN, or has a meaning that we might not be
+aware of.
+
+```{r, eval=FALSE}
+available::available("MyBioconductorPackage")
+```
+
+If prompted whether to report potentially offensive results in the
+Urban Dictionary, type `Y` or `N` depending on your preference, and press the
+Return key.
+
+Note that the function `available::available()` displays some information in
+the R console of the RStudio application, while simultaneously opening a number
+of tabs in our default web browser.
+
+The information in the R console indicates whether the package name
+is syntactically valid and not in use yet on CRAN, Bioconductor, or GitHub.
+If you opted for the Urban Dictionary, the console also reports the meaning
+and sentiment analysis for words and acronym that the name of the package,
+as well as sub-strings and acronym that the name of the package contains
+
+Each tab in your default web browser reports the result of a search
+on Wikipedia, Wiktionary, and other websites, for the name of the package,
+sub-strings, and acronyms.
+It is up to you to check the contents of those pages and decide whether you
+wish to continue the process with that package name.
+
+## Create a package template
+
+When we are satisfied with the name of your package, we use the function
+`usethis::create_package()` to create a package template.
+In this example, we first change directory to `~/Desktop`, to create 
+
+```{r, eval=FALSE}
+setwd("~/Desktop")
+usethis::create_package("MyBioconductorPackage")
+```
+
+The R console displays some information as the package template is created.
+In this example, we saw:
+
+```
+✔ Creating 'MyBioconductorPackage/'
+✔ Setting active project to '/Users/kevin/Desktop/MyBioconductorPackage'
+✔ Creating 'R/'
+✔ Writing 'DESCRIPTION'
+Package: MyBioconductorPackage
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R (parsed):
+    * First Last <first.last@example.com> [aut, cre] (YOUR-ORCID-ID)
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to
+    pick a license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+✔ Writing 'NAMESPACE'
+✔ Writing 'MyBioconductorPackage.Rproj'
+✔ Adding '^MyBioconductorPackage\\.Rproj$' to '.Rbuildignore'
+✔ Adding '.Rproj.user' to '.gitignore'
+✔ Adding '^\\.Rproj\\.user$' to '.Rbuildignore'
+✔ Opening '/Users/kevin/Desktop/MyBioconductorPackage/' in new RStudio session
+✔ Setting active project to '<no active project>'
+```
+
+The RStudio application then reloads and opens the RStudio project on the new
+package in a new RStudio application window.
+
+![Initial state of the RStudio project for the new package.](images/rstudio-package-initial-state.png){width=100%}
 
 ## New RStudio project
 
@@ -145,82 +276,7 @@ In the next sections, we will go through those scripts.
 
 Open the script  `dev/01_create_pkg.R` and follow instructions therein.
 
-First, the script install the CRAN package `r BiocStyle::CRANpkg("remotes")`,
-if it is not available yet (it is not, as we opted to develop this package
-in a new environment using `r BiocStyle::CRANpkg("renv")`).
-
-```{r, eval=FALSE}
-if (!requireNamespace("remotes", quietly = TRUE)) {
-    install.packages("remotes")
-}
-```
-
-Next, the script immediately used the newly installed package to install a
-number of CRAN packages that will be used to develop the new Bioconductor
-package.
-
-```{r, eval=FALSE}
-remotes::install_cran(
-    c(
-        "available",
-        "BiocManager",
-        "biocthis",
-        "devtools",
-        "knitr",
-        "pkgdown",
-        "RefManageR",
-        "rmarkdown",
-        "rstudioapi",
-        "sessioninfo",
-        "styler",
-        "usethis"
-    )
-)
-```
-
-Next, the script installs the Bioconductor package
-`r BiocStyle::Biocpkg("BiocStyle")`, if it is not installed yet.
-That package will be used for styling the vignettes of the new Bioconductor
-package and linking to other packages.
-
-```{r, eval=FALSE}
-if (!requireNamespace("BiocStyle", quietly = TRUE)) {
-    BiocManager::install("BiocStyle")
-}
-```
-
-Next, the script offers you some code to check whether the name of your package
-is already in use, or has a meaning that you might not be aware of.
-
-Note that the function `available::available()` will display some information in
-the R console of the RStudio application, indicating whether the package name
-is valid and available on CRAN, Bioconductor, and GitHub.
-The function will also open a number of tabs in your default web browser,
-on Wikipedia, Wiktionary, and other websites,
-displaying the result of searches for your package name on those websites.
-It is up to you to check the contents of those pages and decide whether you
-wish to continue the process with that package name.
-
-```{r, eval=FALSE}
-available::available("MyBioconductorPackage")
-```
-
-When we are satisfied with the name of your package, the next step in the script
-creates a package template 
-
-```{r, eval=FALSE}
-usethis::create_package("MyBioconductorPackage")
-```
-
-If prompted whether you want to create a new project nested inside an existing
-project, type the number associated with the positive answer and press the
-Return key.
-
-If prompted whether you want to overwrite the pre-existing `*.Rproj` file, 
-type the number associated with the positive answer and press the Return key.
-
-At this point, the RStudio application will reload and a number of newly created
-files and directories will be visible in the Files panel.
+<!-- See "Install accessory packages" -->
 
 In this example, an empty sub-directory with the name of the name of the package
 was created.
