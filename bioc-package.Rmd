@@ -365,6 +365,9 @@ Note:
   can be run successfully. However, that level of detail is beyond the scope of
   this chapter.
 
+Once the command completes,it automatically opens the landing page of the new
+GitHub repository in our default web browser.
+
 ![Landing page of the GitHub repository.](images/github-landing-page-initial.png){width=100%}
 
 ## Further reading
