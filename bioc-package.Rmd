@@ -370,6 +370,99 @@ GitHub repository in our default web browser.
 
 ![Landing page of the GitHub repository.](images/github-landing-page-initial.png){width=100%}
 
+## Edit the DESCRIPTION file
+
+Open the file `dev/03_core_files.R` and follow the instructions.
+
+The first comment in the script recommends to edit the file `DESCRIPTION`.
+Great sources of information for best practices on that subject are:
+
+- <http://r-pkgs.had.co.nz/description.html>
+- <http://contributions.bioconductor.org/description.html>
+
+First, the field `Package` already contains the name that we have chosen for our
+package.
+If you decide to change the package name from this point onward, you should be
+mindful of all the other places where you will need to also update that name.
+
+Next, the field `Title` is the first field that we want to update from the
+default placeholder.
+Note that this field expects a single line in
+[title case](https://en.wikipedia.org/wiki/Title_case),
+where all words are capitalized except for minor words.
+In this example, we go with `Demonstration of a Bioconductor Package`.
+In doubt, you can always look at some of your favourite packages for
+inspiration.
+
+Next, the field `Version` must be changed to either version `0.99.0` or any
+version number that is [semantically](https://semver.org/) lower than that.
+This is because `0.99.0` is the version number that is expected in package
+submitted to the Bioconductor repository, and version numbering should never
+go backward.
+In this example, we set the version to `0.99.0`, as we do not expect to change
+that version number ever in the future.
+You might want to pick a lower version number, if you wish to
+increment version numbers during your work on the package before your first
+submission to the Bioconductor project (e.g., `0.1.0` -> `0.2.0` -> `0.2.1`).
+
+Next, the field `Authors@R` must also be changed from the default placeholder
+to provide information about the package developer(s) and maintainer.
+The default template is designed for a single-person project, calling directly
+the function `person()`.
+For projects that involve multiple contributors, or to make it future-proof
+in case contributors join the project at a later date, the field can concatenate
+as many calls to the function `person()` as needed within a call to the function
+`c()`.
+In this example, we add the information about the author of this chapter,
+within a call to the function `c()`.
+
+```
+Authors@R: 
+    c(person("Kevin", "Rue", "Christophe", "kevinrue@users.noreply.github.com",
+             role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0003-3899-3872")))
+```
+
+Next, the field `Description` must also be changed to provide a longer
+description of the package, albeit general guidelines recommend to keep the
+length of that field to a single paragraph.
+For instance, in this case we can say:
+
+```
+Description: This package demonstrates the set up of a Bioconductor-friendly
+    package using the packages usethis and biocthis. The setup includes the
+    initialisation of a git repository as well as the connection of the local
+    repository to the GitHub website.
+```
+
+Note that this field can always be updated at a later date, to refine the
+description of the package (or fix typos).
+
+Next, the field `License` declares the licensing choice made by the copyright
+holder of the package.
+Bioconductor packages are typically licensed under `Artistic-2.0`, although
+a number of other choices are commonly accepted for community-contributed
+packages.
+In this example, we choose the MIT license, which incidentally can be easily
+set up using the CRAN package `r BiocStyle::CRANpkg("usethis")`.
+
+```{r, eval=FALSE}
+usethis::use_mit_license()
+```
+
+The R console display information as files are edited.
+In this example, the field `License` is automatically updated in the file
+`DESCRIPTION`, while files `LICENSE` and `LICENSE.md` are created,
+and the file `.Rbuildignore` is also updated to ignore the non-standard file
+`LICENSE.md` when the package is built.
+
+```
+✔ Setting License field in DESCRIPTION to 'MIT + file LICENSE'
+✔ Writing 'LICENSE'
+✔ Writing 'LICENSE.md'
+✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'
+```
+
 ## Further reading
 
 ### `biocthis`
