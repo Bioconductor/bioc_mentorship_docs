@@ -230,18 +230,42 @@ rstudioapi::navigateToFile(usethis::proj_path("dev", "02_git_github_setup.R"))
 In this example, the first step in the script `02_git_github_setup.R` is
 to add a line in the file `.gitignore`, declaring that any file ending with the
 extension `.Rproj` should be ignored from git version control.
+We also add a nother line declaring that the sub-directory `dev/` should also
+be ignored.
 
 Packages submitted to the Bioconductor repository should not contain files with
-that extension, as those files are only useful on the computer of package
+the `Rproj` extension, as those files are only useful on the computer of package
 developers using the RStudio application.
 Those files have no use on the Bioconductor repository.
 
+The sub-directory `dev/` also does not belong on the Bioconductor repository.
+The only purpose of R scripts in that sub-directory is to set up a template for
+the new package on the computer of the package developer.
+When the template is set up, those scripts and the sub-directory can all be
+safely removed.
+
 ```{r, eval=FALSE}
 usethis::use_git_ignore("*.Rproj")
+usethis::use_git_ignore("dev/")
 ```
 
 If you wish to visualise the change, you can open the file `.gitignore`.
-You will see that the last line of the file now declared `*.Rproj`.
+You will see that the last two lines of the file now declare `*.Rproj` and
+`dev/`.
+
+## Set up git
+
+Next, the script gives us the command to set up git version control for the new
+package.
+
+Version control is fundamental to durable software development.
+It allows package developers to track incremental changes made to the package,
+revert mistakes, and collaborate with other developers working simultaneously
+on the same package.
+
+```{r, eval=FALSE}
+usethis::use_git()
+```
 
 ## First commit
 
