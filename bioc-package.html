@@ -4,20 +4,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 Making an Bioconductor package | Bioconductor Guidelines for Mentors and Mentees</title>
+<title>Chapter 6 Making a Bioconductor package | Bioconductor Guidelines for Mentors and Mentees</title>
 <meta name="author" content="Kevin Rue-Albrecht">
-<meta name="description" content="Contribute! Introduce and discuss the links below. Link to Kayla’s from Bioc2020 BJ’s Boston Meetup Saskia’s video Template Bioconductor package (in development) Bioconductor Package Guidelines...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 6 Making an Bioconductor package | Bioconductor Guidelines for Mentors and Mentees">
+<meta name="description" content="This chapter demonstrates the making of a Bioconductor package using a workflow that includes the CRAN package usethis and the Bioconductor package biocthis. This is just one example of an...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Making a Bioconductor package | Bioconductor Guidelines for Mentors and Mentees">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Contribute! Introduce and discuss the links below. Link to Kayla’s from Bioc2020 BJ’s Boston Meetup Saskia’s video Template Bioconductor package (in development) Bioconductor Package Guidelines...">
+<meta property="og:description" content="This chapter demonstrates the making of a Bioconductor package using a workflow that includes the CRAN package usethis and the Bioconductor package biocthis. This is just one example of an...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 Making an Bioconductor package | Bioconductor Guidelines for Mentors and Mentees">
-<meta name="twitter:description" content="Contribute! Introduce and discuss the links below. Link to Kayla’s from Bioc2020 BJ’s Boston Meetup Saskia’s video Template Bioconductor package (in development) Bioconductor Package Guidelines...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="twitter:title" content="Chapter 6 Making a Bioconductor package | Bioconductor Guidelines for Mentors and Mentees">
+<meta name="twitter:description" content="This chapter demonstrates the making of a Bioconductor package using a workflow that includes the CRAN package usethis and the Bioconductor package biocthis. This is just one example of an...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -47,7 +72,7 @@
 <li><a class="" href="s4.html"><span class="header-section-number">3</span> Bioconductor and S4 classes</a></li>
 <li><a class="" href="git-github.html"><span class="header-section-number">4</span> Git and GitHub</a></li>
 <li><a class="" href="r-package.html"><span class="header-section-number">5</span> Making an R package</a></li>
-<li><a class="active" href="bioc-package.html"><span class="header-section-number">6</span> Making an Bioconductor package</a></li>
+<li><a class="active" href="bioc-package.html"><span class="header-section-number">6</span> Making a Bioconductor package</a></li>
 <li><a class="" href="bioc-review.html"><span class="header-section-number">7</span> The Bioconductor Package Review Process</a></li>
 <li><a class="" href="bioc-workshop.html"><span class="header-section-number">8</span> Making a Bioconductor workshop</a></li>
 <li><a class="" href="maintenance.html"><span class="header-section-number">9</span> Maintaining a Bioconductor package</a></li>
@@ -70,8 +95,444 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="bioc-package" class="section level1" number="6">
 <h1>
-<span class="header-section-number">6</span> Making an Bioconductor package<a class="anchor" aria-label="anchor" href="#bioc-package"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> Making a Bioconductor package<a class="anchor" aria-label="anchor" href="#bioc-package"><i class="fas fa-link"></i></a>
 </h1>
+<p>This chapter demonstrates the making of a Bioconductor package using a workflow
+that includes the CRAN package <em><a href="https://CRAN.R-project.org/package=usethis">usethis</a></em> and the
+Bioconductor package <em><a href="https://bioconductor.org/packages/3.16/biocthis">biocthis</a></em>.</p>
+<p>This is just one example of an opinionated workflow for making a
+Bioconductor-friendly package, highlighting accessory packages
+with the goal of helping automate the process of creating R packages for
+Bioconductor or making them Bioconductor-friendly.</p>
+<p>It is not a requirement to follow this workflow when preparing a package for
+submission to the Bioconductor repository.
+Many package developers learn from the experience of developing their first
+packages and develop their own personal preferences and templates,
+when working on their subsequent packages.</p>
+<p>Throughout this chapter, this example is used to illustrate essential and
+recommended components for Bioconductor packages, to give readers knowledge
+and information allowing them to develop Bioconductor packages indepedently
+of this workflow, if they so wish.</p>
+<div id="environment" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Environment<a class="anchor" aria-label="anchor" href="#environment"><i class="fas fa-link"></i></a>
+</h2>
+<p>This workflow was written on the operating system macOS Big Sur.
+Other operating systems may require some adjustments.</p>
+<p>This workflow uses
+<a href="https://www.rstudio.com/products/rstudio/download/">RStudio Desktop</a>.</p>
+<p>This workflow was written using R version 4.1.2 (2021-11-01) – “Bird Hippie”.</p>
+<p>This workflow starts in the RStudio application, outside of any RStudio project.</p>
+<div class="figure">
+<img src="images/rstudio-initial-state.png" style="width:100.0%" alt=""><p class="caption">Initial state of the RStudio application.</p>
+</div>
+</div>
+<div id="install-accessory-packages" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Install accessory packages<a class="anchor" aria-label="anchor" href="#install-accessory-packages"><i class="fas fa-link"></i></a>
+</h2>
+<p>First, we install the CRAN package <em><a href="https://CRAN.R-project.org/package=remotes">remotes</a></em>, if it is
+not installed yet.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<p>Next, we immediately used the newly installed package to install a number of
+CRAN packages that will be used to develop the new Bioconductor package.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_cran.html">install_cran</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+        <span class="st">"available"</span>,
+        <span class="st">"BiocManager"</span>,
+        <span class="st">"biocthis"</span>,
+        <span class="st">"devtools"</span>,
+        <span class="st">"knitr"</span>,
+        <span class="st">"pkgdown"</span>,
+        <span class="st">"RefManageR"</span>,
+        <span class="st">"rmarkdown"</span>,
+        <span class="st">"rstudioapi"</span>,
+        <span class="st">"sessioninfo"</span>,
+        <span class="st">"styler"</span>,
+        <span class="st">"usethis"</span>
+    <span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+<p>Next, we install the Bioconductor package <em><a href="https://bioconductor.org/packages/3.16/BiocStyle">BiocStyle</a></em>,
+if it is not installed yet.
+That package will be used for styling the vignettes of the new Bioconductor
+package and linking to other packages.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocStyle"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"BiocStyle"</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+</div>
+<div id="check-if-the-package-name-is-available-on-cran-and-bioconductor" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Check if the package name is available on CRAN and Bioconductor<a class="anchor" aria-label="anchor" href="#check-if-the-package-name-is-available-on-cran-and-bioconductor"><i class="fas fa-link"></i></a>
+</h2>
+<p>Packages submitted to the Bioconductor repository must have a name that is
+not currently used on neither CRAN nor Bioconductor.
+Furthermore, it is a good idea to check whether the package name exists
+as a GitHub repository, in case another package with that name is being
+developed and/or submitted.</p>
+<p>We use the newly installed CRAN package <em><a href="https://CRAN.R-project.org/package=available">available</a></em>
+to check whether the name that we want to give to the new package is already
+in use in either Bioconductor or CRAN, or has a meaning that we might not be
+aware of.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">available</span><span class="fu">::</span><span class="fu">available</span><span class="op">(</span><span class="st">"MyBioconductorPackage"</span><span class="op">)</span></code></pre></div>
+<p>If prompted whether to report potentially offensive results in the
+Urban Dictionary, type <code>Y</code> or <code>N</code> depending on your preference, and press the
+Return key.</p>
+<p>Note that the function <code>available::available()</code> displays some information in
+the R console of the RStudio application, while simultaneously opening a number
+of tabs in our default web browser.</p>
+<p>The information in the R console indicates whether the package name
+is syntactically valid and not in use yet on CRAN, Bioconductor, or GitHub.
+If you opted for the Urban Dictionary, the console also reports the meaning
+and sentiment analysis for words and acronym that the name of the package,
+as well as sub-strings and acronym that the name of the package contains</p>
+<p>Each tab in your default web browser reports the result of a search
+on Wikipedia, Wiktionary, and other websites, for the name of the package,
+sub-strings, and acronyms.
+It is up to you to check the contents of those pages and decide whether you
+wish to continue the process with that package name.</p>
+</div>
+<div id="create-a-package-template-with-usethis" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Create a package template with <code>usethis</code><a class="anchor" aria-label="anchor" href="#create-a-package-template-with-usethis"><i class="fas fa-link"></i></a>
+</h2>
+<p>When we are satisfied with the name of your package, we use the function
+<code><a href="https://usethis.r-lib.org/reference/create_package.html">usethis::create_package()</a></code> to create a package template.
+In this example, we first change directory to <code>~/Desktop</code>, to initialise the
+directory that contains the new package on the <code>Desktop</code>.
+Instead, you will likely prefer to initialise your package in your own preferred
+directory on your computer.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"~/Desktop"</span><span class="op">)</span>
+<span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html">create_package</a></span><span class="op">(</span><span class="st">"MyBioconductorPackage"</span><span class="op">)</span></code></pre></div>
+<p>The R console displays some information as the package template is created.
+In this example, we saw:</p>
+<pre><code>✔ Creating 'MyBioconductorPackage/'
+✔ Setting active project to '/Users/kevin/Desktop/MyBioconductorPackage'
+✔ Creating 'R/'
+✔ Writing 'DESCRIPTION'
+Package: MyBioconductorPackage
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R (parsed):
+    * First Last &lt;first.last@example.com&gt; [aut, cre] (YOUR-ORCID-ID)
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to
+    pick a license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+✔ Writing 'NAMESPACE'
+✔ Writing 'MyBioconductorPackage.Rproj'
+✔ Adding '^MyBioconductorPackage\\.Rproj$' to '.Rbuildignore'
+✔ Adding '.Rproj.user' to '.gitignore'
+✔ Adding '^\\.Rproj\\.user$' to '.Rbuildignore'
+✔ Opening '/Users/kevin/Desktop/MyBioconductorPackage/' in new RStudio session
+✔ Setting active project to '&lt;no active project&gt;'</code></pre>
+<p>The RStudio application then reloads and opens the RStudio project on the new
+package in a new RStudio application window.</p>
+<div class="figure">
+<img src="images/rstudio-package-initial-state.png" style="width:100.0%" alt=""><p class="caption">Initial state of the RStudio project for the new package.</p>
+</div>
+<p>The package template provided by the CRAN package
+<em><a href="https://CRAN.R-project.org/package=usethis">usethis</a></em> includes some of the essential files that make
+an R package.
+Alphabetically:</p>
+<ul>
+<li>The optional file <code>.gitignore</code> is used to declare file names and patterns that
+will be ignored by git version control.</li>
+<li>The optional file <code>.Rbuildignore</code> is used to declare file names that will be
+ignored when the package is built.</li>
+<li>The essential file <code>DESCRIPTION</code> declares information about the package,
+its authors, licensing, and additional information relevant for package
+development and documentation.</li>
+<li>The optional file <code>MyBioconductorPackage.Rproj</code> is used by the RStudio
+application to store project settings.</li>
+<li>The essential file <code>NAMESPACE</code> is used to declare functions imported from
+other packages (i.e., dependencies) and functions exported by the new package.</li>
+<li>The essential directory <code>R/</code> - initially empty - is used to store R scripts
+that contain the code of the new package.</li>
+</ul>
+</div>
+<div id="create-template-scripts-using-biocthis" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Create template scripts using <code>biocthis</code><a class="anchor" aria-label="anchor" href="#create-template-scripts-using-biocthis"><i class="fas fa-link"></i></a>
+</h2>
+<p>At this point, we use the Bioconductor package
+<em><a href="https://bioconductor.org/packages/3.16/biocthis">biocthis</a></em> to generate some R scripts with the goal of
+helping automate the process of creating R packages for Bioconductor or making
+them Bioconductor-friendly.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_pkg_templates</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console display information are a sub-directory <code>dev/</code> and several R
+scripts are created.</p>
+<pre><code>✔ Setting active project to '/Users/kevin/Desktop/MyBioconductorPackage'
+✔ Creating 'dev/'
+✔ Adding '^dev$' to '.Rbuildignore'
+✔ Writing 'dev/01_create_pkg.R'
+• Modify 'dev/01_create_pkg.R'
+✔ Writing 'dev/02_git_github_setup.R'
+• Modify 'dev/02_git_github_setup.R'
+✔ Writing 'dev/03_core_files.R'
+• Modify 'dev/03_core_files.R'
+✔ Writing 'dev/04_update.R'
+• Modify 'dev/04_update.R'</code></pre>
+<p>In the next sections, we will go through those R scripts in turn.</p>
+</div>
+<div id="create-the-r-package" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Create the R package<a class="anchor" aria-label="anchor" href="#create-the-r-package"><i class="fas fa-link"></i></a>
+</h2>
+<p>Open the file <code>dev/01_create_pkg.R</code>.</p>
+<p>Carefully read the contents of the file, including comments and code, as we have
+run most of that code already in the previous steps.</p>
+<p>In this example, we have already run all the code in that script, so we can
+directly open the file <code>dev/02_git_github_setup.R</code>.
+We can click on the tab of the file already open in the Source panel of the
+RStudio application, or we can run the last line of code in the script
+<code>dev/01_create_pkg.R</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rstudioapi/man/navigateToFile.html">navigateToFile</a></span><span class="op">(</span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/proj_utils.html">proj_path</a></span><span class="op">(</span><span class="st">"dev"</span>, <span class="st">"02_git_github_setup.R"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="exclude-files-from-git-version-control" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> Exclude files from git version control<a class="anchor" aria-label="anchor" href="#exclude-files-from-git-version-control"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this example, the first step in the script <code>02_git_github_setup.R</code> is
+to add a line in the file <code>.gitignore</code>, declaring that any file ending with the
+extension <code>.Rproj</code> should be ignored from git version control.
+We also add a nother line declaring that the sub-directory <code>dev/</code> should also
+be ignored.</p>
+<p>Packages submitted to the Bioconductor repository should not contain files with
+the <code>Rproj</code> extension, as those files are only useful on the computer of package
+developers using the RStudio application.
+Those files have no use on the Bioconductor repository.</p>
+<p>The sub-directory <code>dev/</code> also does not belong on the Bioconductor repository.
+The only purpose of R scripts in that sub-directory is to set up a template for
+the new package on the computer of the package developer.
+When the template is set up, those scripts and the sub-directory can all be
+safely removed.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git_ignore.html">use_git_ignore</a></span><span class="op">(</span><span class="st">"*.Rproj"</span><span class="op">)</span>
+<span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git_ignore.html">use_git_ignore</a></span><span class="op">(</span><span class="st">"dev/"</span><span class="op">)</span></code></pre></div>
+<p>If you wish to visualise the change, you can open the file <code>.gitignore</code>.
+You will see that the last two lines of the file now declare <code>*.Rproj</code> and
+<code>dev/</code>.</p>
+</div>
+<div id="set-up-git" class="section level2" number="6.8">
+<h2>
+<span class="header-section-number">6.8</span> Set up git<a class="anchor" aria-label="anchor" href="#set-up-git"><i class="fas fa-link"></i></a>
+</h2>
+<p>Next, the script gives us the command to set up git version control for the new
+package.</p>
+<p>Version control is fundamental to durable software development.
+It allows package developers to track incremental changes made to the package,
+revert mistakes, and collaborate with other developers working simultaneously
+on the same package.</p>
+<p>A git repository can be initialised on the command line in a Unix terminal.
+However, the CRAN package <em><a href="https://CRAN.R-project.org/package=usethis">usethis</a></em> provides a function
+to automate this process from the R console.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html">use_git</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>In this example, we are prompted whether we wish to commit some of the files
+that were created. We choose the option to consent, and press the Return key
+to confirm.</p>
+<pre><code>There are 4 uncommitted files:
+* '.gitignore'
+* '.Rbuildignore'
+* 'DESCRIPTION'
+* 'NAMESPACE'
+Is it ok to commit them?
+
+1: Yeah
+2: No way
+3: Not now
+
+Selection: 1
+✔ Adding files
+✔ Making a commit with message 'Initial commit'</code></pre>
+<p>When prompted to restart the RStudio application, we choose the option to
+consent and press the Return key confirm.</p>
+<pre><code>• A restart of RStudio is required to activate the Git pane
+Restart now?
+
+1: Absolutely not
+2: No way
+3: Yup
+
+Selection: 3</code></pre>
+<p>Once the RStudio application has restarted, we can see the Git tab in the
+version control panel, and a <code>.git</code> sub-directory in the <code>Files</code> pane.</p>
+<div class="figure">
+<img src="images/rstudio-git-tab.png" style="width:100.0%" alt=""><p class="caption">View of the RStudio application after activating git version control.</p>
+</div>
+<p>Note:</p>
+<ul>
+<li>The <code>.git</code> sub-directory may not be visible until you enable the option to
+<code>Show Hidden Files</code>.</li>
+</ul>
+<div class="figure">
+<img src="images/rstudio-show-hidden-files.png" alt=""><p class="caption">Show hidden files.</p>
+</div>
+</div>
+<div id="connect-the-git-repository-to-github" class="section level2" number="6.9">
+<h2>
+<span class="header-section-number">6.9</span> Connect the git repository to GitHub<a class="anchor" aria-label="anchor" href="#connect-the-git-repository-to-github"><i class="fas fa-link"></i></a>
+</h2>
+<p>The <a href="https://github.com/">GitHub</a> website provides a platform to build, ship,
+and maintain software, free of charge for public repositories.</p>
+<p>A GitHub repository can be created interactively on the
+<a href="https://github.com/">GitHub</a> website.
+However, the CRAN package <em><a href="https://CRAN.R-project.org/package=usethis">usethis</a></em> provides
+functionality to automate this process from the R console.</p>
+<p>Part of the process adds a couple of lines in the file <code>DESCRIPTION</code>,
+declaring URLs for the landing page of the repository, and the web page where
+issues can be reported.
+When prompted whether we wish to commit the changes, we choose the option to
+consent, and press the Return key to confirm.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html">use_github</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>✔ Creating GitHub repository 'kevinrue/MyBioconductorPackage'
+✔ Setting remote 'origin' to 'git@github.com:kevinrue/MyBioconductorPackage.git'
+✔ Setting URL field in DESCRIPTION to 'https://github.com/kevinrue/MyBioconductorPackage'
+✔ Setting BugReports field in DESCRIPTION to 'https://github.com/kevinrue/MyBioconductorPackage/issues'
+There is 1 uncommitted file:
+* 'DESCRIPTION'
+Is it ok to commit it?
+
+1: Absolutely not
+2: Not now
+3: Yup
+
+Selection: 3
+✔ Adding files
+✔ Making a commit with message 'Add GitHub links to DESCRIPTION'
+✔ Pushing 'main' branch to GitHub and setting 'origin/main' as upstream branch
+✔ Opening URL 'https://github.com/kevinrue/MyBioconductorPackage'</code></pre>
+<p>Note:</p>
+<ul>
+<li>If this is your first time running <code>use_github()</code>, the script provides you
+some additional commands that you may need to run before the command above
+can be run successfully. However, that level of detail is beyond the scope of
+this chapter.</li>
+</ul>
+<p>Once the command completes,it automatically opens the landing page of the new
+GitHub repository in our default web browser.</p>
+<div class="figure">
+<img src="images/github-landing-page-initial.png" style="width:100.0%" alt=""><p class="caption">Landing page of the GitHub repository.</p>
+</div>
+</div>
+<div id="edit-the-description-file" class="section level2" number="6.10">
+<h2>
+<span class="header-section-number">6.10</span> Edit the DESCRIPTION file<a class="anchor" aria-label="anchor" href="#edit-the-description-file"><i class="fas fa-link"></i></a>
+</h2>
+<p>Open the file <code>dev/03_core_files.R</code> and follow the instructions.</p>
+<p>The first comment in the script recommends to edit the file <code>DESCRIPTION</code>.
+Great sources of information for best practices on that subject are:</p>
+<ul>
+<li><a href="http://r-pkgs.had.co.nz/description.html" class="uri">http://r-pkgs.had.co.nz/description.html</a></li>
+<li><a href="http://contributions.bioconductor.org/description.html" class="uri">http://contributions.bioconductor.org/description.html</a></li>
+</ul>
+<p>First, the field <code>Package</code> already contains the name that we have chosen for our
+package.
+If you decide to change the package name from this point onward, you should be
+mindful of all the other places where you will need to also update that name.</p>
+<p>Next, the field <code>Title</code> is the first field that we want to update from the
+default placeholder.
+Note that this field expects a single line in
+<a href="https://en.wikipedia.org/wiki/Title_case">title case</a>,
+where all words are capitalized except for minor words.
+In this example, we go with <code>Demonstration of a Bioconductor Package</code>.
+In doubt, you can always look at some of your favourite packages for
+inspiration.</p>
+<p>Next, the field <code>Version</code> must be changed to either version <code>0.99.0</code> or any
+version number that is <a href="https://semver.org/">semantically</a> lower than that.
+This is because <code>0.99.0</code> is the version number that is expected in package
+submitted to the Bioconductor repository, and version numbering should never
+go backward.
+In this example, we set the version to <code>0.99.0</code>, as we do not expect to change
+that version number ever in the future.
+You might want to pick a lower version number, if you wish to
+increment version numbers during your work on the package before your first
+submission to the Bioconductor project (e.g., <code>0.1.0</code> -&gt; <code>0.2.0</code> -&gt; <code>0.2.1</code>).</p>
+<p>Next, the field <code>Authors@R</code> must also be changed from the default placeholder
+to provide information about the package developer(s) and maintainer.
+The default template is designed for a single-person project, calling directly
+the function <code><a href="https://rdrr.io/r/utils/person.html">person()</a></code>.
+For projects that involve multiple contributors, or to make it future-proof
+in case contributors join the project at a later date, the field can concatenate
+as many calls to the function <code><a href="https://rdrr.io/r/utils/person.html">person()</a></code> as needed within a call to the function
+<code><a href="https://rdrr.io/r/base/c.html">c()</a></code>.
+In this example, we add the information about the author of this chapter,
+within a call to the function <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>.</p>
+<pre><code>Authors@R: 
+    c(person("Kevin", "Rue", "Christophe", "kevinrue@users.noreply.github.com",
+             role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0003-3899-3872")))</code></pre>
+<p>Next, the field <code>Description</code> must also be changed to provide a longer
+description of the package, albeit general guidelines recommend to keep the
+length of that field to a single paragraph.
+For instance, in this case we can say:</p>
+<pre><code>Description: This package demonstrates the set up of a Bioconductor-friendly
+    package using the packages usethis and biocthis. The setup includes the
+    initialisation of a git repository as well as the connection of the local
+    repository to the GitHub website.</code></pre>
+<p>Note that this field can always be updated at a later date, to refine the
+description of the package (or fix typos).</p>
+<p>Next, the field <code>License</code> declares the licensing choice made by the copyright
+holder of the package.
+Bioconductor packages are typically licensed under <code>Artistic-2.0</code>, although
+a number of other choices are commonly accepted for community-contributed
+packages.
+In this example, we choose the MIT license, which incidentally can be easily
+set up using the CRAN package <em><a href="https://CRAN.R-project.org/package=usethis">usethis</a></em>.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/licenses.html">use_mit_license</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console display information as files are edited.
+In this example, the field <code>License</code> is automatically updated in the file
+<code>DESCRIPTION</code>, while files <code>LICENSE</code> and <code>LICENSE.md</code> are created,
+and the file <code>.Rbuildignore</code> is also updated to ignore the non-standard file
+<code>LICENSE.md</code> when the package is built.</p>
+<pre><code>✔ Setting License field in DESCRIPTION to 'MIT + file LICENSE'
+✔ Writing 'LICENSE'
+✔ Writing 'LICENSE.md'
+✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'</code></pre>
+<p>Next, the field <code>Encoding</code> can usually be left at the default value.
+In this example, this is <code>UTF-8</code>.</p>
+<p>Similarly, the fields <code>Roxygen</code> and <code>RoxygenNote</code> can usually be left to their
+default value.
+In this example, those were <code>list(markdown = TRUE)</code> and <code>7.1.2</code>, respectively.
+The former is a list of options passed to the CRAN package
+<em><a href="https://CRAN.R-project.org/package=roxygen2">roxygen2</a></em> – used to generate manual pages – while
+the latter tracks the version of <code>BiocStyle::CRANpkg("roxygen2")</code> that was last
+used to manage the documentation in this particular Bioconductor package.</p>
+<p>Finally, at this point, the last two fields of the file are <code>URL</code> and
+<code>BugReports</code>, which were recently added as the result of a call to the function <code><a href="https://usethis.r-lib.org/reference/use_github.html">usethis::use_github()</a></code>.</p>
+</div>
+<div id="further-reading" class="section level2" number="6.11">
+<h2>
+<span class="header-section-number">6.11</span> Further reading<a class="anchor" aria-label="anchor" href="#further-reading"><i class="fas fa-link"></i></a>
+</h2>
+<div id="biocthis" class="section level3" number="6.11.1">
+<h3>
+<span class="header-section-number">6.11.1</span> <code>biocthis</code><a class="anchor" aria-label="anchor" href="#biocthis"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>2021-01-28 <a href="https://youtu.be/3fLNsLchPnI">two minute video</a> in Spanish for ConectaR 2021. <a href="https://speakerdeck.com/lcolladotor/biocthis-conectar2021">Slides in Spanish</a>.</li>
+<li>2020-11-05 <a href="https://speakerdeck.com/lcolladotor/biocthis-tab">slides in English</a> for the Bioconductor Technical Advisory Board.</li>
+<li>2020-09-10 <a href="https://youtu.be/aMTxkYsM-8o">55 minute video in English</a>. <a href="https://speakerdeck.com/lcolladotor/making-bioc-packages-with-biocthis">Slides in English</a>.</li>
+</ul>
+</div>
+</div>
+<div id="resources" class="section level2" number="6.12">
+<h2>
+<span class="header-section-number">6.12</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
+</h2>
 <blockquote>
 <p>Contribute!</p>
 <p>Introduce and discuss the links below.</p>
@@ -85,18 +546,6 @@
 <li><a href="https://github.com/SaskiaFreytag/making_bioconductor_pkg">Building a Bioconductor package using RStudio</a></li>
 <li><a href="https://github.com/lshep/MakeAPackage">lshep/MakeAPackage</a></li>
 </ul>
-<div id="biocthis" class="section level2" number="6.1">
-<h2>
-<span class="header-section-number">6.1</span> biocthis<a class="anchor" aria-label="anchor" href="#biocthis"><i class="fas fa-link"></i></a>
-</h2>
-<p>The <em><a href="https://bioconductor.org/packages/3.15/biocthis">biocthis</a></em> package provide convenient utilities to automate package and project setup for Bioconductor packages.</p>
-<ul>
-<li>
-<a href="https://lcolladotor.github.io/biocthis/reference/use_bioc_pkg_templates.html"><code>biocthis::use_bioc_pkg_templates()</code></a> creates four <code>dev/*.R</code> scripts that guide you in the process of setting up an RStudio project for a Bioconductor-friendly R package.</li>
-<li>2021-01-28 <a href="https://youtu.be/3fLNsLchPnI">two minute video</a> in Spanish for ConectaR 2021. <a href="https://speakerdeck.com/lcolladotor/biocthis-conectar2021">Slides in Spanish</a>.</li>
-<li>2020-11-05 <a href="https://speakerdeck.com/lcolladotor/biocthis-tab">slides in English</a> for the Bioconductor Technical Advisory Board.</li>
-<li>2020-09-10 <a href="https://youtu.be/aMTxkYsM-8o">55 minute video in English</a>. <a href="https://speakerdeck.com/lcolladotor/making-bioc-packages-with-biocthis">Slides in English</a>.</li>
-</ul>
 </div>
 </div>
   <div class="chapter-nav">
@@ -105,8 +554,21 @@
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#bioc-package"><span class="header-section-number">6</span> Making an Bioconductor package</a></li>
-<li><a class="nav-link" href="#biocthis"><span class="header-section-number">6.1</span> biocthis</a></li>
+<li><a class="nav-link" href="#bioc-package"><span class="header-section-number">6</span> Making a Bioconductor package</a></li>
+<li><a class="nav-link" href="#environment"><span class="header-section-number">6.1</span> Environment</a></li>
+<li><a class="nav-link" href="#install-accessory-packages"><span class="header-section-number">6.2</span> Install accessory packages</a></li>
+<li><a class="nav-link" href="#check-if-the-package-name-is-available-on-cran-and-bioconductor"><span class="header-section-number">6.3</span> Check if the package name is available on CRAN and Bioconductor</a></li>
+<li><a class="nav-link" href="#create-a-package-template-with-usethis"><span class="header-section-number">6.4</span> Create a package template with usethis</a></li>
+<li><a class="nav-link" href="#create-template-scripts-using-biocthis"><span class="header-section-number">6.5</span> Create template scripts using biocthis</a></li>
+<li><a class="nav-link" href="#create-the-r-package"><span class="header-section-number">6.6</span> Create the R package</a></li>
+<li><a class="nav-link" href="#exclude-files-from-git-version-control"><span class="header-section-number">6.7</span> Exclude files from git version control</a></li>
+<li><a class="nav-link" href="#set-up-git"><span class="header-section-number">6.8</span> Set up git</a></li>
+<li><a class="nav-link" href="#connect-the-git-repository-to-github"><span class="header-section-number">6.9</span> Connect the git repository to GitHub</a></li>
+<li><a class="nav-link" href="#edit-the-description-file"><span class="header-section-number">6.10</span> Edit the DESCRIPTION file</a></li>
+<li>
+<a class="nav-link" href="#further-reading"><span class="header-section-number">6.11</span> Further reading</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#biocthis"><span class="header-section-number">6.11.1</span> biocthis</a></li></ul>
+</li>
+<li><a class="nav-link" href="#resources"><span class="header-section-number">6.12</span> Resources</a></li>
 </ul>
 
       <div class="book-extra">
@@ -124,7 +586,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Bioconductor Guidelines for Mentors and Mentees</strong>" was written by Kevin Rue-Albrecht. It was last built on 2022-02-28.</p>
+    <p>"<strong>Bioconductor Guidelines for Mentors and Mentees</strong>" was written by Kevin Rue-Albrecht. It was last built on 2022-05-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
