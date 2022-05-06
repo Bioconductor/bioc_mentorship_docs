@@ -119,7 +119,10 @@ wish to continue the process with that package name.
 
 When we are satisfied with the name of your package, we use the function
 `usethis::create_package()` to create a package template.
-In this example, we first change directory to `~/Desktop`, to create 
+In this example, we first change directory to `~/Desktop`, to initialise the
+directory that contains the new package on the `Desktop`.
+Instead, you will likely prefer to initialise your package in your own preferred
+directory on your computer.
 
 ```{r, eval=FALSE}
 setwd("~/Desktop")
