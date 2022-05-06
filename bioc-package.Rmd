@@ -362,7 +362,10 @@ Note:
 
 - If this is your first time running `use_github()`, the script provides you
   some additional commands that you may need to run before the command above
-  can be run successfully.
+  can be run successfully. However, that level of detail is beyond the scope of
+  this chapter.
+
+![Landing page of the GitHub repository.](images/github-landing-page-initial.png){width=100%}
 
 ## Further reading
 
