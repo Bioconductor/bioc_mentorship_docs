@@ -115,7 +115,7 @@ sub-strings, and acronyms.
 It is up to you to check the contents of those pages and decide whether you
 wish to continue the process with that package name.
 
-## Create a package template
+## Create a package template with `usethis`
 
 When we are satisfied with the name of your package, we use the function
 `usethis::create_package()` to create a package template.
@@ -178,133 +178,52 @@ Alphabetically:
 - The essential directory `R/` - initially empty - is used to store R scripts
   that contain the code of the new package.
 
-## New RStudio project
+## Create template scripts using `biocthis`
 
-In the top right corner of the RStudio application, click on `New Project...`.
-
-![RStudio - New Project...](images/new-rstudio-project.png){width=66%}
-
-In the `New Project Wizard`, select the option `New Directory`.
-
-![RStudio - New Project Wizard - Create Project](images/wizard-create-project.png){width=66%}
-
-Then, click on `New Project`.
-
-![RStudio - New Project Wizard - Project type](images/wizard-project-type.png){width=66%}
-
-Then, type the name of your package in the field `Directory Name`,
-this will also be used as the name of a new directory in which your package
-will be stored.
-Select a parent directory on your computer where that new directory will be
-created.
-
-In this example, we allow the RStudio application to initialise a
-[git](TODO) repository and a [renv](TODO) environment.
-
-It is recommended to initialise a git repository as early as possible in the
-lifecycle of the package, to facilitate version control.
-
-The `r BiocStyle::CRANpkg("renv")` package is a great option to manage
-the environment in which the package is developped, independently from any other
-RStudio project on your computer.
-
-When you are ready, click the button `Create Project`.
-
-![RStudio - New Project Wizard - Create New Project](images/wizard-create-new-project.png){width=66%}
-
-The RStudio application should display the newly created project as follows.
-
-![Initial state of a new RStudio project.](images/rstudio-project-initial.png){width=100%}
-
-Notes:
-
-- In the example above, the file `.gitignore` was created becaused we opted
-  to `Create a git repository`.
-- Similarly, the files and directories `.Rprofile`, `renv/`, and `renv.lock`
-  were created becaused we opted to `Use renv with this project`.
-
-## Exclude initial files from version control
-
-In this example, we opted to let the RStudio application initialise a git
-repository for us in the newly created project directory.
-
-Files that have been created, modified, or deleted are listed in the Git panel
-of the RStudio application.
-
-![Initial state of the RStudio Git panel](images/git-initial.png){width=66%}
-
-In this example, all the files initially created are only relevant to the
-local development of the package, and should be excluded from version control.
-
-Select all the files, click on the wheel, and click on `Ignore...`.
-
-![Exclude the initial files from version control](images/git-ignore-initial.png){width=66%}
-
-
-In the modal window that opens, check that all the files to ignore were added.
-The RStudio application may not automatically add the file `.gitignore`,
-in which case you can type it manually yourself on a new line.
-It is recommended to add an empty line at the end of the file.
-
-When you are ready, click the button `Save`.
-
-![Manually add the file .gitignore to the .gitignore file.](images/git-ignore-gitignore.png){width=66%}
-
-The Git panel of the RStudio application should be empty now.
-
-## Install BiocManager and biocthis
-
-In this example, we use the package `r BiocStyle::CRANpkg("renv")` to create
-and manage the environment in which the package is developed, independently
-from any other RStudio project on the same computer.
-
-However, a consequence of this is that the newly created environment does not
-contain any R package other than the base R packages.
-
-First, install the CRAN package `r BiocStyle::CRANpkg("BiocManager")`.
-
-```{r, eval=FALSE}
-install.packages("BiocManager")
-```
-
-Then, install the Bioconductor package `r BiocStyle::Biocpkg("biocthis")`.
-
-```{r, eval=FALSE}
-BiocManager::install("biocthis")
-```
-
-If prompted whether you "want to install from sources the package which needs compilation? (Yes/no/cancel)", type `Yes` and press the Return key.
-
-## Create a package template
-
-Call the function `biocthis::use_bioc_pkg_templates()` from the R console panel
-in the RStudio application.
+At this point, we use the Bioconductor package
+`r BiocStyle::Biocpkg("biocthis")` to generate some R scripts with the goal of
+helping automate the process of creating R packages for Bioconductor or making
+them Bioconductor-friendly.
 
 ```{r, eval=FALSE}
 biocthis::use_bioc_pkg_templates()
 ```
 
-The function creates a sub-directory `dev/` and a number of R scripts that are
-designed to help us create our new Bioconductor-friendly package.
-The RStudio application will automatically open the newly created scripts in the
-Source panel.
+The R console display information are a sub-directory `dev/` and several R
+scripts are created.
 
-In the next sections, we will go through those scripts.
+```
+✔ Setting active project to '/Users/kevin/Desktop/MyBioconductorPackage'
+✔ Creating 'dev/'
+✔ Adding '^dev$' to '.Rbuildignore'
+✔ Writing 'dev/01_create_pkg.R'
+• Modify 'dev/01_create_pkg.R'
+✔ Writing 'dev/02_git_github_setup.R'
+• Modify 'dev/02_git_github_setup.R'
+✔ Writing 'dev/03_core_files.R'
+• Modify 'dev/03_core_files.R'
+✔ Writing 'dev/04_update.R'
+• Modify 'dev/04_update.R'
+```
+
+In the next sections, we will go through those R scripts in turn.
 
 ## Create the R package
 
-Open the script  `dev/01_create_pkg.R` and follow instructions therein.
+Open the file `dev/01_create_pkg.R`.
 
-<!-- See "Install accessory packages" -->
+Carefully read the contents of the file, including comments and code, as we have
+run most of that code already in the previous steps.
 
-In this example, an empty sub-directory with the name of the name of the package
-was created.
-This sub-directory is a supefluous artifact of the process, which should be
-removed.
-Click on the checkbox next to the sub-directory, click the `Delete` button,
-and click the `Yes` button in the modal to confirm.
+In this example, we have already run all the code in that script, so we can
+directly open the file `dev/02_git_github_setup.R`.
+We can click on the tab of the file already open in the Source panel of the
+RStudio application, or we can run the last line of code in the script
+`dev/01_create_pkg.R`.
 
-![Delete the empty directory.](images/files-package-delete.png)
+```{r, eval=FALSE}
+rstudioapi::navigateToFile(usethis::proj_path("dev", "02_git_github_setup.R"))
+```
 
 ## First commit
 
