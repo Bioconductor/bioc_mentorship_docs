@@ -922,8 +922,7 @@ the contents of the file as needed.
 • Modify 'inst/CITATION'
 ```
 
-At least for the time being, we decide to keep the contents of the file
-`inst/CITATION` as they are.
+In this example, we decide to keep the original contents as they are.
 
 ## Further reading
 
