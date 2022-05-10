@@ -586,7 +586,7 @@ to regular updates as the package continues to be developed:
 - the `biocViews` field can be updated to refine the list of terms used to
   thematically classify the package in the Bioconductor repository.
 
-## Create and edit the README file
+## Create the README file
 
 Most code repositories include a file named `README.md`, that often provides
 useful information to new users, such as instructions to install the package,
@@ -684,6 +684,64 @@ However, the `README.Rmd` is a convenient way to include example code that can
 be automatically executed, with the results embedded directly into the file `README.md` without any additional work on our part.
 All that we need to remember is to re-compile the file `README.md` every time
 that we update the source file `README.Rmd`.
+
+## Create the NEWS file
+
+R packages should include a file named `NEWS` to keep track of changes to the
+code from one version to the next.
+A valid alternative is the the file `NEWS.md`.
+
+In this example, we use the function `biocthis::use_bioc_news_md()` to create
+a template file that we can examine and edit as needed.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_news_md()
+```
+
+The R console displays some information as the file `NEWS.md` is created.
+When the command completes, the file is automatically opened in the Source panel
+of the RStudio application.
+
+```
+✔ Writing 'NEWS.md'
+• Modify 'NEWS.md'
+```
+
+In this example, the file contains an entry that starts with a first level
+heading that declares the package name and current version.
+
+Next, the template contents includes three sections, each with a single bullet
+point.
+
+In this example, we keep only the first section that declares the creation of
+the file `NEWS.md`.
+We delete the next two sections, as their contents does not describe anything
+relevant to our work so far.
+The final contents of the file `NEWS.md` in this example are shown below.
+
+```
+# MyBioconductorPackage 0.99.0
+
+NEW FEATURES
+
+* Added a `NEWS.md` file to track changes to the package.
+```
+
+The takeaway from this section is that the file `NEWS.md` should be regularly
+updated to briefly describe changes introduced in each new version of the
+package.
+
+New entries should be added at the top of the file, resulting in a reverse
+chronological order.
+There is no restriction on the name of sections within each entry.
+For future reference, the sections used in the initial template were:
+
+- `NEW FEATURES`
+- `SIGNIFICANT USER-VISIBLE CHANGES`
+- `BUG FIXES`
+
+Those sections cover most of the situations, but you are free to use different
+section titles that may better fit your needs.
 
 ## Further reading
 
