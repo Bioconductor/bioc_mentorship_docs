@@ -14,6 +14,11 @@ exclude-files-from-git-version-control
 set-up-git
 connect-the-git-repository-to-github
 edit-the-description-file
+create-the-readme-file
+create-the-news-file
+create-a-bioconductor-styled-code-of-conduct
+create-a-guide-for-contributions
+create-a-guide-for-getting-support
 further-reading
 biocthis
 resources

@@ -438,10 +438,56 @@ Great sources of information for best practices on that subject are:</p>
 <li><a href="http://r-pkgs.had.co.nz/description.html" class="uri">http://r-pkgs.had.co.nz/description.html</a></li>
 <li><a href="http://contributions.bioconductor.org/description.html" class="uri">http://contributions.bioconductor.org/description.html</a></li>
 </ul>
+<p>Before we start editing any of the fields, we use the function <code>biocthis::use_bioc_description()</code> to add two more fields.</p>
+<p>First, Bioconductor requires an additional field named <code>biocViews</code>.
+The field must be populated by terms selected from a controlled vocabulary,
+to facilitate the thematic classification of the new package on the Bioconductor
+website.
+The full list of available biocViews can be navigated
+<a href="https://www.bioconductor.org/packages/release/BiocViews.html">here</a>.</p>
+<p>Separately, an optional field named <code>Date</code> can also be added to the file
+<code>DESCRIPTION</code>. If available, that field is used for generating the package
+citation information.</p>
+<p>Both fields are added and automaticall filled bu the function
+<code>biocthis::use_bioc_description()</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_description</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>When prompted whether to over-write the pre-existing file <code>DESCRIPTION</code>, we
+choose the answer to consent and press the Return key.
+The console then displays the contents of the updated file <code>DESCRIPTION</code>.</p>
+<pre><code>✔ Setting active project to '/Users/kevin/Desktop/MyBioconductorPackage'
+Overwrite pre-existing file 'DESCRIPTION'?
+
+1: Negative
+2: No
+3: Definitely
+
+Selection: 3
+✔ Writing 'DESCRIPTION'
+Package: MyBioconductorPackage
+Title: What the Package Does (One Line, Title Case)
+Version: 0.99.0
+Date: 2022-05-10
+Authors@R (parsed):
+    * First Last &lt;first.last@example.com&gt; [aut, cre] (YOUR-ORCID-ID)
+Description: What the package does (one paragraph).
+License: Artistic-2.0
+URL: https://github.com/kevinrue/MyBioconductorPackage
+BugReports:
+    https://support.bioconductor.org/t/MyBioconductorPackage
+biocViews: Software
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2</code></pre>
+<p>Now we open the file <code>DESCRIPTION</code> and carefully examine each field.</p>
 <p>First, the field <code>Package</code> already contains the name that we have chosen for our
-package.
-If you decide to change the package name from this point onward, you should be
-mindful of all the other places where you will need to also update that name.</p>
+new package.</p>
+<pre><code>Package: MyBioconductorPackage</code></pre>
+<p>Note:</p>
+<ul>
+<li>If you decide to change the package name from this point onward, you should be
+mindful of all the other places where you will need to also update that name.</li>
+</ul>
 <p>Next, the field <code>Title</code> is the first field that we want to update from the
 default placeholder.
 Note that this field expects a single line in
@@ -450,16 +496,22 @@ where all words are capitalized except for minor words.
 In this example, we go with <code>Demonstration of a Bioconductor Package</code>.
 In doubt, you can always look at some of your favourite packages for
 inspiration.</p>
-<p>Next, the field <code>Version</code> must be changed to either version <code>0.99.0</code> or any
+<pre><code>Title: Demonstration of a Bioconductor Package</code></pre>
+<p>Next, the field <code>Version</code> must be set to either version <code>0.99.0</code> or any
 version number that is <a href="https://semver.org/">semantically</a> lower than that.
 This is because <code>0.99.0</code> is the version number that is expected in package
 submitted to the Bioconductor repository, and version numbering should never
 go backward.
-In this example, we set the version to <code>0.99.0</code>, as we do not expect to change
+In this example, we leave the version <code>0.99.0</code> that was automatically set by the
+function <code>biocthis::use_bioc_description()</code>, as we do not expect to change
 that version number ever in the future.
 You might want to pick a lower version number, if you wish to
 increment version numbers during your work on the package before your first
 submission to the Bioconductor project (e.g., <code>0.1.0</code> -&gt; <code>0.2.0</code> -&gt; <code>0.2.1</code>).</p>
+<pre><code>Version: 0.99.0</code></pre>
+<p>Next, we leave the field <code>Date</code> to the date of today, that was automatically
+filled by the function <code>biocthis::use_bioc_description()</code>.</p>
+<pre><code>Date: 2022-05-10</code></pre>
 <p>Next, the field <code>Authors@R</code> must also be changed from the default placeholder
 to provide information about the package developer(s) and maintainer.
 The default template is designed for a single-person project, calling directly
@@ -477,50 +529,285 @@ within a call to the function <code><a href="https://rdrr.io/r/base/c.html">c()<
 <p>Next, the field <code>Description</code> must also be changed to provide a longer
 description of the package, albeit general guidelines recommend to keep the
 length of that field to a single paragraph.
-For instance, in this case we can say:</p>
+For instance, in this case we choose to write:</p>
 <pre><code>Description: This package demonstrates the set up of a Bioconductor-friendly
     package using the packages usethis and biocthis. The setup includes the
     initialisation of a git repository as well as the connection of the local
     repository to the GitHub website.</code></pre>
-<p>Note that this field can always be updated at a later date, to refine the
-description of the package (or fix typos).</p>
+<p>Note:</p>
+<ul>
+<li>Best practices encourage us to wrap the contents of the field over multiple
+lines, in a way that each line of the file <code>DESCRIPTION</code> does not exceed 80
+characters, and each line from the second one is indented by four spaces.</li>
+</ul>
 <p>Next, the field <code>License</code> declares the licensing choice made by the copyright
 holder of the package.
 Bioconductor packages are typically licensed under <code>Artistic-2.0</code>, although
 a number of other choices are commonly accepted for community-contributed
 packages.
-In this example, we choose the MIT license, which incidentally can be easily
-set up using the CRAN package <em><a href="https://CRAN.R-project.org/package=usethis">usethis</a></em>.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/licenses.html">use_mit_license</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>The R console display information as files are edited.
-In this example, the field <code>License</code> is automatically updated in the file
-<code>DESCRIPTION</code>, while files <code>LICENSE</code> and <code>LICENSE.md</code> are created,
-and the file <code>.Rbuildignore</code> is also updated to ignore the non-standard file
-<code>LICENSE.md</code> when the package is built.</p>
-<pre><code>✔ Setting License field in DESCRIPTION to 'MIT + file LICENSE'
-✔ Writing 'LICENSE'
-✔ Writing 'LICENSE.md'
-✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'</code></pre>
+In this example, we leave the <code>Artistic-2.0</code> license automatically set by the
+function <code>biocthis::use_bioc_description()</code>.</p>
+<pre><code>License: Artistic-2.0</code></pre>
+<p>The next two fields of the file are <code>URL</code> and <code>BugReports</code>,
+which were recently added by the function <code><a href="https://usethis.r-lib.org/reference/use_github.html">usethis::use_github()</a></code> and
+subsequently edited by the function <code>biocthis::use_bioc_description()</code>.</p>
+<pre><code>URL: https://github.com/kevinrue/MyBioconductorPackage
+BugReports: https://support.bioconductor.org/t/MyBioconductorPackage</code></pre>
+<p>Although this demonstration package may never be actually included in the
+Bioconductor repository, we decide to leave the <code>BugReports</code> field to a URL
+directing to the <a href="https://support.bioconductor.org">Bioconductor support site</a>,
+as it is a great source of information from fellow package users and developers.</p>
+<p>Next, we can leave the Bioconductor-specific field <code>biocViews</code> to the value
+<code>Software</code> automatically filled by the function
+<code>biocthis::use_bioc_description()</code>, at least until we add some code to the
+package and determine other terms that best describe our new package.</p>
+<pre><code>biocViews: Software</code></pre>
 <p>Next, the field <code>Encoding</code> can usually be left at the default value.
 In this example, this is <code>UTF-8</code>.</p>
-<p>Similarly, the fields <code>Roxygen</code> and <code>RoxygenNote</code> can usually be left to their
+<pre><code>Encoding: UTF-8</code></pre>
+<p>Finally, the fields <code>Roxygen</code> and <code>RoxygenNote</code> can usually be left to their
 default value.
 In this example, those were <code>list(markdown = TRUE)</code> and <code>7.1.2</code>, respectively.
 The former is a list of options passed to the CRAN package
 <em><a href="https://CRAN.R-project.org/package=roxygen2">roxygen2</a></em> – used to generate manual pages – while
 the latter tracks the version of <code>BiocStyle::CRANpkg("roxygen2")</code> that was last
 used to manage the documentation in this particular Bioconductor package.</p>
-<p>Finally, at this point, the last two fields of the file are <code>URL</code> and
-<code>BugReports</code>, which were recently added as the result of a call to the function <code><a href="https://usethis.r-lib.org/reference/use_github.html">usethis::use_github()</a></code>.</p>
+<p>With that, we have finished out first round of edits to the file <code>DESCRIPTION</code>.
+Importantly, we have highlighted many of the fields in this file that are prone
+to regular updates as the package continues to be developed:</p>
+<ul>
+<li>the <code>Version</code> field can be updated to create new releases of the package.</li>
+<li>the <code>Date</code> field should be updated in parallel with the <code>Version</code> field,
+to mark the release date of each version of the package.</li>
+<li>the <code>Authors@R</code> field can be edited to update information about existing
+or new contributors to the package.</li>
+<li>the <code>Description</code> field can be updated to refine information about the
+package, for instance as new functionality is added.</li>
+<li>the <code>BugReports</code> field can be updated when the package is acccepted in the
+Bioconductor repository.</li>
+<li>the <code>biocViews</code> field can be updated to refine the list of terms used to
+thematically classify the package in the Bioconductor repository.</li>
+</ul>
 </div>
-<div id="further-reading" class="section level2" number="6.11">
+<div id="create-the-readme-file" class="section level2" number="6.11">
 <h2>
-<span class="header-section-number">6.11</span> Further reading<a class="anchor" aria-label="anchor" href="#further-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.11</span> Create the README file<a class="anchor" aria-label="anchor" href="#create-the-readme-file"><i class="fas fa-link"></i></a>
 </h2>
-<div id="biocthis" class="section level3" number="6.11.1">
+<p>Most code repositories include a file named <code>README.md</code>, that often provides
+useful information to new users, such as instructions to install the package,
+a brief showcase of the package functionality, or preferences for citing the
+package.</p>
+<p>In this example, we use function <code>biocthis::use_bioc_readme_rmd()</code> to generate
+a template R Markdown file named <code>README.Rmd</code>, that we will adapt to our own
+new package before compiling it to a regular Markdown file <code>README.md</code>.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_readme_rmd</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>✔ Writing 'README.Rmd'
+✔ Adding '^README\\.Rmd$' to '.Rbuildignore'
+• Modify 'README.Rmd'
+✔ Writing '.git/hooks/pre-commit'</code></pre>
+<p>The R console displays some information as the file <code>README.Rmd</code> is created.
+When the command completes, the file is automatically opened in the Source panel
+of the RStudio application, where we can carefully read and edit it as needed.</p>
+<p>We see that the initial template contains code that we can expect to fail at
+this point in time.</p>
+<p>First, some of the instructions in the section <code>## Installation instructions</code>
+clearly assume that our new package can be obtained and installed from the
+Bioconductor repository.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"MyBioconductorPackage"</span><span class="op">)</span></code></pre></div>
+<p>This is obviously not the case yet, and those instructions would cause an error
+for anyone attempting to run that code.
+While we could decide to remove those currently invalid instructions, it is
+acceptable to keep them as a placeholder, as they indicate our intention to
+submit that package to the Bioconductor repository, and those command will be
+valid when the package is accepted and included in the Bioconductor repository.</p>
+<p>Similarly, the section <code>## Example</code> demonstrates how to load the package, as
+well as running some code that is currently unrelated to our new package.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"MyBioconductorPackage"</span><span class="op">)</span>
+<span class="va">...</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span>
+<span class="va">...</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pressure</span><span class="op">)</span></code></pre></div>
+<p>Since our package does not contain any code yet, we do not have any code to
+demonstrate the functionality of the package itself.
+Again, it is acceptable to keep that part of the template as a placeholder and
+reminder that as our new package is matures, we should use this section to
+briefly demonstrate how to use the package.</p>
+<p>Again, the rest of this template file describes aspects of the package that are
+not in place yet.
+In this example, we choose to keep this template file exactly as it was
+generated, as there is nothing that needs urgent attention or editing.</p>
+<p>Following the next set of instructions in the script <code>03_core_files.R</code>, we use
+the function <code><a href="https://devtools.r-lib.org/reference/build_rmd.html">devtools::build_readme()</a></code> to compile the R Markdown file
+<code>README.Rmd</code> into a Markdown file <code>README.md</code>.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_readme</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>ℹ Installing MyBioconductorPackage in temporary library
+ℹ Building /Users/kevin/Desktop/MyBioconductorPackage/README.Rmd
+Loading required namespace: MyBioconductorPackage</code></pre>
+<p>The console displays some information, as our package is temporarily installed for the duration of the command.</p>
+<p>When the command completes successfully, we see the newly created file
+<code>README.md</code>.
+We can open that file, and see that it contains the regular Markdown contents
+from the original <code>README.Rmd</code> source file, as well as the output of the code
+chunks that were executed during compilation.</p>
+<p>The takeaway from this section is that the file <code>README.md</code> is ultimately the
+target file that we want to produce.
+However, the <code>README.Rmd</code> is a convenient way to include example code that can
+be automatically executed, with the results embedded directly into the file <code>README.md</code> without any additional work on our part.
+All that we need to remember is to re-compile the file <code>README.md</code> every time
+that we update the source file <code>README.Rmd</code>.</p>
+</div>
+<div id="create-the-news-file" class="section level2" number="6.12">
+<h2>
+<span class="header-section-number">6.12</span> Create the NEWS file<a class="anchor" aria-label="anchor" href="#create-the-news-file"><i class="fas fa-link"></i></a>
+</h2>
+<p>R packages should include a file named <code>NEWS</code> to keep track of changes to the
+code from one version to the next.
+A valid alternative is the the file <code>NEWS.md</code>.</p>
+<p>In this example, we use the function <code>biocthis::use_bioc_news_md()</code> to create
+a template file that we can examine and edit as needed.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_news_md</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console displays some information as the file <code>NEWS.md</code> is created.
+When the command completes, the file is automatically opened in the Source panel
+of the RStudio application.</p>
+<pre><code>✔ Writing 'NEWS.md'
+• Modify 'NEWS.md'</code></pre>
+<p>In this example, the file contains an entry that starts with a first level
+heading that declares the package name and current version.</p>
+<p>Next, the template contents includes three sections, each with a single bullet
+point.</p>
+<p>In this example, we keep only the first section that declares the creation of
+the file <code>NEWS.md</code>.
+We delete the next two sections, as their contents does not describe anything
+relevant to our work so far.
+The final contents of the file <code>NEWS.md</code> in this example are shown below.</p>
+<pre><code># MyBioconductorPackage 0.99.0
+
+NEW FEATURES
+
+* Added a `NEWS.md` file to track changes to the package.</code></pre>
+<p>The takeaway from this section is that the file <code>NEWS.md</code> should be regularly
+updated to briefly describe changes introduced in each new version of the
+package.</p>
+<p>New entries should be added at the top of the file, resulting in a reverse
+chronological order.
+There is no restriction on the name of sections within each entry.
+For future reference, the sections used in the initial template were:</p>
+<ul>
+<li><code>NEW FEATURES</code></li>
+<li><code>SIGNIFICANT USER-VISIBLE CHANGES</code></li>
+<li><code>BUG FIXES</code></li>
+</ul>
+<p>Those sections cover most of the situations, but you are free to use different
+section titles that may better fit your needs.</p>
+</div>
+<div id="create-a-bioconductor-styled-code-of-conduct" class="section level2" number="6.13">
+<h2>
+<span class="header-section-number">6.13</span> Create a Bioconductor-styled code of conduct<a class="anchor" aria-label="anchor" href="#create-a-bioconductor-styled-code-of-conduct"><i class="fas fa-link"></i></a>
+</h2>
+<p>The Bioconductor project declares a code of conduct that community members are
+expected to respect when participating in community events and communicating
+on community platforms (e.g., support site, Slack workspace).</p>
+<p>In this example, we use the function <code>biocthis::use_bioc_coc()</code> to generate
+a template file indicating that our new package subscribes to that code of
+conduct.</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_coc</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console displays information as files are created and edited.
+In particular, when the command completes, our clipboard contains some text
+that we can add to the file <code>README.Rmd</code>.</p>
+<pre><code>✔ Creating '.github/'
+✔ Adding '^\\.github$' to '.Rbuildignore'
+✔ Adding '*.html' to '.github/.gitignore'
+✔ Writing '.github/CODE_OF_CONDUCT.md'
+• Don't forget to describe the code of conduct in your README:
+  ## Code of Conduct
+  Please note that the MyBioconductorPackage project is released with a [Contributor Code of Conduct](http://bioconductor.org/about/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
+  [Copied to clipboard]</code></pre>
+<p>In this example, we open the file <code>README.Rmd</code> and paste the contents of the
+clipboard at the end of the file.
+Importantly, we remember to re-compile this file <code>README.Rmd</code> to update the
+target file <code>README.md</code>.</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_readme</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>From the information displayed in the R console, we also learn that a
+sub-directory named <code>.github</code> was created, and a file named <code>CODE_OF_CONDUCT.md</code>
+was created within that new sub-directory.</p>
+<p>We can take a moment to open that new file and examine its contents.</p>
+<pre><code>The Bioconductor community values
+
+* an open approach to science that promotes the sharing of ideas, code, and expertise
+* collaboration
+* diversity and inclusivity
+* a kind and welcoming environment
+* community contributions
+
+In line with these values, Bioconductor is dedicated to providing a welcoming, supportive, collegial, experience free of harassment, intimidation, and bullying regardless of:
+
+* identity: gender, gender identity and expression, sexual orientation, disability, physical appearance, ethnicity, body size, race, age, religion, etc.
+* intellectual position: approaches to data analysis, software preferences, coding style, scientific perspective, etc.
+* stage of career
+
+In order to uphold these values, members of the Bioconductor community are required to follow the Code of Conduct.The latest version of Bioconductor project Code of Conduct is available at http://bioconductor.org/about/code-of-conduct/. Please read the Code of Conduct before contributing to this project.
+
+Thank you!</code></pre>
+<p>In this example, we decide to keep the contents of the template file as they
+are.</p>
+</div>
+<div id="create-a-guide-for-contributions" class="section level2" number="6.14">
+<h2>
+<span class="header-section-number">6.14</span> Create a guide for contributions<a class="anchor" aria-label="anchor" href="#create-a-guide-for-contributions"><i class="fas fa-link"></i></a>
+</h2>
+<p>Optionally, R packages are welcome to include a file <code>.github/CONTRIBUTING.md</code>.
+That file is used to inform potential contributors to the package of our
+preferences to receive and handle such contributions.</p>
+<p>In this example, we use the function <code><a href="https://usethis.r-lib.org/reference/tidyverse.html">usethis::use_tidy_contributing()</a></code> to set
+up a template file that we can examine and edit as needed.</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/tidyverse.html">use_tidy_contributing</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console displays information as the file <code>.github/CONTRIBUTING.md</code> is
+created.</p>
+<pre><code>✔ Writing '.github/CONTRIBUTING.md'</code></pre>
+<p>That template file is relatively long to display here, so we encourage you to
+carefully inspect the one that is create when you run the command above, and
+edit it as needed.
+In this example, we keep the contents of the template file as they are.</p>
+</div>
+<div id="create-a-guide-for-getting-support" class="section level2" number="6.15">
+<h2>
+<span class="header-section-number">6.15</span> Create a guide for getting support<a class="anchor" aria-label="anchor" href="#create-a-guide-for-getting-support"><i class="fas fa-link"></i></a>
+</h2>
+<p>Another optional file that may be added to Bioconductor packages is
+<code>.github/SUPPORT.md</code>.
+That file is used to inform users of the package about sources of information
+and help when they experience difficulties while using the package.</p>
+<p>In this example, we use the function <code>biocthis::use_bioc_support()</code> to set
+up a template file that we can examine and edit as needed.</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_support</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console displays information as the file <code>.github/SUPPORT.md</code> is
+created.</p>
+<pre><code>✔ Writing '.github/SUPPORT.md'</code></pre>
+<p>That template file is relatively long to display here, so we encourage you to
+carefully inspect the one that is create when you run the command above, and
+edit it as needed.
+In this example, we keep the contents of the template file as they are.</p>
+</div>
+<div id="further-reading" class="section level2" number="6.16">
+<h2>
+<span class="header-section-number">6.16</span> Further reading<a class="anchor" aria-label="anchor" href="#further-reading"><i class="fas fa-link"></i></a>
+</h2>
+<div id="biocthis" class="section level3" number="6.16.1">
 <h3>
-<span class="header-section-number">6.11.1</span> <code>biocthis</code><a class="anchor" aria-label="anchor" href="#biocthis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.16.1</span> <code>biocthis</code><a class="anchor" aria-label="anchor" href="#biocthis"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>2021-01-28 <a href="https://youtu.be/3fLNsLchPnI">two minute video</a> in Spanish for ConectaR 2021. <a href="https://speakerdeck.com/lcolladotor/biocthis-conectar2021">Slides in Spanish</a>.</li>
@@ -529,9 +816,9 @@ used to manage the documentation in this particular Bioconductor package.</p>
 </ul>
 </div>
 </div>
-<div id="resources" class="section level2" number="6.12">
+<div id="resources" class="section level2" number="6.17">
 <h2>
-<span class="header-section-number">6.12</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.17</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>Contribute!</p>
@@ -565,10 +852,15 @@ used to manage the documentation in this particular Bioconductor package.</p>
 <li><a class="nav-link" href="#set-up-git"><span class="header-section-number">6.8</span> Set up git</a></li>
 <li><a class="nav-link" href="#connect-the-git-repository-to-github"><span class="header-section-number">6.9</span> Connect the git repository to GitHub</a></li>
 <li><a class="nav-link" href="#edit-the-description-file"><span class="header-section-number">6.10</span> Edit the DESCRIPTION file</a></li>
+<li><a class="nav-link" href="#create-the-readme-file"><span class="header-section-number">6.11</span> Create the README file</a></li>
+<li><a class="nav-link" href="#create-the-news-file"><span class="header-section-number">6.12</span> Create the NEWS file</a></li>
+<li><a class="nav-link" href="#create-a-bioconductor-styled-code-of-conduct"><span class="header-section-number">6.13</span> Create a Bioconductor-styled code of conduct</a></li>
+<li><a class="nav-link" href="#create-a-guide-for-contributions"><span class="header-section-number">6.14</span> Create a guide for contributions</a></li>
+<li><a class="nav-link" href="#create-a-guide-for-getting-support"><span class="header-section-number">6.15</span> Create a guide for getting support</a></li>
 <li>
-<a class="nav-link" href="#further-reading"><span class="header-section-number">6.11</span> Further reading</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#biocthis"><span class="header-section-number">6.11.1</span> biocthis</a></li></ul>
+<a class="nav-link" href="#further-reading"><span class="header-section-number">6.16</span> Further reading</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#biocthis"><span class="header-section-number">6.16.1</span> biocthis</a></li></ul>
 </li>
-<li><a class="nav-link" href="#resources"><span class="header-section-number">6.12</span> Resources</a></li>
+<li><a class="nav-link" href="#resources"><span class="header-section-number">6.17</span> Resources</a></li>
 </ul>
 
       <div class="book-extra">
@@ -586,7 +878,7 @@ used to manage the documentation in this particular Bioconductor package.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Bioconductor Guidelines for Mentors and Mentees</strong>" was written by Kevin Rue-Albrecht. It was last built on 2022-05-06.</p>
+    <p>"<strong>Bioconductor Guidelines for Mentors and Mentees</strong>" was written by Kevin Rue-Albrecht. It was last built on 2022-05-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
