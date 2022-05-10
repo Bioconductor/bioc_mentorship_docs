@@ -810,7 +810,7 @@ Thank you!
 In this example, we decide to keep the contents of the template file as they
 are.
 
-## Create a guide fo contributions
+## Create a guide for contributions
 
 Optionally, R packages are welcome to include a file `.github/CONTRIBUTING.md`.
 That file is used to inform potential contributors to the package of our
