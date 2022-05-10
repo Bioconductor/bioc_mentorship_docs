@@ -647,9 +647,9 @@ plot(pressure)
 
 Since our package does not contain any code yet, we do not have any code to
 demonstrate the functionality of the package itself.
-Again, it is acceptable to keep that part of the template as a placeholder and
-reminder that as our new package is matures, we should use this section to
-briefly demonstrate how to use the package.
+Again, it is acceptable to keep that part of the template as a placeholder and a
+reminder that as our new package matures, we should use this section to briefly
+demonstrate how to use the package.
 
 Again, the rest of this template file describes aspects of the package that are
 not in place yet.
