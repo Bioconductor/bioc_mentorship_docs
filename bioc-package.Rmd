@@ -674,8 +674,16 @@ The console displays some information, as our package is temporarily installed f
 
 When the command completes successfully, we see the newly created file
 `README.md`.
+We can open that file, and see that it contains the regular Markdown contents
+from the original `README.Rmd` source file, as well as the output of the code
+chunks that were executed during compilation.
 
-
+The takeaway from this section is that the file `README.md` is ultimately the
+target file that we want to produce.
+However, the `README.Rmd` is a convenient way to include example code that can
+be automatically executed, with the results embedded directly into the file `README.md` without any additional work on our part.
+All that we need to remember is to re-compile the file `README.md` every time
+that we update the source file `README.Rmd`.
 
 ## Further reading
 
