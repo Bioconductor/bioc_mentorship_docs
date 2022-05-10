@@ -479,6 +479,13 @@ used to manage the documentation in this particular Bioconductor package.
 
 Finally, at this point, the last two fields of the file are `URL` and
 `BugReports`, which were recently added as the result of a call to the function `usethis::use_github()`.
+In this example, the fields were already filled with the appopriate information
+(as shown below) so we do not need to edit anything.
+
+```
+URL: https://github.com/kevinrue/MyBioconductorPackage
+BugReports: https://github.com/kevinrue/MyBioconductorPackage/issues
+```
 
 ## Further reading
 
