@@ -383,10 +383,70 @@ Great sources of information for best practices on that subject are:
 - <http://r-pkgs.had.co.nz/description.html>
 - <http://contributions.bioconductor.org/description.html>
 
+Before we start editing any of the fields, we use the function `biocthis::use_bioc_description()` to add two more fields.
+
+First, Bioconductor requires an additional field named `biocViews`.
+The field must be populated by terms selected from a controlled vocabulary,
+to facilitate the thematic classification of the new package on the Bioconductor
+website.
+The full list of available biocViews can be navigated
+[here](https://www.bioconductor.org/packages/release/BiocViews.html).
+
+Separately, an optional field named `Date` can also be added to the file
+`DESCRIPTION`. If available, that field is used for generating the package
+citation information.
+
+Both fields are added and automaticall filled bu the function
+`biocthis::use_bioc_description()`.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_description()
+```
+
+When prompted whether to over-write the pre-existing file `DESCRIPTION`, we
+choose the answer to consent and press the Return key.
+The console then displays the contents of the updated file `DESCRIPTION`.
+
+```
+✔ Setting active project to '/Users/kevin/Desktop/MyBioconductorPackage'
+Overwrite pre-existing file 'DESCRIPTION'?
+
+1: Negative
+2: No
+3: Definitely
+
+Selection: 3
+✔ Writing 'DESCRIPTION'
+Package: MyBioconductorPackage
+Title: What the Package Does (One Line, Title Case)
+Version: 0.99.0
+Date: 2022-05-10
+Authors@R (parsed):
+    * First Last <first.last@example.com> [aut, cre] (YOUR-ORCID-ID)
+Description: What the package does (one paragraph).
+License: Artistic-2.0
+URL: https://github.com/kevinrue/MyBioconductorPackage
+BugReports:
+    https://support.bioconductor.org/t/MyBioconductorPackage
+biocViews: Software
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+```
+
+Now we open the file `DESCRIPTION` and carefully examine each field.
+
 First, the field `Package` already contains the name that we have chosen for our
-package.
-If you decide to change the package name from this point onward, you should be
-mindful of all the other places where you will need to also update that name.
+new package.
+
+```
+Package: MyBioconductorPackage
+```
+
+Note:
+
+- If you decide to change the package name from this point onward, you should be
+  mindful of all the other places where you will need to also update that name.
 
 Next, the field `Title` is the first field that we want to update from the
 default placeholder.
@@ -397,16 +457,32 @@ In this example, we go with `Demonstration of a Bioconductor Package`.
 In doubt, you can always look at some of your favourite packages for
 inspiration.
 
-Next, the field `Version` must be changed to either version `0.99.0` or any
+```
+Title: Demonstration of a Bioconductor Package
+```
+
+Next, the field `Version` must be set to either version `0.99.0` or any
 version number that is [semantically](https://semver.org/) lower than that.
 This is because `0.99.0` is the version number that is expected in package
 submitted to the Bioconductor repository, and version numbering should never
 go backward.
-In this example, we set the version to `0.99.0`, as we do not expect to change
+In this example, we leave the version `0.99.0` that was automatically set by the
+function `biocthis::use_bioc_description()`, as we do not expect to change
 that version number ever in the future.
 You might want to pick a lower version number, if you wish to
 increment version numbers during your work on the package before your first
 submission to the Bioconductor project (e.g., `0.1.0` -> `0.2.0` -> `0.2.1`).
+
+```
+Version: 0.99.0
+```
+
+Next, we leave the field `Date` to the date of today, that was automatically
+filled by the function `biocthis::use_bioc_description()`.
+
+```
+Date: 2022-05-10
+```
 
 Next, the field `Authors@R` must also be changed from the default placeholder
 to provide information about the package developer(s) and maintainer.
@@ -429,7 +505,7 @@ Authors@R:
 Next, the field `Description` must also be changed to provide a longer
 description of the package, albeit general guidelines recommend to keep the
 length of that field to a single paragraph.
-For instance, in this case we can say:
+For instance, in this case we choose to write:
 
 ```
 Description: This package demonstrates the set up of a Bioconductor-friendly
@@ -438,38 +514,58 @@ Description: This package demonstrates the set up of a Bioconductor-friendly
     repository to the GitHub website.
 ```
 
-Note that this field can always be updated at a later date, to refine the
-description of the package (or fix typos).
+Note:
+
+- Best practices encourage us to wrap the contents of the field over multiple
+  lines, in a way that each line of the file `DESCRIPTION` does not exceed 80
+  characters, and each line from the second one is indented by four spaces.
 
 Next, the field `License` declares the licensing choice made by the copyright
 holder of the package.
 Bioconductor packages are typically licensed under `Artistic-2.0`, although
 a number of other choices are commonly accepted for community-contributed
 packages.
-In this example, we choose the MIT license, which incidentally can be easily
-set up using the CRAN package `r BiocStyle::CRANpkg("usethis")`.
-
-```{r, eval=FALSE}
-usethis::use_mit_license()
-```
-
-The R console display information as files are edited.
-In this example, the field `License` is automatically updated in the file
-`DESCRIPTION`, while files `LICENSE` and `LICENSE.md` are created,
-and the file `.Rbuildignore` is also updated to ignore the non-standard file
-`LICENSE.md` when the package is built.
+In this example, we leave the `Artistic-2.0` license automatically set by the
+function `biocthis::use_bioc_description()`.
 
 ```
-✔ Setting License field in DESCRIPTION to 'MIT + file LICENSE'
-✔ Writing 'LICENSE'
-✔ Writing 'LICENSE.md'
-✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'
+License: Artistic-2.0
+```
+
+The next two fields of the file are `URL` and `BugReports`,
+which were recently added by the function `usethis::use_github()` and 
+subsequently edited by the function `biocthis::use_bioc_description()`.
+
+```
+URL: https://github.com/kevinrue/MyBioconductorPackage
+BugReports: https://support.bioconductor.org/t/MyBioconductorPackage
+```
+
+As this demonstration package may never be actually included in the Bioconductor
+repository, we choose to replace the `BugReports` report field with the GitHub
+Issues page for the repository instead.
+
+```
+BugReports: https://github.com/kevinrue/MyBioconductorPackage/issues
+```
+
+Next, we can leave the Bioconductor-specific field `biocViews` to the value
+`Software` automatically filled by the function
+`biocthis::use_bioc_description()`, at least until we add some code to the
+package and determine other terms that best describe our new package.
+
+```
+biocViews: Software
 ```
 
 Next, the field `Encoding` can usually be left at the default value.
 In this example, this is `UTF-8`.
 
-Similarly, the fields `Roxygen` and `RoxygenNote` can usually be left to their
+```
+Encoding: UTF-8
+```
+
+Finally, the fields `Roxygen` and `RoxygenNote` can usually be left to their
 default value.
 In this example, those were `list(markdown = TRUE)` and `7.1.2`, respectively.
 The former is a list of options passed to the CRAN package
@@ -477,33 +573,21 @@ The former is a list of options passed to the CRAN package
 the latter tracks the version of `BiocStyle::CRANpkg("roxygen2")` that was last
 used to manage the documentation in this particular Bioconductor package.
 
-Finally, at this point, the last two fields of the file are `URL` and
-`BugReports`, which were recently added as the result of a call to the function `usethis::use_github()`.
-In this example, the fields were already filled with the appopriate information
-(as shown below) so we do not need to edit anything.
+With that, we have finished out first round of edits to the file `DESCRIPTION`.
+Importantly, we have highlighted many of the fields in this file that are prone
+to regular updates as the package continues to be developed:
 
-```
-URL: https://github.com/kevinrue/MyBioconductorPackage
-BugReports: https://github.com/kevinrue/MyBioconductorPackage/issues
-```
-
-Now, Bioconductor requires an additional field in the DESCRIPTION file, which
-is not automatically created by the CRAN package
-`r BiocStyle::CRANpkg("usethis")`, as that package is designed to develop CRAN
-packages.
-That Bioconductor-specific field is named `biocViews`.
-The field must be populated by terms selected from a controlled vocabulary,
-to facilitate the thematic classification of the new package on the Bioconductor
-website.
-The full list of available biocViews can be navigated
-[here](https://www.bioconductor.org/packages/release/BiocViews.html).
-In this example, we declare that the new package provides new software.
-
-```
-biocViews: Software
-```
-
-
+- the `Version` field can be updated to create new releases of the package.
+- the `Date` field should be updated in parallel with the `Version` field,
+  to mark the release date of each version of the package.
+- the `Authors@R` field can be edited to update information about existing
+  or new contributors to the package.
+- the `Description` field can be updated to refine information about the
+  package, for instance as new functionality is added.
+- the `BugReports` field can be updated when the package is acccepted in the
+  Bioconductor repository.
+- the `biocViews` field can be updated to refine the list of terms used to
+  thematically classify the package in the Bioconductor repository.
 
 ## Further reading
 
