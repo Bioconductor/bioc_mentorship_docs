@@ -647,9 +647,9 @@ plot(pressure)
 
 Since our package does not contain any code yet, we do not have any code to
 demonstrate the functionality of the package itself.
-Again, it is acceptable to keep that part of the template as a placeholder and
-reminder that as our new package is matures, we should use this section to
-briefly demonstrate how to use the package.
+Again, it is acceptable to keep that part of the template as a placeholder and a
+reminder that as our new package matures, we should use this section to briefly
+demonstrate how to use the package.
 
 Again, the rest of this template file describes aspects of the package that are
 not in place yet.
@@ -860,6 +860,130 @@ That template file is relatively long to display here, so we encourage you to
 carefully inspect the one that is create when you run the command above, and
 edit it as needed.
 In this example, we keep the contents of the template file as they are.
+
+## Create a GitHub issue template
+
+Bioconductor packages maintained on [GitHub](https://github.com)
+benefit of a web page for reporting issues about the package, typically
+identified by users or developers of packages that depend on the functionality
+provided by this package.
+
+By default, the form for reporting issue is entirely blank, leaving users to
+decide what information they think is sufficient to describe their issue.
+GitHub repositories have the possibility of including template forms designed to
+guide users in identifying and reporting all the information relevant to their
+issue.
+Useful information often involves a minimal reproducible example, including
+a small data set that is either publicly available or simulated by some code,
+alongside the code that is either throwing an error, or producing an
+unexpected output.
+
+In this example, we use the function `biocthis::use_bioc_issue_template()`
+to create a new sub-directory `.github/ISSUE_TEMPLATE` and a template file
+`issue_template.md` within that new sub-directory.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_issue_template()
+```
+
+The R console displays some information as directories and files are created.
+When the command completes, we can open the newly created file, to examine
+and edit it as needed.
+
+```
+✔ Creating '.github/ISSUE_TEMPLATE/'
+✔ Writing '.github/ISSUE_TEMPLATE/issue_template.md'
+```
+
+In this example, we decide to keep the original contents as they are.
+
+## Create a CITATION template
+
+Optionally, R packages can contain a file `inst/CITATION`, that provides
+information encouraging and guiding users wishing to cite an article or book
+related to the package.
+
+In this example, we use the function `biocthis::use_bioc_citation()`
+to create a new sub-directory `inst` and a template file `CITATION`
+within that new sub-directory.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_citation()
+```
+
+The R console displays some information as directories and files are created.
+When the command completes, the file `inst/CITATION` is automatically opened
+in the Source panel of the RStudio application where we can examine and edit
+the contents of the file as needed.
+
+```
+✔ Creating 'inst/'
+✔ Writing 'inst/CITATION'
+• Modify 'inst/CITATION'
+```
+
+In this example, we edit the required argument `title=` of the two calls to the function `bibentry()` to `"Demonstration of a Bioconductor Package"` (which is
+also the title of the package that we declared in the file `DESCRIPTION`).
+
+At this point, we remember that the `README.Rmd` file demonstrates how to cite
+the package.
+As a consequence, we need to re-compile the file `README.Rmd` to update the file
+`README.md`.
+
+```{r, eval=FALSE}
+devtools::build_rmd("README.Rmd")
+```
+
+When the command completes, we can take the time to open the file `README.md`
+and examine the new contents in the section `## Citation`.
+
+## Add badges to the README file
+
+Optionally, status badges can be added to the `README.Rmd` file, and displayed
+in the `README.md` file. 
+
+Lifecycle badges are popular to inform package users about the level of maturity
+that they can expect from the package.
+Packages in the earliest stages of developement -- as in our current
+example -- tend to be updated frequently, as new experimental functionality is
+regularly added, while bugs are being identified and fixed.
+Conversely, package at later stages of development tend to be more stable,
+allowing users to expect more reliability from the package functionality and a
+relatively fixed set of best practices.
+
+In this example, we use the function `usethis::use_lifecycle_badge()` to declare
+that our new package is still at an early stage of development and should be
+considered with care by our users.
+
+```{r, eval=FALSE}
+usethis::use_lifecycle_badge("Experimental")
+```
+
+The R console displays some information as the file `README.Rmd` is edited to
+embed the new badge.
+
+```
+✔ Adding Lifecycle: experimental badge to 'README.Rmd'
+• Re-knit 'README.Rmd'
+```
+
+As a consequence of the update to the file `README.Rmd`, we need to re-compile
+that file to apply the changes to the file `README.md`.
+
+```{r, eval=FALSE}
+devtools::build_rmd("README.Rmd")
+```
+
+When the command completes, we can take the time to open the file `README.md`
+and examine the new line in the badges section.
+
+```
+<!-- badges: start -->
+...
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+```
 
 ## Further reading
 
