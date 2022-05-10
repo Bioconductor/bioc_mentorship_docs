@@ -541,13 +541,10 @@ URL: https://github.com/kevinrue/MyBioconductorPackage
 BugReports: https://support.bioconductor.org/t/MyBioconductorPackage
 ```
 
-As this demonstration package may never be actually included in the Bioconductor
-repository, we choose to replace the `BugReports` report field with the GitHub
-Issues page for the repository instead.
-
-```
-BugReports: https://github.com/kevinrue/MyBioconductorPackage/issues
-```
+Although this demonstration package may never be actually included in the
+Bioconductor repository, we decide to leave the `BugReports` field to a URL
+directing to the [Bioconductor support site](https://support.bioconductor.org),
+as it is a great source of information from fellow package users and developers.
 
 Next, we can leave the Bioconductor-specific field `biocViews` to the value
 `Software` automatically filled by the function
@@ -588,6 +585,97 @@ to regular updates as the package continues to be developed:
   Bioconductor repository.
 - the `biocViews` field can be updated to refine the list of terms used to
   thematically classify the package in the Bioconductor repository.
+
+## Create and edit the README file
+
+Most code repositories include a file named `README.md`, that often provides
+useful information to new users, such as instructions to install the package,
+a brief showcase of the package functionality, or preferences for citing the
+package.
+
+In this example, we use function `biocthis::use_bioc_readme_rmd()` to generate
+a template R Markdown file named `README.Rmd`, that we will adapt to our own
+new package before compiling it to a regular Markdown file `README.md`.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_readme_rmd()
+```
+
+```
+✔ Writing 'README.Rmd'
+✔ Adding '^README\\.Rmd$' to '.Rbuildignore'
+• Modify 'README.Rmd'
+✔ Writing '.git/hooks/pre-commit'
+```
+
+The R console displays some information as the file `README.Rmd` is created.
+When the command completes, the file is automatically opened in the Source panel
+of the RStudio application, where we can carefully read and edit it as needed.
+
+We see that the initial template contains code that we can expect to fail at
+this point in time.
+
+First, some of the instructions in the section `## Installation instructions`
+clearly assume that our new package can be obtained and installed from the
+Bioconductor repository.
+
+```{r, eval = FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+}
+
+BiocManager::install("MyBioconductorPackage")
+```
+
+This is obviously not the case yet, and those instructions would cause an error
+for anyone attempting to run that code.
+While we could decide to remove those currently invalid instructions, it is
+acceptable to keep them as a placeholder, as they indicate our intention to
+submit that package to the Bioconductor repository, and those command will be 
+valid when the package is accepted and included in the Bioconductor repository.
+
+Similarly, the section `## Example` demonstrates how to load the package, as
+well as running some code that is currently unrelated to our new package.
+
+```{r, eval=FALSE}
+library("MyBioconductorPackage")
+...
+summary(cars)
+...
+plot(pressure)
+```
+
+Since our package does not contain any code yet, we do not have any code to
+demonstrate the functionality of the package itself.
+Again, it is acceptable to keep that part of the template as a placeholder and
+reminder that as our new package is matures, we should use this section to
+briefly demonstrate how to use the package.
+
+Again, the rest of this template file describes aspects of the package that are
+not in place yet.
+In this example, we choose to keep this template file exactly as it was
+generated, as there is nothing that needs urgent attention or editing.
+
+Following the next set of instructions in the script `03_core_files.R`, we use
+the function `devtools::build_readme()` to compile the R Markdown file
+`README.Rmd` into a Markdown file `README.md`.
+
+```{r, eval=FALSE}
+devtools::build_readme()
+```
+
+```
+ℹ Installing MyBioconductorPackage in temporary library
+ℹ Building /Users/kevin/Desktop/MyBioconductorPackage/README.Rmd
+Loading required namespace: MyBioconductorPackage
+```
+
+The console displays some information, as our package is temporarily installed for the duration of the command.
+
+When the command completes successfully, we see the newly created file
+`README.md`.
+
+
 
 ## Further reading
 
