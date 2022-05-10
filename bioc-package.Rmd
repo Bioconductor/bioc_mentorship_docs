@@ -743,6 +743,47 @@ For future reference, the sections used in the initial template were:
 Those sections cover most of the situations, but you are free to use different
 section titles that may better fit your needs.
 
+## Create a Bioconductor-styled code of conduct
+
+The Bioconductor project declares a code of conduct that community members are
+expected to respect when participating in community events and communicating
+on community platforms (e.g., support site, Slack workspace).
+
+In this example, we use the function `biocthis::use_bioc_coc()` to generate
+a template file indicating that our new package subscribes to that code of
+conduct.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_coc()
+```
+
+The R console displays information as files are created and edited.
+In particular, when the command completes, our clipboard contains some text
+that we can add to the file `README.Rmd`.
+
+```
+✔ Creating '.github/'
+✔ Adding '^\\.github$' to '.Rbuildignore'
+✔ Adding '*.html' to '.github/.gitignore'
+✔ Writing '.github/CODE_OF_CONDUCT.md'
+• Don't forget to describe the code of conduct in your README:
+  ## Code of Conduct
+  Please note that the MyBioconductorPackage project is released with a [Contributor Code of Conduct](http://bioconductor.org/about/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
+  [Copied to clipboard]
+```
+
+In this example, we open the file `README.Rmd` and paste the contents of the
+clipboard at the end of the file.
+
+From the information displayed in the R console, we know that a sub-directory
+named `.github` was created, and a file named `CODE_OF_CONDUCT.md` was created
+within that new sub-directory.
+
+We can take a moment to open that new file and examine its contents.
+
+In this example, we decide to keep the contents of the template file as they
+are.
+
 ## Further reading
 
 ### `biocthis`
