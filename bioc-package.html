@@ -636,9 +636,9 @@ well as running some code that is currently unrelated to our new package.</p>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pressure</span><span class="op">)</span></code></pre></div>
 <p>Since our package does not contain any code yet, we do not have any code to
 demonstrate the functionality of the package itself.
-Again, it is acceptable to keep that part of the template as a placeholder and
-reminder that as our new package is matures, we should use this section to
-briefly demonstrate how to use the package.</p>
+Again, it is acceptable to keep that part of the template as a placeholder and a
+reminder that as our new package matures, we should use this section to briefly
+demonstrate how to use the package.</p>
 <p>Again, the rest of this template file describes aspects of the package that are
 not in place yet.
 In this example, we choose to keep this template file exactly as it was
@@ -801,13 +801,107 @@ carefully inspect the one that is create when you run the command above, and
 edit it as needed.
 In this example, we keep the contents of the template file as they are.</p>
 </div>
-<div id="further-reading" class="section level2" number="6.16">
+<div id="create-a-github-issue-template" class="section level2" number="6.16">
 <h2>
-<span class="header-section-number">6.16</span> Further reading<a class="anchor" aria-label="anchor" href="#further-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.16</span> Create a GitHub issue template<a class="anchor" aria-label="anchor" href="#create-a-github-issue-template"><i class="fas fa-link"></i></a>
 </h2>
-<div id="biocthis" class="section level3" number="6.16.1">
+<p>Bioconductor packages maintained on <a href="https://github.com">GitHub</a>
+benefit of a web page for reporting issues about the package, typically
+identified by users or developers of packages that depend on the functionality
+provided by this package.</p>
+<p>By default, the form for reporting issue is entirely blank, leaving users to
+decide what information they think is sufficient to describe their issue.
+GitHub repositories have the possibility of including template forms designed to
+guide users in identifying and reporting all the information relevant to their
+issue.
+Useful information often involves a minimal reproducible example, including
+a small data set that is either publicly available or simulated by some code,
+alongside the code that is either throwing an error, or producing an
+unexpected output.</p>
+<p>In this example, we use the function <code>biocthis::use_bioc_issue_template()</code>
+to create a new sub-directory <code>.github/ISSUE_TEMPLATE</code> and a template file
+<code>issue_template.md</code> within that new sub-directory.</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_issue_template</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console displays some information as directories and files are created.
+When the command completes, we can open the newly created file, to examine
+and edit it as needed.</p>
+<pre><code>✔ Creating '.github/ISSUE_TEMPLATE/'
+✔ Writing '.github/ISSUE_TEMPLATE/issue_template.md'</code></pre>
+<p>In this example, we decide to keep the original contents as they are.</p>
+</div>
+<div id="create-a-citation-template" class="section level2" number="6.17">
+<h2>
+<span class="header-section-number">6.17</span> Create a CITATION template<a class="anchor" aria-label="anchor" href="#create-a-citation-template"><i class="fas fa-link"></i></a>
+</h2>
+<p>Optionally, R packages can contain a file <code>inst/CITATION</code>, that provides
+information encouraging and guiding users wishing to cite an article or book
+related to the package.</p>
+<p>In this example, we use the function <code>biocthis::use_bioc_citation()</code>
+to create a new sub-directory <code>inst</code> and a template file <code>CITATION</code>
+within that new sub-directory.</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_citation</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console displays some information as directories and files are created.
+When the command completes, the file <code>inst/CITATION</code> is automatically opened
+in the Source panel of the RStudio application where we can examine and edit
+the contents of the file as needed.</p>
+<pre><code>✔ Creating 'inst/'
+✔ Writing 'inst/CITATION'
+• Modify 'inst/CITATION'</code></pre>
+<p>In this example, we edit the required argument <code>title=</code> of the two calls to the function <code><a href="https://rdrr.io/r/utils/bibentry.html">bibentry()</a></code> to <code>"Demonstration of a Bioconductor Package"</code> (which is
+also the title of the package that we declared in the file <code>DESCRIPTION</code>).</p>
+<p>At this point, we remember that the <code>README.Rmd</code> file demonstrates how to cite
+the package.
+As a consequence, we need to re-compile the file <code>README.Rmd</code> to update the file
+<code>README.md</code>.</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_rmd</a></span><span class="op">(</span><span class="st">"README.Rmd"</span><span class="op">)</span></code></pre></div>
+<p>When the command completes, we can take the time to open the file <code>README.md</code>
+and examine the new contents in the section <code>## Citation</code>.</p>
+</div>
+<div id="add-badges-to-the-readme-file" class="section level2" number="6.18">
+<h2>
+<span class="header-section-number">6.18</span> Add badges to the README file<a class="anchor" aria-label="anchor" href="#add-badges-to-the-readme-file"><i class="fas fa-link"></i></a>
+</h2>
+<p>Optionally, status badges can be added to the <code>README.Rmd</code> file, and displayed
+in the <code>README.md</code> file.</p>
+<p>Lifecycle badges are popular to inform package users about the level of maturity
+that they can expect from the package.
+Packages in the earliest stages of developement – as in our current
+example – tend to be updated frequently, as new experimental functionality is
+regularly added, while bugs are being identified and fixed.
+Conversely, package at later stages of development tend to be more stable,
+allowing users to expect more reliability from the package functionality and a
+relatively fixed set of best practices.</p>
+<p>In this example, we use the function <code><a href="https://usethis.r-lib.org/reference/badges.html">usethis::use_lifecycle_badge()</a></code> to declare
+that our new package is still at an early stage of development and should be
+considered with care by our users.</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/badges.html">use_lifecycle_badge</a></span><span class="op">(</span><span class="st">"Experimental"</span><span class="op">)</span></code></pre></div>
+<p>The R console displays some information as the file <code>README.Rmd</code> is edited to
+embed the new badge.</p>
+<pre><code>✔ Adding Lifecycle: experimental badge to 'README.Rmd'
+• Re-knit 'README.Rmd'</code></pre>
+<p>As a consequence of the update to the file <code>README.Rmd</code>, we need to re-compile
+that file to apply the changes to the file <code>README.md</code>.</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_rmd</a></span><span class="op">(</span><span class="st">"README.Rmd"</span><span class="op">)</span></code></pre></div>
+<p>When the command completes, we can take the time to open the file <code>README.md</code>
+and examine the new line in the badges section.</p>
+<pre><code>&lt;!-- badges: start --&gt;
+...
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+&lt;!-- badges: end --&gt;</code></pre>
+</div>
+<div id="further-reading" class="section level2" number="6.19">
+<h2>
+<span class="header-section-number">6.19</span> Further reading<a class="anchor" aria-label="anchor" href="#further-reading"><i class="fas fa-link"></i></a>
+</h2>
+<div id="biocthis" class="section level3" number="6.19.1">
 <h3>
-<span class="header-section-number">6.16.1</span> <code>biocthis</code><a class="anchor" aria-label="anchor" href="#biocthis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.19.1</span> <code>biocthis</code><a class="anchor" aria-label="anchor" href="#biocthis"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>2021-01-28 <a href="https://youtu.be/3fLNsLchPnI">two minute video</a> in Spanish for ConectaR 2021. <a href="https://speakerdeck.com/lcolladotor/biocthis-conectar2021">Slides in Spanish</a>.</li>
@@ -816,9 +910,9 @@ In this example, we keep the contents of the template file as they are.</p>
 </ul>
 </div>
 </div>
-<div id="resources" class="section level2" number="6.17">
+<div id="resources" class="section level2" number="6.20">
 <h2>
-<span class="header-section-number">6.17</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.20</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>Contribute!</p>
@@ -857,10 +951,13 @@ In this example, we keep the contents of the template file as they are.</p>
 <li><a class="nav-link" href="#create-a-bioconductor-styled-code-of-conduct"><span class="header-section-number">6.13</span> Create a Bioconductor-styled code of conduct</a></li>
 <li><a class="nav-link" href="#create-a-guide-for-contributions"><span class="header-section-number">6.14</span> Create a guide for contributions</a></li>
 <li><a class="nav-link" href="#create-a-guide-for-getting-support"><span class="header-section-number">6.15</span> Create a guide for getting support</a></li>
+<li><a class="nav-link" href="#create-a-github-issue-template"><span class="header-section-number">6.16</span> Create a GitHub issue template</a></li>
+<li><a class="nav-link" href="#create-a-citation-template"><span class="header-section-number">6.17</span> Create a CITATION template</a></li>
+<li><a class="nav-link" href="#add-badges-to-the-readme-file"><span class="header-section-number">6.18</span> Add badges to the README file</a></li>
 <li>
-<a class="nav-link" href="#further-reading"><span class="header-section-number">6.16</span> Further reading</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#biocthis"><span class="header-section-number">6.16.1</span> biocthis</a></li></ul>
+<a class="nav-link" href="#further-reading"><span class="header-section-number">6.19</span> Further reading</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#biocthis"><span class="header-section-number">6.19.1</span> biocthis</a></li></ul>
 </li>
-<li><a class="nav-link" href="#resources"><span class="header-section-number">6.17</span> Resources</a></li>
+<li><a class="nav-link" href="#resources"><span class="header-section-number">6.20</span> Resources</a></li>
 </ul>
 
       <div class="book-extra">

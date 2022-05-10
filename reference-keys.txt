@@ -19,6 +19,9 @@ create-the-news-file
 create-a-bioconductor-styled-code-of-conduct
 create-a-guide-for-contributions
 create-a-guide-for-getting-support
+create-a-github-issue-template
+create-a-citation-template
+add-badges-to-the-readme-file
 further-reading
 biocthis
 resources
