@@ -487,6 +487,24 @@ URL: https://github.com/kevinrue/MyBioconductorPackage
 BugReports: https://github.com/kevinrue/MyBioconductorPackage/issues
 ```
 
+Now, Bioconductor requires an additional field in the DESCRIPTION file, which
+is not automatically created by the CRAN package
+`r BiocStyle::CRANpkg("usethis")`, as that package is designed to develop CRAN
+packages.
+That Bioconductor-specific field is named `biocViews`.
+The field must be populated by terms selected from a controlled vocabulary,
+to facilitate the thematic classification of the new package on the Bioconductor
+website.
+The full list of available biocViews can be navigated
+[here](https://www.bioconductor.org/packages/release/BiocViews.html).
+In this example, we declare that the new package provides new software.
+
+```
+biocViews: Software
+```
+
+
+
 ## Further reading
 
 ### `biocthis`
