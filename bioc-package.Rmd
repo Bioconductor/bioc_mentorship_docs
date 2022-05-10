@@ -861,6 +861,42 @@ carefully inspect the one that is create when you run the command above, and
 edit it as needed.
 In this example, we keep the contents of the template file as they are.
 
+## Create a GitHub issue template
+
+Bioconductor packages maintained on [GitHub](https://github.com)
+benefit of a web page for reporting issues about the package, typically
+identified by users or developers of packages that depend on the functionality
+provided by this package.
+
+By default, the form for reporting issue is entirely blank, leaving users to
+decide what information they think is sufficient to describe their issue.
+GitHub repositories have the possibility of including template forms designed to
+guide users in identifying and reporting all the information relevant to their
+issue.
+Useful information often involves a minimal reproducible example, including
+a small data set that is either publicly available or simulated by some code,
+alongside the code that is either throwing an error, or producing an
+unexpected output.
+
+In this example, we use the function `biocthis::use_bioc_issue_template()`
+to create a nw sub-directory `.github/ISSUE_TEMPLATE` and a template file
+`issue_template.md` within that new sub-directory.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_issue_template()
+```
+
+The R console displays some information as directories and files are created.
+When the command completes, we can open the newly created file, to examine
+and edit it as needed.
+
+```
+✔ Creating '.github/ISSUE_TEMPLATE/'
+✔ Writing '.github/ISSUE_TEMPLATE/issue_template.md'
+```
+
+In this example, we decide to keep the original contents as they are.
+
 ## Further reading
 
 ### `biocthis`
