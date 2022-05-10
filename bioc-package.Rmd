@@ -810,6 +810,57 @@ Thank you!
 In this example, we decide to keep the contents of the template file as they
 are.
 
+## Create a guide fo contributions
+
+Optionally, R packages are welcome to include a file `.github/CONTRIBUTING.md`.
+That file is used to inform potential contributors to the package of our
+preferences to receive and handle such contributions.
+
+In this example, we use the function `usethis::use_tidy_contributing()` to set
+up a template file that we can examine and edit as needed.
+
+```{r, eval=FALSE}
+usethis::use_tidy_contributing()
+```
+
+The R console displays information as the file `.github/CONTRIBUTING.md` is
+created.
+
+```
+✔ Writing '.github/CONTRIBUTING.md'
+```
+
+That template file is relatively long to display here, so we encourage you to
+carefully inspect the one that is create when you run the command above, and
+edit it as needed.
+In this example, we keep the contents of the template file as they are.
+
+## Create a guide for getting support
+
+Another optional file that may be added to Bioconductor packages is
+`.github/SUPPORT.md`.
+That file is used to inform users of the package about sources of information
+and help when they experience difficulties while using the package.
+
+In this example, we use the function `biocthis::use_bioc_support()` to set
+up a template file that we can examine and edit as needed.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_support()
+```
+
+The R console displays information as the file `.github/SUPPORT.md` is
+created.
+
+```
+✔ Writing '.github/SUPPORT.md'
+```
+
+That template file is relatively long to display here, so we encourage you to
+carefully inspect the one that is create when you run the command above, and
+edit it as needed.
+In this example, we keep the contents of the template file as they are.
+
 ## Further reading
 
 ### `biocthis`
