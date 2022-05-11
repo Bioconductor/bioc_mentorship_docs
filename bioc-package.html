@@ -377,7 +377,7 @@ version control panel, and a <code>.git</code> sub-directory in the <code>Files<
 <code>Show Hidden Files</code>.</li>
 </ul>
 <div class="figure">
-<img src="images/rstudio-show-hidden-files.png" alt=""><p class="caption">Show hidden files.</p>
+<img src="images/rstudio-show-hidden-files.png" style="width:100.0%" alt=""><p class="caption">Show hidden files.</p>
 </div>
 </div>
 <div id="connect-the-git-repository-to-github" class="section level2" number="6.9">
@@ -1171,7 +1171,7 @@ Terminal (e.g., the <code>Terminal</code> panel of the RStudio application), or 
 commit message that describes the changes that we are making in this commit.
 Then we click the <code>Commit</code> button, and the <code>Push</code> button.</p>
 <div class="figure">
-<img src="images/rstudio-git-github-actions.png" alt=""><p class="caption">RStudio Git panel</p>
+<img src="images/rstudio-git-github-actions.png" style="width:100.0%" alt=""><p class="caption">RStudio Git panel</p>
 </div>
 <p>When the commit reaches the GitHub repository, the presence of the file
 <code>.github/workflows/check-bioc.yml</code> prompts GitHub to execute the GitHub Action
@@ -1191,7 +1191,7 @@ and add the term <code>Infrastructure</code> to the section <code>biocViews</cod
     Infrastructure</code></pre>
 <p>Then, we make another commit and push the updated repository to GitHub.</p>
 <div class="figure">
-<img src="images/rstudio-git-biocviews-error.png" alt=""><p class="caption">Make a commit that fixes an ERROR in the GitHub Actions workflow.</p>
+<img src="images/rstudio-git-biocviews-error.png" style="width:100.0%" alt=""><p class="caption">Make a commit that fixes an ERROR in the GitHub Actions workflow.</p>
 </div>
 <p>When the push to the GitHub repository completes, the GitHub Actions workflow
 is automatically triggered.
@@ -1215,7 +1215,7 @@ specifically on the Ubuntu platform</p>
 <p>The relevant GitHub Actions report is available at:
 <a href="https://github.com/kevinrue/MyBioconductorPackage/runs/6388447895?check_suite_focus=true" class="uri">https://github.com/kevinrue/MyBioconductorPackage/runs/6388447895?check_suite_focus=true</a></p>
 <div class="figure">
-<img src="images/github-action-error-ubuntu.png" alt=""><p class="caption">GitHub Actions failing specifically on the Ubuntu platform.</p>
+<img src="images/github-action-error-ubuntu.png" style="width:100.0%" alt=""><p class="caption">GitHub Actions failing specifically on the Ubuntu platform.</p>
 </div>
 <p>Specifically, the relevant part of the report is displayed below.</p>
 <pre><code>&gt; Run covr::codecov()
@@ -1236,7 +1236,7 @@ sub-directory of our package, and we write a simple function in that package.</p
 <span class="op">}</span></code></pre></div>
 <p>We save the file, and then we commit and push it to the GitHub repository.</p>
 <div class="figure">
-<img src="rstudio-git-add-script.png" alt=""><p class="caption">Add an R script in the <code>R/</code> sub-directory.</p>
+<img src="rstudio-git-add-script.png" style="width:100.0%" alt=""><p class="caption">Add an R script in the <code>R/</code> sub-directory.</p>
 </div>
 <p>When the GitHub Action completes, we gladly see that the previous error message
 has now disappeared.
@@ -1310,17 +1310,17 @@ created branch <code>gh-pages</code>.</p>
 <code>Workflow permissions</code> and tick the option <code>Read and write permissions</code>.
 Finally, we click the <code>Save</code> button at the bottom of the page.</p>
 <div class="figure">
-<img src="images/github-settings-allow-bot.png" alt=""><p class="caption">Give GitHub Actions workflows read and write permissions to the repository.</p>
+<img src="images/github-settings-allow-bot.png" style="width:100.0%" alt=""><p class="caption">Give GitHub Actions workflows read and write permissions to the repository.</p>
 </div>
 <p>At this point, we can force GitHub to re-run the failed workflow, in the
 <code>Actions</code> tab of the repository.</p>
 <div class="figure">
-<img src="images/github-actions-rerun-workflow.png" alt=""><p class="caption">Re-run failed GitHub Actions workflows.</p>
+<img src="images/github-actions-rerun-workflow.png" style="width:100.0%" alt=""><p class="caption">Re-run failed GitHub Actions workflows.</p>
 </div>
 <p>In this example, when the GitHub Actions workflow completes, we see now our
 first fully successful build report!</p>
 <div class="figure">
-<img src="images/github-github-action-success.png" alt=""><p class="caption">First fully successful GitHub Actions report.</p>
+<img src="images/github-github-action-success.png" style="width:100.0%" alt=""><p class="caption">First fully successful GitHub Actions report.</p>
 </div>
 <p>An exciting output of this section is the online deployment of the package
 documentation on GitHub Pages.
@@ -1331,11 +1331,11 @@ GitHub repository at a URL built as <code>&lt;username&gt;.github.io/&lt;reposit
 navigate to the <code>Settings</code> tab, in the <code>Pages</code> section, and you will find
 the URL at the top of that page.</p>
 <div class="figure">
-<img src="images/github-pages-link.png" alt=""><p class="caption">URL of GitHub Pages for the repository.</p>
+<img src="images/github-pages-link.png" style="width:100.0%" alt=""><p class="caption">URL of GitHub Pages for the repository.</p>
 </div>
 <p>Navigate to that URL to find the online version of your package documentation!</p>
 <div class="figure">
-<img src="images/pkgdown-github-pages.png" alt=""><p class="caption">Package documentation deployed using <code>pkgdown</code></p>
+<img src="images/pkgdown-github-pages.png" style="width:100.0%" alt=""><p class="caption">Package documentation deployed using <code>pkgdown</code></p>
 </div>
 </div>
 <div id="continue-developing-the-package" class="section level2" number="6.25">
