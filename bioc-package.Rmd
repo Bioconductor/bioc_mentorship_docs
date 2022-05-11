@@ -1508,6 +1508,11 @@ At this point, we can force GitHub to re-run the failed workflow, in the
 
 ![Re-run failed GitHub Actions workflows.](images/github-actions-rerun-workflow.png)
 
+In this example, when the GitHub Actions workflow completes, we see now our
+first fully successful build report!
+
+![First fully successful GitHub Actions report.](images/github-github-action-success.png)
+
 ## Further reading
 
 ### `biocthis`
