@@ -1155,6 +1155,83 @@ As a result of that last edit, we are reminded to re-compile the file
 devtools::build_readme()
 ```
 
+## Create a vignette
+
+Package vignettes are a requirement for Bioconductor packages, providing
+high-quality documentation and a thorough demonstration of the functionality
+in the package.
+
+In this example, we use the function `biocthis::use_bioc_vignette()` to
+initialise a template vignette that we can examine and edit as needed.
+
+```{r, eval=FALSE}
+pkg <- basename(usethis::proj_get())
+biocthis::use_bioc_vignette(pkg, paste("Introduction to", pkg))
+```
+
+The R console displays information as package dependencies required for the
+compilation of the template vignette are added to the file `DESCRIPTION`.
+Simultaneously, a sub-directory `vignette/` is created,
+and a R Markdown file `MyBioconductorPackage.Rmd` is created within that new
+sub-directory.
+Additionally, the file `.gitignore` is edited to add entry `inst/doc` that
+excludes compiled vignettes from version control, as those will be compiled
+automatically on the Bioconductor repository.
+Another file `.gitignore` is created within the sub-directory `vignettes/`, 
+to ignore HTML files and R scripts specifically within that sub-directory.
+
+```
+✔ Adding 'knitr' to Suggests field in DESCRIPTION
+• Use `requireNamespace("knitr", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `knitr::fun()`
+✔ Adding 'BiocStyle' to Suggests field in DESCRIPTION
+• Use `requireNamespace("BiocStyle", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `BiocStyle::fun()`
+✔ Adding 'RefManageR' to Suggests field in DESCRIPTION
+• Use `requireNamespace("RefManageR", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `RefManageR::fun()`
+✔ Adding 'sessioninfo' to Suggests field in DESCRIPTION
+• Use `requireNamespace("sessioninfo", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `sessioninfo::fun()`
+✔ Setting VignetteBuilder field in DESCRIPTION to 'knitr'
+✔ Adding 'inst/doc' to '.gitignore'
+✔ Creating 'vignettes/'
+✔ Adding '*.html', '*.R' to 'vignettes/.gitignore'
+✔ Adding 'rmarkdown' to Suggests field in DESCRIPTION
+• Use `requireNamespace("rmarkdown", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `rmarkdown::fun()`
+✔ Writing 'vignettes/MyBioconductorPackage.Rmd'
+• Modify 'vignettes/MyBioconductorPackage.Rmd'
+```
+
+When the command completes, the source vignette file
+`vignettes/MyBioconductorPackage.Rmd` is automatically opened in the source pane
+of the RStudio application.
+
+In this example, in the header section of the file, we replace the placeholder
+values in the author field.
+
+```
+  - name: Kevin Rue-Albrecht
+    affiliation:
+    - University of Oxford
+    email: kevin.rue-albrecht@imm.ox.ac.uk
+```
+
+Note:
+
+- Multiple authors can be added as additional entries in that section.
+
+The template vignette is somewhat large to include in this chapter.
+We encourage you to read the contents carefully, editing, removing, and adding
+contents as you see fit.
+Vignette are live documents that can be updated either to reflect updates
+to the package source code, or in their own right, to refine the documentation
+distributed with the package.
+
+In this example, we leave the rest of the template vignette to its original
+contents.
+
 ## Further reading
 
 ### `biocthis`
