@@ -1513,24 +1513,81 @@ first fully successful build report!
 
 ![First fully successful GitHub Actions report.](images/github-github-action-success.png)
 
+An exciting output of this section is the online deployment of the package
+documentation on GitHub Pages.
+Specifically, the contents of the branch `gh-pages` are available for each
+GitHub repository at a URL built as `<username>.github.io/<repository>`.
+
+In this example, that is <https://kevinrue.github.io/MyBioconductorPackage/>.
+
+In doubt, one way to identify that address for your own repository is to
+navigate to the `Settings` tab, in the `Pages` section, and you will find
+the URL at the top of that page.
+
+![URL of GitHub Pages for the repository.](images/github-pages-link.png)
+
+Navigate to that URL to find the online version of your package documentation!
+
+![Package documentation deployed using `pkgdown`](images/pkgdown-github-pages.png)
+
+## Continue developing the package
+
+At this point, all the essential components of our new Bioconductor-friendly
+package are in place.
+
+We are now in a place where we can safely focus more of our attention to the
+source code and documentation of the package.
+Those are topics that will be covered in more details in other sections of this
+book.
+
+In the meantime, the takeaways from this chapter are:
+
+- Updates to a package often require edits across multiple files:
+  + The version of the package is defined in the file `DESCRIPTION`.
+  + A description of the changes in each version is added to the file
+    `inst/NEWS.md`
+  + Source code is added in the sub-directory `R/`.
+  + Unit tests are added in the sub-directory `tests/testthat`.
+  + Vignettes are added in the sub-directory `vignettes/`.
+  + Updates affecting the file `README.Rmd` requires you to re-compile that
+    file, to apply those changes to the file `README.md`.
+- The template GitHub Actions workflow is run every time the repository is
+  pushed.
+- Use the GitHub Actions report to identify and monitor issues that you should
+  fix in your package.
+- Many aspects of software development are subject to changes,
+  from Bioconductor best practices and requirements, to packages intended to
+  facilitate your work -- e.g. `r BiocStyle::CRANpkg("usethis")`
+  and `r BiocStyle::Biocpkg("biocthis")`.
+  You may need to stay informed and willing to adapt the contents of your
+  package to match new requirements.
+- This chapter describes a number of optional components, and an opinionated
+  workflow to set up the infrastructure of a Bioconductor-friendly package.
+  Once you are familiar with the components that are essential or optional for
+  a Bioconductor package, you are entirely free to devise your own workflow to
+  achieve a working Bioconductor-friendly package!
+
+Finally, a regular reminder that you are very welcome to join the Bioconductor
+community and communicate with fellow package users and developers on the
+[Bioconductor Slack workspace](https://bioc-community.herokuapp.com/) and the
+[Bioconductor Support site](https://support.bioconductor.org/).
+
 ## Further reading
 
 ### `biocthis`
 
-- 2021-01-28 [two minute video](https://youtu.be/3fLNsLchPnI) in Spanish for ConectaR 2021. [Slides in Spanish](https://speakerdeck.com/lcolladotor/biocthis-conectar2021).
-- 2020-11-05 [slides in English](https://speakerdeck.com/lcolladotor/biocthis-tab) for the Bioconductor Technical Advisory Board. 
-- 2020-09-10 [55 minute video in English](https://youtu.be/aMTxkYsM-8o). [ Slides in English](https://speakerdeck.com/lcolladotor/making-bioc-packages-with-biocthis).
+- [biocthis para ConectaR2021 - Leonardo Collado Torres (2020-01-28; 2 min video; Spanish)](https://youtu.be/3fLNsLchPnI) for ConectaR 2021.
+  + [Slides (Spanish)](https://speakerdeck.com/lcolladotor/biocthis-conectar2021).
+- [biocthis slides - Leonardo Collado Torres (2020-11-05; English)](https://speakerdeck.com/lcolladotor/biocthis-tab) for the Bioconductor Technical Advisory Board. 
+- [Making R/Bioconductor packages with biocthis: recount3 use case - Leonardo Collado Torres (2020-09-10; 55 min video; English)](https://youtu.be/aMTxkYsM-8o).
+  + [Slides (English)](https://speakerdeck.com/lcolladotor/making-bioc-packages-with-biocthis).
 
-## Resources
+### Making a Bioconductor package
 
-> Contribute!
-> 
-> Introduce and discuss the links below.
-
-- [Link to Kayla’s from Bioc2020](TODO)
-- [BJ’s Boston Meetup](TODO)
-- [Saskia’s video](TODO)
-- [Template Bioconductor package (in development)](https://github.com/kevinrue/BiocPackageSofwareTemplate)
-- [Bioconductor Package Guidelines for Developers and Reviewers](https://github.com/kevinrue/bioc_package_guide)
-- [Building a Bioconductor package using RStudio](https://github.com/SaskiaFreytag/making_bioconductor_pkg)
-- [lshep/MakeAPackage](https://github.com/lshep/MakeAPackage)
+- [kevinrue/MyBioconductorPackage - GitHub repository created in this chapter (2022-05-11)](https://github.com/kevinrue/MyBioconductorPackage)
+- [Create and submit a package to Bioconductor - Kayla Interdonato (2020-09-10; workshop; English)](https://www.youtube.com/watch?v=fq3kx6FZ6lY)
+- [Creating a Bioconductor Package - Benjamin Stubbs (2018-11-20; Boston Meetup)](https://www.meetup.com/Boston-R-Bioconductor-for-genomics/events/254563803/)
+- [Workshop - Building a Bioconductor Package - Saskia Freytag (2021-01-19; English)](https://www.youtube.com/watch?v=ua-lEaPbCyo&ab_channel=Bioconductor)
+- [Bioconductor Packages: Development, Maintenance, and Peer Review (2021-present; book)](http://contributions.bioconductor.org/)
+- [SaskiaFreytag/making_bioconductor_pkg - GitHub repository created in a workshop (2020)](https://github.com/SaskiaFreytag/making_bioconductor_pkg)
+- [lshep/MakeAPackage - Lori Shepherd (2017)](https://github.com/lshep/MakeAPackage)
