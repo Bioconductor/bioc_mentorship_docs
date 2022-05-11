@@ -985,6 +985,46 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 ```
 
+The next command in the script `03_core_files.R` demonstrates the function `usethis::use_github_actions_badge()`.
+
+[GitHub Actions](https://github.com/features/actions) is a optional
+functionality of the GitHub website that makes it easy to automate workflows
+related to software development, including regular building, testing, and
+deployment of the code hosted in GitHub repositories.
+
+In this example, we use the function `usethis::use_github_actions_badge()` to
+add a badge that will display the result of a GitHub Actions workflow for our
+new package.
+We use the first argument `"R-CMD-check-bioc"` to declare the name of the
+GitHub Actions workflow.
+
+```{r, eval=FALSE}
+usethis::use_github_actions_badge("R-CMD-check-bioc")
+```
+
+The R console displays some information as the file `README.Rmd` is edited to
+embed the new badge.
+
+```
+✔ Setting active project to '/Users/kevin/Desktop/MyBioconductorPackage'
+✔ Adding R-CMD-check-bioc badge to 'README.Rmd'
+• Re-knit 'README.Rmd'
+```
+
+The last message reminds us to re-compile the file `README.Rmd` to apply the
+update to the file `README.md`.
+
+```{r, eval=FALSE}
+devtools::build_rmd("README.Rmd")
+```
+
+Note:
+
+- At the moment, the GitHub Actions workflow itself is not defined.
+  As a result, the badge may not display properly.
+  This is entirely normal and acceptable, as the functionality of the package
+  itself is in no way impacted by the contents of the file `README.md`.
+
 ## Further reading
 
 ### `biocthis`
