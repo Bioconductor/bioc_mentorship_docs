@@ -1155,7 +1155,7 @@ As a result of that last edit, we are reminded to re-compile the file
 devtools::build_readme()
 ```
 
-## Create a vignette
+## Create a template vignette
 
 Package vignettes are a requirement for Bioconductor packages, providing
 high-quality documentation and a thorough demonstration of the functionality
@@ -1231,6 +1231,63 @@ distributed with the package.
 
 In this example, we leave the rest of the template vignette to its original
 contents.
+
+## Create a template GitHub Actions
+
+In the earlier section
+[Add badges to the README file](#add-badges-to-the-readme-file),
+we added a badge that reports the status of a
+[GitHub Actions](https://github.com/features/actions) workflow that we are only
+about to create now.
+
+In this example, we use the function `biocthis::use_bioc_github_action()` to
+initialise a template GitHub Actions workflow that includes a number of actions
+typically performed during software development to verify the integrity and
+functionality of software package.
+This process -- called continuous integration -- is extremely valuable to
+identify issues as early as possible in the software development process,
+preferably as part as automated testing, and before those issues reach users.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_github_action()
+```
+
+The R console displays information as a sub-directory `.github/workflows/` and
+a file `check-bioc.yml` within that sub-directory.
+
+```
+✔ Creating '.github/workflows/'
+✔ Writing '.github/workflows/check-bioc.yml'
+```
+
+The new file `.github/workflows/check-bioc.yml` is somewhat large to display in
+this chapter (300+ lines).
+
+In this example, we use the RStudio "Find and Replace" functionality to replace
+all occurrences of `refs/heads/master` in the file by `refs/heads/main`.
+This is because the default branch of our repository is called `main`, not
+`master`.
+
+Note:
+
+- In our example, there were 5 occurrences to replace.
+
+In this example, we keep the strategy matrix to use R version `4.1` and
+Bioconductor version `3.14`.
+Those specification represent the version of R and Bioconductor that will be
+used to run the GitHub Action workflow, including the installation of package
+dependencies, which in turn may impact the outcome of the unit tests.
+
+Notes:
+
+- Bioconductor packages should be tested in an environment that uses the
+  development version of R ("R-Devel") and the development version of
+  Bioconductor ("Bioc Devel").
+- A new version of R is typically released annually in April/May
+- A new version of Bioconductor is typically released bi-annually; in April/May
+  (shortly after the R release) and in October.
+- You will need to update the version of R and Bioconductor specified in the
+  GitHub Actions workflow as new versions of R and Bioconductor are released.
 
 ## Further reading
 
