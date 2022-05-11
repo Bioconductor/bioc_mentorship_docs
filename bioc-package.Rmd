@@ -319,7 +319,7 @@ Note:
 - The `.git` sub-directory may not be visible until you enable the option to
 `Show Hidden Files`.
 
-![Show hidden files.](images/rstudio-show-hidden-files.png)
+![Show hidden files.](images/rstudio-show-hidden-files.png){width=100%}
 
 ## Connect the git repository to GitHub
 
@@ -1332,7 +1332,7 @@ We click the `Git` tab, then the `Diff` button, and in the popup, we type a
 commit message that describes the changes that we are making in this commit.
 Then we click the `Commit` button, and the `Push` button.
 
-![RStudio Git panel](images/rstudio-git-github-actions.png)
+![RStudio Git panel](images/rstudio-git-github-actions.png){width=100%}
 
 When the commit reaches the GitHub repository, the presence of the file
 `.github/workflows/check-bioc.yml` prompts GitHub to execute the GitHub Action
@@ -1363,7 +1363,7 @@ biocViews: Software,
 
 Then, we make another commit and push the updated repository to GitHub.
 
-![Make a commit that fixes an ERROR in the GitHub Actions workflow.](images/rstudio-git-biocviews-error.png)
+![Make a commit that fixes an ERROR in the GitHub Actions workflow.](images/rstudio-git-biocviews-error.png){width=100%}
 
 When the push to the GitHub repository completes, the GitHub Actions workflow
 is automatically triggered.
@@ -1387,7 +1387,7 @@ specifically on the Ubuntu platform
 The relevant GitHub Actions report is available at:
 <https://github.com/kevinrue/MyBioconductorPackage/runs/6388447895?check_suite_focus=true>
 
-![GitHub Actions failing specifically on the Ubuntu platform.](images/github-action-error-ubuntu.png)
+![GitHub Actions failing specifically on the Ubuntu platform.](images/github-action-error-ubuntu.png){width=100%}
 
 Specifically, the relevant part of the report is displayed below.
 
@@ -1415,7 +1415,7 @@ my_bioc_function <- function(x, y) {
 
 We save the file, and then we commit and push it to the GitHub repository.
 
-![Add an R script in the `R/` sub-directory.](rstudio-git-add-script.png)
+![Add an R script in the `R/` sub-directory.](rstudio-git-add-script.png){width=100%}
 
 When the GitHub Action completes, we gladly see that the previous error message
 has now disappeared.
@@ -1501,17 +1501,17 @@ We navigate to the `Settings` tab of the GitHub repository, then under the
 `Workflow permissions` and tick the option `Read and write permissions`.
 Finally, we click the `Save` button at the bottom of the page.
 
-![Give GitHub Actions workflows read and write permissions to the repository.](images/github-settings-allow-bot.png)
+![Give GitHub Actions workflows read and write permissions to the repository.](images/github-settings-allow-bot.png){width=100%}
 
 At this point, we can force GitHub to re-run the failed workflow, in the
 `Actions` tab of the repository.
 
-![Re-run failed GitHub Actions workflows.](images/github-actions-rerun-workflow.png)
+![Re-run failed GitHub Actions workflows.](images/github-actions-rerun-workflow.png){width=100%}
 
 In this example, when the GitHub Actions workflow completes, we see now our
 first fully successful build report!
 
-![First fully successful GitHub Actions report.](images/github-github-action-success.png)
+![First fully successful GitHub Actions report.](images/github-github-action-success.png){width=100%}
 
 An exciting output of this section is the online deployment of the package
 documentation on GitHub Pages.
@@ -1524,11 +1524,11 @@ In doubt, one way to identify that address for your own repository is to
 navigate to the `Settings` tab, in the `Pages` section, and you will find
 the URL at the top of that page.
 
-![URL of GitHub Pages for the repository.](images/github-pages-link.png)
+![URL of GitHub Pages for the repository.](images/github-pages-link.png){width=100%}
 
 Navigate to that URL to find the online version of your package documentation!
 
-![Package documentation deployed using `pkgdown`](images/pkgdown-github-pages.png)
+![Package documentation deployed using `pkgdown`](images/pkgdown-github-pages.png){width=100%}
 
 ## Continue developing the package
 
