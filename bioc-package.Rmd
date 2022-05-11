@@ -1365,6 +1365,15 @@ Then, we make another commit and push the updated repository to GitHub.
 
 ![Make a commit that fixes an ERROR in the GitHub Actions workflow.](images/rstudio-git-biocviews-error.png)
 
+When the push to the GitHub repository completes, the GitHub Actions workflow
+is automatically triggered.
+In this example, we are pleased to see that the previous ERROR message does not
+appear in the new report.
+
+However, we see that an issue is now reported, specifically on the Ubuntu
+platform.
+We will address this issue in the next section.
+
 ## Add R code
 
 So far -- in this example -- we have been developing the infrastructure of our
@@ -1407,6 +1416,97 @@ my_bioc_function <- function(x, y) {
 We save the file, and then we commit and push it to the GitHub repository.
 
 ![Add an R script in the `R/` sub-directory.](rstudio-git-add-script.png)
+
+When the GitHub Action completes, we gladly see that the previous error message
+has now disappeared.
+The report is available at:
+<https://github.com/kevinrue/MyBioconductorPackage/runs/6388803864?check_suite_focus=true>.
+
+Unfortunately, we also notice that another issue has now occurred later in the
+workflow.
+We will address this issue in the next section.
+
+## GitHub Pages
+
+In the GitHub Actions report produced by our changes in the previous section,
+we see that an error is reported in the section `Build and deploy pkgdown site`.
+
+The error messsage is copied below.
+
+```
+> Run git config --local user.name "$GITHUB_ACTOR"
+Run git config --local user.name "$GITHUB_ACTOR"
+Running git checkout --orphan gh-pages
+Switched to a new branch 'gh-pages'
+Running git rm -rf --quiet .
+Running git commit --allow-empty -m 'Initializing gh-pages branch'
+[gh-pages (root-commit) 513d36d] Initializing gh-pages branch
+Running git push origin 'HEAD:gh-pages'
+remote: Permission to kevinrue/MyBioconductorPackage.git denied to github-actions[bot].
+fatal: unable to access 'https://github.com/kevinrue/MyBioconductorPackage/': The requested URL returned error: 403
+
+Error: <system_command_status_error in callr::run("git", c(...), echo_cmd = echo_cmd, echo = echo, error_on_status ...:
+ System command 'git' failed, exit status: 128, stdout & stderr were printed>
+
+Stack trace:
+ 1. pkgdown::deploy_to_branch(new_process = FALSE)
+ 2. pkgdown:::git("push", remote, paste0("HEAD:", branch))
+ 3. callr::run("git", c(...), echo_cmd = echo_cmd, echo = echo, error_on_status ...
+ 4. throw(new_process_error(res, call = sys.call(), echo = echo,  ...
+
+ x System command 'git' failed, exit status: 128, stdout & stderr were printed 
+Execution halted
+Error: Process completed with exit code 1.
+```
+
+This error message is somewhat dense and not entirely straightforward to
+interpret.
+
+However, the solution to this issue is to run the following set of commands in
+the R console of the RStudio application.
+
+```{r, eval=FALSE}
+pkgdown::deploy_to_branch()
+```
+
+Note:
+
+- The function `pkgdown::deploy_to_branch()` is the same as the GitHub Action
+  workflow tries to run.
+  However, it must be run once manually to set things up, in such a way that
+  the GitHub Action workflow can use that setup to perform its function
+  in subsequent runs.
+- Even when run in the R console of the RStudio application, the function will
+  conclude with an error message.
+  However, even then, it will have done what we needed it to do; namely, create
+  a branch named `gh-pages` in the git repository, and push that branch to the
+  GitHub clone of the repository.
+  The harmless error message is shown below.
+
+```
+-- RMarkdown error ------------------------------------------------------------------------------
+Quitting from lines 2-22 (MyBioconductorPackage.Rmd) 
+Error in packageVersion(pkg) : 
+  there is no package called 'MyBioconductorPackage'
+-------------------------------------------------------------------------------------------------
+Error in !trace_length(trace) : invalid argument type
+```
+
+Furthermore, we also need to change some settings in the GitHub repository,
+allowing the automated GitHub Actions workflow to push changes to the newly
+created branch `gh-pages`.
+
+We navigate to the `Settings` tab of the GitHub repository, then under the
+`Actions` and `General` sub-sections, we scroll down to the section
+`Workflow permissions` and tick the option `Read and write permissions`.
+Finally, we click the `Save` button at the bottom of the page.
+
+![Give GitHub Actions workflows read and write permissions to the repository.](images/github-settings-allow-bot.png)
+
+At this point, we can force GitHub to re-run the failed workflow, in the
+`Actions` tab of the repository.
+
+![Re-run failed GitHub Actions workflows.](images/github-actions-rerun-workflow.png)
 
 ## Further reading
 
