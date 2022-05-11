@@ -1289,6 +1289,82 @@ Notes:
 - You will need to update the version of R and Bioconductor specified in the
   GitHub Actions workflow as new versions of R and Bioconductor are released.
 
+In this example, in the section named `Run CMD check`, we also replace
+`error_on = "warning"` by `error_on = "error"`.
+This change allows `R CMD check` to report a successful build build even in the
+presence of warning messages.
+
+```
+          rcmdcheck::rcmdcheck(
+              args = c("--no-manual", "--no-vignettes", "--timings"),
+              build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
+              error_on = "error",
+              check_dir = "check"
+          )
+```
+
+Note:
+
+- Bioconductor recommends that packages should pass `R CMD check` without any
+  WARNING nor ERROR message.
+  
+## Using GitHub Actions
+
+In this example, we have regularly made commits to the git repository as we
+progressed through each section.
+We make a new commit now, all the files that we have recently created and
+edited, and we push the new git commit to GitHub.
+This can be done through a set of commands typed on the command line in a
+Terminal (e.g., the `Terminal` panel of the RStudio application), or using the
+`Git` panel of the RStudio application.
+
+### Using Git on Terminal command line
+
+```{bash, eval=FALSE}
+git add .
+git commit -m "add template files"
+git push
+```
+
+### Using the RStudio Git panel
+
+We click the `Git` tab, then the `Diff` button, and in the popup, we type a
+commit message that describes the changes that we are making in this commit.
+Then we click the `Commit` button, and the `Push` button.
+
+![RStudio Git panel](images/rstudio-git-github-actions.png)
+
+When the commit reaches the GitHub repository, the presence of the file
+`.github/workflows/check-bioc.yml` prompts GitHub to execute the GitHub Action
+workflow.
+
+The log file produced by the GitHub Action workflow can be watched as it is
+being generated, in the "Actions" section of the GitHub repository:
+<https://github.com/kevinrue/MyBioconductorPackage/runs/6388422844?check_suite_focus=true>.
+
+In this example, when the GitHub Action workflow completes, we see that it
+reports a single ERROR message that occurred during the step running
+`BiocCheck::BiocCheck()`.
+
+The full report is fairly large; only the ERROR message is displayed below.
+
+```
+* Checking for non-trivial biocViews...
+    * ERROR: Add biocViews other than Software
+```
+
+To resolve that ERROR message, in this example, we open the file `DESCRIPTION`
+and add the term `Infrastructure` to the section `biocViews`.
+
+```
+biocViews: Software,
+    Infrastructure
+```
+
+Then, we make another commit and push the updated repository to GitHub.
+
+![Make a commit that fixes an ERROR in the GitHub Actions workflow.](images/rstudio-git-biocviews-error.png)
+
 ## Further reading
 
 ### `biocthis`
