@@ -931,7 +931,7 @@ As a consequence, we need to re-compile the file `README.Rmd` to update the file
 `README.md`.
 
 ```{r, eval=FALSE}
-devtools::build_rmd("README.Rmd")
+devtools::build_readme()
 ```
 
 When the command completes, we can take the time to open the file `README.md`
@@ -971,7 +971,7 @@ As a consequence of the update to the file `README.Rmd`, we need to re-compile
 that file to apply the changes to the file `README.md`.
 
 ```{r, eval=FALSE}
-devtools::build_rmd("README.Rmd")
+devtools::build_readme()
 ```
 
 When the command completes, we can take the time to open the file `README.md`
@@ -985,24 +985,609 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 ```
 
+The next command in the script `03_core_files.R` demonstrates the function `usethis::use_github_actions_badge()`.
+
+[GitHub Actions](https://github.com/features/actions) is a optional
+functionality of the GitHub website that makes it easy to automate workflows
+related to software development, including regular building, testing, and
+deployment of the code hosted in GitHub repositories.
+
+In this example, we use the function `usethis::use_github_actions_badge()` to
+add a badge that will display the result of a GitHub Actions workflow for our
+new package.
+We use the first argument `"R-CMD-check-bioc"` to declare the name of the
+GitHub Actions workflow.
+
+```{r, eval=FALSE}
+usethis::use_github_actions_badge("R-CMD-check-bioc")
+```
+
+The R console displays some information as the file `README.Rmd` is edited to
+embed the new badge.
+
+```
+✔ Setting active project to '/Users/kevin/Desktop/MyBioconductorPackage'
+✔ Adding R-CMD-check-bioc badge to 'README.Rmd'
+• Re-knit 'README.Rmd'
+```
+
+The last message reminds us to re-compile the file `README.Rmd` to apply the
+update to the file `README.md`.
+
+```{r, eval=FALSE}
+devtools::build_readme()
+```
+
+Note:
+
+- At the moment, the GitHub Actions workflow itself is not defined.
+  As a result, the badge may not display properly.
+  This is entirely normal and acceptable, as the functionality of the package
+  itself is in no way impacted by the contents of the file `README.md`.
+
+## Enable unit tests
+
+Separately from the code that create new functionality in a package,
+unit tests allow package developers to write additional code that invokes
+functions defined in the package, and verifies that they produce the expected
+results in given scenarios.
+
+In this example, we use the function `usethis::use_testthat()`
+
+```{r, eval=FALSE}
+usethis::use_testthat()
+```
+
+The R console displays some information as sub-directories and files are
+created and edited.
+
+```
+✔ Adding 'testthat' to Suggests field in DESCRIPTION
+✔ Setting Config/testthat/edition field in DESCRIPTION to '3'
+✔ Creating 'tests/testthat/'
+✔ Writing 'tests/testthat.R'
+• Call `use_test()` to initialize a basic test file and open it for editing.
+```
+
+In this example, the file `DESCRIPTION` is edited to declare that our package
+now depends on the CRAN package `r BiocStyle::CRANpkg("testthat")` for writing
+and running tests, specifically version 3 of the testthat package.
+
+```
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+```
+
+Simultaneously, a sub-directory `tests` and script file `tests/testthat.R` are
+created.
+That script is the entry point that is used to start the execution of any test
+that we may write in the future.
+At the moment, there is not test in the package.
+
+Even though our package does not contain any code that we can test yet,
+in this example, we use the function `usethis::use_test()` to demonstrate the
+creation of a test script in the package.
+We use the first argument `"example_test"` to declare the name of the
+test file.
+
+```{r, eval=FALSE}
+usethis::use_test("example_test")
+```
+
+The R console displays some information as a sub-directory and a file are
+created.
+
+```
+✔ Writing 'tests/testthat/test-example_test.R'
+• Modify 'tests/testthat/test-example_test.R'
+```
+
+When the command completes, the new file `tests/testthat/test-example_test.R`
+is open in the source panel of the RStudio application.
+The script contains an example test that is designed to verify whether
+R correctly returns the value 4 when asked to multiply 2 by 2.
+
+
+```{r, eval=FALSE}
+test_that("multiplication works", {
+  expect_equal(2 * 2, 4)
+})
+```
+
+This example is trivial and merely a placeholder that we will ultimately replace
+by tests specifically tailored to verify that our own package functions behave
+as expected.
+For now, it is entirely acceptable to keep this example test, for the purpose
+of setting up our package infrastructure.
+
+Tied with the notion of tests is the notion of coverage.
+Coverage is a metric in software testing that measures the fraction of source
+code in a package that is traversed at least once during the execution the
+entire series of tests in that package.
+
+In this example, we use the function `usethis::use_coverage()` to set up files
+and default settings for the execution and reporting of test coverage in our
+package.
+
+```{r, eval=FALSE}
+usethis::use_coverage()
+```
+
+In this example, the CRAN package `r BiocStyle::CRANpkg("covr")` is not
+installed yet, so we are prompted to install it first.
+We choose the option to consent.
+
+```
+ℹ The package `covr` is required.
+✖ Would you like to install it?
+
+1: Yes
+2: No
+
+Selection: 1
+```
+
+When packages are installed, the command will proceed to create and edit files,
+displaying information in the R console as it does so.
+
+```
+✔ Adding 'covr' to Suggests field in DESCRIPTION
+✔ Writing 'codecov.yml'
+✔ Adding '^codecov\\.yml$' to '.Rbuildignore'
+✔ Adding Codecov test coverage badge to 'README.Rmd'
+• Re-knit 'README.Rmd'
+• Call `use_github_action("test-coverage")` to continuously monitor test coverage.
+```
+
+First, the CRAN package `r BiocStyle::CRANpkg("covr")` is added to the
+dependencies of our package in the file `DESCRIPTION`.
+Then, a file `codecov.yml` is created with default options that control the
+execution and reporting of the test coverage.
+That new file is added to the file `.Rbuildignore`, to avoid warnings during
+future builds of the package.
+Another badge is added to the file `README.Rmd`, for reporting test coverage.
+
+As a result of that last edit, we are reminded to re-compile the file
+`README.Rmd`, to apply the updates to the file `README.md`.
+
+```{r, eval=FALSE}
+devtools::build_readme()
+```
+
+## Create a template vignette
+
+Package vignettes are a requirement for Bioconductor packages, providing
+high-quality documentation and a thorough demonstration of the functionality
+in the package.
+
+In this example, we use the function `biocthis::use_bioc_vignette()` to
+initialise a template vignette that we can examine and edit as needed.
+
+```{r, eval=FALSE}
+pkg <- basename(usethis::proj_get())
+biocthis::use_bioc_vignette(pkg, paste("Introduction to", pkg))
+```
+
+The R console displays information as package dependencies required for the
+compilation of the template vignette are added to the file `DESCRIPTION`.
+Simultaneously, a sub-directory `vignette/` is created,
+and a R Markdown file `MyBioconductorPackage.Rmd` is created within that new
+sub-directory.
+Additionally, the file `.gitignore` is edited to add entry `inst/doc` that
+excludes compiled vignettes from version control, as those will be compiled
+automatically on the Bioconductor repository.
+Another file `.gitignore` is created within the sub-directory `vignettes/`, 
+to ignore HTML files and R scripts specifically within that sub-directory.
+
+```
+✔ Adding 'knitr' to Suggests field in DESCRIPTION
+• Use `requireNamespace("knitr", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `knitr::fun()`
+✔ Adding 'BiocStyle' to Suggests field in DESCRIPTION
+• Use `requireNamespace("BiocStyle", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `BiocStyle::fun()`
+✔ Adding 'RefManageR' to Suggests field in DESCRIPTION
+• Use `requireNamespace("RefManageR", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `RefManageR::fun()`
+✔ Adding 'sessioninfo' to Suggests field in DESCRIPTION
+• Use `requireNamespace("sessioninfo", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `sessioninfo::fun()`
+✔ Setting VignetteBuilder field in DESCRIPTION to 'knitr'
+✔ Adding 'inst/doc' to '.gitignore'
+✔ Creating 'vignettes/'
+✔ Adding '*.html', '*.R' to 'vignettes/.gitignore'
+✔ Adding 'rmarkdown' to Suggests field in DESCRIPTION
+• Use `requireNamespace("rmarkdown", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `rmarkdown::fun()`
+✔ Writing 'vignettes/MyBioconductorPackage.Rmd'
+• Modify 'vignettes/MyBioconductorPackage.Rmd'
+```
+
+When the command completes, the source vignette file
+`vignettes/MyBioconductorPackage.Rmd` is automatically opened in the source pane
+of the RStudio application.
+
+In this example, in the header section of the file, we replace the placeholder
+values in the author field.
+
+```
+  - name: Kevin Rue-Albrecht
+    affiliation:
+    - University of Oxford
+    email: kevin.rue-albrecht@imm.ox.ac.uk
+```
+
+Note:
+
+- Multiple authors can be added as additional entries in that section.
+
+The template vignette is somewhat large to include in this chapter.
+We encourage you to read the contents carefully, editing, removing, and adding
+contents as you see fit.
+Vignette are live documents that can be updated either to reflect updates
+to the package source code, or in their own right, to refine the documentation
+distributed with the package.
+
+In this example, we leave the rest of the template vignette to its original
+contents.
+
+## Create a template GitHub Actions
+
+In the earlier section
+[Add badges to the README file](#add-badges-to-the-readme-file),
+we added a badge that reports the status of a
+[GitHub Actions](https://github.com/features/actions) workflow that we are only
+about to create now.
+
+In this example, we use the function `biocthis::use_bioc_github_action()` to
+initialise a template GitHub Actions workflow that includes a number of actions
+typically performed during software development to verify the integrity and
+functionality of software package.
+This process -- called continuous integration -- is extremely valuable to
+identify issues as early as possible in the software development process,
+preferably as part as automated testing, and before those issues reach users.
+
+```{r, eval=FALSE}
+biocthis::use_bioc_github_action()
+```
+
+The R console displays information as a sub-directory `.github/workflows/` and
+a file `check-bioc.yml` within that sub-directory.
+
+```
+✔ Creating '.github/workflows/'
+✔ Writing '.github/workflows/check-bioc.yml'
+```
+
+The new file `.github/workflows/check-bioc.yml` is somewhat large to display in
+this chapter (300+ lines).
+
+In this example, we use the RStudio "Find and Replace" functionality to replace
+all occurrences of `refs/heads/master` in the file by `refs/heads/main`.
+This is because the default branch of our repository is called `main`, not
+`master`.
+
+Note:
+
+- In our example, there were 5 occurrences to replace.
+
+In this example, we keep the strategy matrix to use R version `4.1` and
+Bioconductor version `3.14`.
+Those specification represent the version of R and Bioconductor that will be
+used to run the GitHub Action workflow, including the installation of package
+dependencies, which in turn may impact the outcome of the unit tests.
+
+Notes:
+
+- Bioconductor packages should be tested in an environment that uses the
+  development version of R ("R-Devel") and the development version of
+  Bioconductor ("Bioc Devel").
+- A new version of R is typically released annually in April/May
+- A new version of Bioconductor is typically released bi-annually; in April/May
+  (shortly after the R release) and in October.
+- You will need to update the version of R and Bioconductor specified in the
+  GitHub Actions workflow as new versions of R and Bioconductor are released.
+
+In this example, in the section named `Run CMD check`, we also replace
+`error_on = "warning"` by `error_on = "error"`.
+This change allows `R CMD check` to report a successful build build even in the
+presence of warning messages.
+
+```
+          rcmdcheck::rcmdcheck(
+              args = c("--no-manual", "--no-vignettes", "--timings"),
+              build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
+              error_on = "error",
+              check_dir = "check"
+          )
+```
+
+Note:
+
+- Bioconductor recommends that packages should pass `R CMD check` without any
+  WARNING nor ERROR message.
+  
+## Using GitHub Actions
+
+In this example, we have regularly made commits to the git repository as we
+progressed through each section.
+We make a new commit now, all the files that we have recently created and
+edited, and we push the new git commit to GitHub.
+This can be done through a set of commands typed on the command line in a
+Terminal (e.g., the `Terminal` panel of the RStudio application), or using the
+`Git` panel of the RStudio application.
+
+### Using Git on Terminal command line
+
+```{bash, eval=FALSE}
+git add .
+git commit -m "add template files"
+git push
+```
+
+### Using the RStudio Git panel
+
+We click the `Git` tab, then the `Diff` button, and in the popup, we type a
+commit message that describes the changes that we are making in this commit.
+Then we click the `Commit` button, and the `Push` button.
+
+![RStudio Git panel](images/rstudio-git-github-actions.png)
+
+When the commit reaches the GitHub repository, the presence of the file
+`.github/workflows/check-bioc.yml` prompts GitHub to execute the GitHub Action
+workflow.
+
+The log file produced by the GitHub Action workflow can be watched as it is
+being generated, in the "Actions" section of the GitHub repository:
+<https://github.com/kevinrue/MyBioconductorPackage/runs/6388422844?check_suite_focus=true>.
+
+In this example, when the GitHub Action workflow completes, we see that it
+reports a single ERROR message that occurred during the step running
+`BiocCheck::BiocCheck()`.
+
+The full report is fairly large; only the ERROR message is displayed below.
+
+```
+* Checking for non-trivial biocViews...
+    * ERROR: Add biocViews other than Software
+```
+
+To resolve that ERROR message, in this example, we open the file `DESCRIPTION`
+and add the term `Infrastructure` to the section `biocViews`.
+
+```
+biocViews: Software,
+    Infrastructure
+```
+
+Then, we make another commit and push the updated repository to GitHub.
+
+![Make a commit that fixes an ERROR in the GitHub Actions workflow.](images/rstudio-git-biocviews-error.png)
+
+When the push to the GitHub repository completes, the GitHub Actions workflow
+is automatically triggered.
+In this example, we are pleased to see that the previous ERROR message does not
+appear in the new report.
+
+However, we see that an issue is now reported, specifically on the Ubuntu
+platform.
+We will address this issue in the next section.
+
+## Add R code
+
+So far -- in this example -- we have been developing the infrastructure of our
+new package, without adding any source code to the sub-directory `R/`.
+As such, the package does not provide any new functionality.
+
+Moreover, despite the fix introduced in the previous section, the absence of
+code still causes an issue during the execution GitHub Action workflow,
+specifically on the Ubuntu platform
+
+The relevant GitHub Actions report is available at:
+<https://github.com/kevinrue/MyBioconductorPackage/runs/6388447895?check_suite_focus=true>
+
+![GitHub Actions failing specifically on the Ubuntu platform.](images/github-action-error-ubuntu.png)
+
+Specifically, the relevant part of the report is displayed below.
+
+```
+> Run covr::codecov()
+Error in file(con, "r") : cannot open the connection
+Calls: <Anonymous> -> package_coverage -> add_hooks -> readLines -> file
+In addition: Warning message:
+In file(con, "r") :
+  cannot open file '/tmp/RtmpSRVmSc/R_LIBSa203b2bd7d4/MyBioconductorPackage/R/MyBioconductorPackage': No such file or directory
+Execution halted
+Error: Process completed with exit code 1.
+```
+
+To address this issue, we create an R script `example.R` in the `R/`
+sub-directory of our package, and we write a simple function in that package.
+
+```{r, eval=FALSE}
+## example.R
+my_bioc_function <- function(x, y) {
+  message("This is an example function")
+  return(x + y)
+}
+```
+
+We save the file, and then we commit and push it to the GitHub repository.
+
+![Add an R script in the `R/` sub-directory.](rstudio-git-add-script.png)
+
+When the GitHub Action completes, we gladly see that the previous error message
+has now disappeared.
+The report is available at:
+<https://github.com/kevinrue/MyBioconductorPackage/runs/6388803864?check_suite_focus=true>.
+
+Unfortunately, we also notice that another issue has now occurred later in the
+workflow.
+We will address this issue in the next section.
+
+## GitHub Pages
+
+In the GitHub Actions report produced by our changes in the previous section,
+we see that an error is reported in the section `Build and deploy pkgdown site`.
+
+The error messsage is copied below.
+
+```
+> Run git config --local user.name "$GITHUB_ACTOR"
+Run git config --local user.name "$GITHUB_ACTOR"
+Running git checkout --orphan gh-pages
+Switched to a new branch 'gh-pages'
+Running git rm -rf --quiet .
+Running git commit --allow-empty -m 'Initializing gh-pages branch'
+[gh-pages (root-commit) 513d36d] Initializing gh-pages branch
+Running git push origin 'HEAD:gh-pages'
+remote: Permission to kevinrue/MyBioconductorPackage.git denied to github-actions[bot].
+fatal: unable to access 'https://github.com/kevinrue/MyBioconductorPackage/': The requested URL returned error: 403
+
+Error: <system_command_status_error in callr::run("git", c(...), echo_cmd = echo_cmd, echo = echo, error_on_status ...:
+ System command 'git' failed, exit status: 128, stdout & stderr were printed>
+
+Stack trace:
+ 1. pkgdown::deploy_to_branch(new_process = FALSE)
+ 2. pkgdown:::git("push", remote, paste0("HEAD:", branch))
+ 3. callr::run("git", c(...), echo_cmd = echo_cmd, echo = echo, error_on_status ...
+ 4. throw(new_process_error(res, call = sys.call(), echo = echo,  ...
+
+ x System command 'git' failed, exit status: 128, stdout & stderr were printed 
+Execution halted
+Error: Process completed with exit code 1.
+```
+
+This error message is somewhat dense and not entirely straightforward to
+interpret.
+
+However, the solution to this issue is to run the following set of commands in
+the R console of the RStudio application.
+
+```{r, eval=FALSE}
+pkgdown::deploy_to_branch()
+```
+
+Note:
+
+- The function `pkgdown::deploy_to_branch()` is the same as the GitHub Action
+  workflow tries to run.
+  However, it must be run once manually to set things up, in such a way that
+  the GitHub Action workflow can use that setup to perform its function
+  in subsequent runs.
+- Even when run in the R console of the RStudio application, the function will
+  conclude with an error message.
+  However, even then, it will have done what we needed it to do; namely, create
+  a branch named `gh-pages` in the git repository, and push that branch to the
+  GitHub clone of the repository.
+  The harmless error message is shown below.
+
+```
+-- RMarkdown error ------------------------------------------------------------------------------
+Quitting from lines 2-22 (MyBioconductorPackage.Rmd) 
+Error in packageVersion(pkg) : 
+  there is no package called 'MyBioconductorPackage'
+-------------------------------------------------------------------------------------------------
+Error in !trace_length(trace) : invalid argument type
+```
+
+Furthermore, we also need to change some settings in the GitHub repository,
+allowing the automated GitHub Actions workflow to push changes to the newly
+created branch `gh-pages`.
+
+We navigate to the `Settings` tab of the GitHub repository, then under the
+`Actions` and `General` sub-sections, we scroll down to the section
+`Workflow permissions` and tick the option `Read and write permissions`.
+Finally, we click the `Save` button at the bottom of the page.
+
+![Give GitHub Actions workflows read and write permissions to the repository.](images/github-settings-allow-bot.png)
+
+At this point, we can force GitHub to re-run the failed workflow, in the
+`Actions` tab of the repository.
+
+![Re-run failed GitHub Actions workflows.](images/github-actions-rerun-workflow.png)
+
+In this example, when the GitHub Actions workflow completes, we see now our
+first fully successful build report!
+
+![First fully successful GitHub Actions report.](images/github-github-action-success.png)
+
+An exciting output of this section is the online deployment of the package
+documentation on GitHub Pages.
+Specifically, the contents of the branch `gh-pages` are available for each
+GitHub repository at a URL built as `<username>.github.io/<repository>`.
+
+In this example, that is <https://kevinrue.github.io/MyBioconductorPackage/>.
+
+In doubt, one way to identify that address for your own repository is to
+navigate to the `Settings` tab, in the `Pages` section, and you will find
+the URL at the top of that page.
+
+![URL of GitHub Pages for the repository.](images/github-pages-link.png)
+
+Navigate to that URL to find the online version of your package documentation!
+
+![Package documentation deployed using `pkgdown`](images/pkgdown-github-pages.png)
+
+## Continue developing the package
+
+At this point, all the essential components of our new Bioconductor-friendly
+package are in place.
+
+We are now in a place where we can safely focus more of our attention to the
+source code and documentation of the package.
+Those are topics that will be covered in more details in other sections of this
+book.
+
+In the meantime, the takeaways from this chapter are:
+
+- Updates to a package often require edits across multiple files:
+  + The version of the package is defined in the file `DESCRIPTION`.
+  + A description of the changes in each version is added to the file
+    `inst/NEWS.md`
+  + Source code is added in the sub-directory `R/`.
+  + Unit tests are added in the sub-directory `tests/testthat`.
+  + Vignettes are added in the sub-directory `vignettes/`.
+  + Updates affecting the file `README.Rmd` requires you to re-compile that
+    file, to apply those changes to the file `README.md`.
+- The template GitHub Actions workflow is run every time the repository is
+  pushed.
+- Use the GitHub Actions report to identify and monitor issues that you should
+  fix in your package.
+- Many aspects of software development are subject to changes,
+  from Bioconductor best practices and requirements, to packages intended to
+  facilitate your work -- e.g. `r BiocStyle::CRANpkg("usethis")`
+  and `r BiocStyle::Biocpkg("biocthis")`.
+  You may need to stay informed and willing to adapt the contents of your
+  package to match new requirements.
+- This chapter describes a number of optional components, and an opinionated
+  workflow to set up the infrastructure of a Bioconductor-friendly package.
+  Once you are familiar with the components that are essential or optional for
+  a Bioconductor package, you are entirely free to devise your own workflow to
+  achieve a working Bioconductor-friendly package!
+
+Finally, a regular reminder that you are very welcome to join the Bioconductor
+community and communicate with fellow package users and developers on the
+[Bioconductor Slack workspace](https://bioc-community.herokuapp.com/) and the
+[Bioconductor Support site](https://support.bioconductor.org/).
+
 ## Further reading
 
 ### `biocthis`
 
-- 2021-01-28 [two minute video](https://youtu.be/3fLNsLchPnI) in Spanish for ConectaR 2021. [Slides in Spanish](https://speakerdeck.com/lcolladotor/biocthis-conectar2021).
-- 2020-11-05 [slides in English](https://speakerdeck.com/lcolladotor/biocthis-tab) for the Bioconductor Technical Advisory Board. 
-- 2020-09-10 [55 minute video in English](https://youtu.be/aMTxkYsM-8o). [ Slides in English](https://speakerdeck.com/lcolladotor/making-bioc-packages-with-biocthis).
+- [biocthis para ConectaR2021 - Leonardo Collado Torres (2020-01-28; 2 min video; Spanish)](https://youtu.be/3fLNsLchPnI) for ConectaR 2021.
+  + [Slides (Spanish)](https://speakerdeck.com/lcolladotor/biocthis-conectar2021).
+- [biocthis slides - Leonardo Collado Torres (2020-11-05; English)](https://speakerdeck.com/lcolladotor/biocthis-tab) for the Bioconductor Technical Advisory Board. 
+- [Making R/Bioconductor packages with biocthis: recount3 use case - Leonardo Collado Torres (2020-09-10; 55 min video; English)](https://youtu.be/aMTxkYsM-8o).
+  + [Slides (English)](https://speakerdeck.com/lcolladotor/making-bioc-packages-with-biocthis).
 
-## Resources
+### Making a Bioconductor package
 
-> Contribute!
-> 
-> Introduce and discuss the links below.
-
-- [Link to Kayla’s from Bioc2020](TODO)
-- [BJ’s Boston Meetup](TODO)
-- [Saskia’s video](TODO)
-- [Template Bioconductor package (in development)](https://github.com/kevinrue/BiocPackageSofwareTemplate)
-- [Bioconductor Package Guidelines for Developers and Reviewers](https://github.com/kevinrue/bioc_package_guide)
-- [Building a Bioconductor package using RStudio](https://github.com/SaskiaFreytag/making_bioconductor_pkg)
-- [lshep/MakeAPackage](https://github.com/lshep/MakeAPackage)
+- [kevinrue/MyBioconductorPackage - GitHub repository created in this chapter (2022-05-11)](https://github.com/kevinrue/MyBioconductorPackage)
+- [Create and submit a package to Bioconductor - Kayla Interdonato (2020-09-10; workshop; English)](https://www.youtube.com/watch?v=fq3kx6FZ6lY)
+- [Creating a Bioconductor Package - Benjamin Stubbs (2018-11-20; Boston Meetup)](https://www.meetup.com/Boston-R-Bioconductor-for-genomics/events/254563803/)
+- [Workshop - Building a Bioconductor Package - Saskia Freytag (2021-01-19; English)](https://www.youtube.com/watch?v=ua-lEaPbCyo&ab_channel=Bioconductor)
+- [Bioconductor Packages: Development, Maintenance, and Peer Review (2021-present; book)](http://contributions.bioconductor.org/)
+- [SaskiaFreytag/making_bioconductor_pkg - GitHub repository created in a workshop (2020)](https://github.com/SaskiaFreytag/making_bioconductor_pkg)
+- [lshep/MakeAPackage - Lori Shepherd (2017)](https://github.com/lshep/MakeAPackage)
