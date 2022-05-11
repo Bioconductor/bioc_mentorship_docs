@@ -1365,6 +1365,49 @@ Then, we make another commit and push the updated repository to GitHub.
 
 ![Make a commit that fixes an ERROR in the GitHub Actions workflow.](images/rstudio-git-biocviews-error.png)
 
+## Add R code
+
+So far -- in this example -- we have been developing the infrastructure of our
+new package, without adding any source code to the sub-directory `R/`.
+As such, the package does not provide any new functionality.
+
+Moreover, despite the fix introduced in the previous section, the absence of
+code still causes an issue during the execution GitHub Action workflow,
+specifically on the Ubuntu platform
+
+The relevant GitHub Actions report is available at:
+<https://github.com/kevinrue/MyBioconductorPackage/runs/6388447895?check_suite_focus=true>
+
+![GitHub Actions failing specifically on the Ubuntu platform.](images/github-action-error-ubuntu.png)
+
+Specifically, the relevant part of the report is displayed below.
+
+```
+> Run covr::codecov()
+Error in file(con, "r") : cannot open the connection
+Calls: <Anonymous> -> package_coverage -> add_hooks -> readLines -> file
+In addition: Warning message:
+In file(con, "r") :
+  cannot open file '/tmp/RtmpSRVmSc/R_LIBSa203b2bd7d4/MyBioconductorPackage/R/MyBioconductorPackage': No such file or directory
+Execution halted
+Error: Process completed with exit code 1.
+```
+
+To address this issue, we create an R script `example.R` in the `R/`
+sub-directory of our package, and we write a simple function in that package.
+
+```{r, eval=FALSE}
+## example.R
+my_bioc_function <- function(x, y) {
+  message("This is an example function")
+  return(x + y)
+}
+```
+
+We save the file, and then we commit and push it to the GitHub repository.
+
+![Add an R script in the `R/` sub-directory.](rstudio-git-add-script.png)
+
 ## Further reading
 
 ### `biocthis`
