@@ -931,7 +931,7 @@ As a consequence, we need to re-compile the file `README.Rmd` to update the file
 `README.md`.
 
 ```{r, eval=FALSE}
-devtools::build_rmd("README.Rmd")
+devtools::build_readme()
 ```
 
 When the command completes, we can take the time to open the file `README.md`
@@ -971,7 +971,7 @@ As a consequence of the update to the file `README.Rmd`, we need to re-compile
 that file to apply the changes to the file `README.md`.
 
 ```{r, eval=FALSE}
-devtools::build_rmd("README.Rmd")
+devtools::build_readme()
 ```
 
 When the command completes, we can take the time to open the file `README.md`
@@ -1015,7 +1015,7 @@ The last message reminds us to re-compile the file `README.Rmd` to apply the
 update to the file `README.md`.
 
 ```{r, eval=FALSE}
-devtools::build_rmd("README.Rmd")
+devtools::build_readme()
 ```
 
 Note:
@@ -1024,6 +1024,136 @@ Note:
   As a result, the badge may not display properly.
   This is entirely normal and acceptable, as the functionality of the package
   itself is in no way impacted by the contents of the file `README.md`.
+
+## Enable unit tests
+
+Separately from the code that create new functionality in a package,
+unit tests allow package developers to write additional code that invokes
+functions defined in the package, and verifies that they produce the expected
+results in given scenarios.
+
+In this example, we use the function `usethis::use_testthat()`
+
+```{r, eval=FALSE}
+usethis::use_testthat()
+```
+
+The R console displays some information as sub-directories and files are
+created and edited.
+
+```
+✔ Adding 'testthat' to Suggests field in DESCRIPTION
+✔ Setting Config/testthat/edition field in DESCRIPTION to '3'
+✔ Creating 'tests/testthat/'
+✔ Writing 'tests/testthat.R'
+• Call `use_test()` to initialize a basic test file and open it for editing.
+```
+
+In this example, the file `DESCRIPTION` is edited to declare that our package
+now depends on the CRAN package `r BiocStyle::CRANpkg("testthat")` for writing
+and running tests, specifically version 3 of the testthat package.
+
+```
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+```
+
+Simultaneously, a sub-directory `tests` and script file `tests/testthat.R` are
+created.
+That script is the entry point that is used to start the execution of any test
+that we may write in the future.
+At the moment, there is not test in the package.
+
+Even though our package does not contain any code that we can test yet,
+in this example, we use the function `usethis::use_test()` to demonstrate the
+creation of a test script in the package.
+We use the first argument `"example_test"` to declare the name of the
+test file.
+
+```{r, eval=FALSE}
+usethis::use_test("example_test")
+```
+
+The R console displays some information as a sub-directory and a file are
+created.
+
+```
+✔ Writing 'tests/testthat/test-example_test.R'
+• Modify 'tests/testthat/test-example_test.R'
+```
+
+When the command completes, the new file `tests/testthat/test-example_test.R`
+is open in the source panel of the RStudio application.
+The script contains an example test that is designed to verify whether
+R correctly returns the value 4 when asked to multiply 2 by 2.
+
+
+```{r, eval=FALSE}
+test_that("multiplication works", {
+  expect_equal(2 * 2, 4)
+})
+```
+
+This example is trivial and merely a placeholder that we will ultimately replace
+by tests specifically tailored to verify that our own package functions behave
+as expected.
+For now, it is entirely acceptable to keep this example test, for the purpose
+of setting up our package infrastructure.
+
+Tied with the notion of tests is the notion of coverage.
+Coverage is a metric in software testing that measures the fraction of source
+code in a package that is traversed at least once during the execution the
+entire series of tests in that package.
+
+In this example, we use the function `usethis::use_coverage()` to set up files
+and default settings for the execution and reporting of test coverage in our
+package.
+
+```{r, eval=FALSE}
+usethis::use_coverage()
+```
+
+In this example, the CRAN package `r BiocStyle::CRANpkg("covr")` is not
+installed yet, so we are prompted to install it first.
+We choose the option to consent.
+
+```
+ℹ The package `covr` is required.
+✖ Would you like to install it?
+
+1: Yes
+2: No
+
+Selection: 1
+```
+
+When packages are installed, the command will proceed to create and edit files,
+displaying information in the R console as it does so.
+
+```
+✔ Adding 'covr' to Suggests field in DESCRIPTION
+✔ Writing 'codecov.yml'
+✔ Adding '^codecov\\.yml$' to '.Rbuildignore'
+✔ Adding Codecov test coverage badge to 'README.Rmd'
+• Re-knit 'README.Rmd'
+• Call `use_github_action("test-coverage")` to continuously monitor test coverage.
+```
+
+First, the CRAN package `r BiocStyle::CRANpkg("covr")` is added to the
+dependencies of our package in the file `DESCRIPTION`.
+Then, a file `codecov.yml` is created with default options that control the
+execution and reporting of the test coverage.
+That new file is added to the file `.Rbuildignore`, to avoid warnings during
+future builds of the package.
+Another badge is added to the file `README.Rmd`, for reporting test coverage.
+
+As a result of that last edit, we are reminded to re-compile the file
+`README.Rmd`, to apply the updates to the file `README.md`.
+
+```{r, eval=FALSE}
+devtools::build_readme()
+```
 
 ## Further reading
 
