@@ -856,7 +856,7 @@ the package.
 As a consequence, we need to re-compile the file <code>README.Rmd</code> to update the file
 <code>README.md</code>.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_rmd</a></span><span class="op">(</span><span class="st">"README.Rmd"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_readme</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>When the command completes, we can take the time to open the file <code>README.md</code>
 and examine the new contents in the section <code>## Citation</code>.</p>
 </div>
@@ -886,7 +886,7 @@ embed the new badge.</p>
 <p>As a consequence of the update to the file <code>README.Rmd</code>, we need to re-compile
 that file to apply the changes to the file <code>README.md</code>.</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_rmd</a></span><span class="op">(</span><span class="st">"README.Rmd"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_readme</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>When the command completes, we can take the time to open the file <code>README.md</code>
 and examine the new line in the badges section.</p>
 <pre><code>&lt;!-- badges: start --&gt;
@@ -894,39 +894,537 @@ and examine the new line in the badges section.</p>
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 &lt;!-- badges: end --&gt;</code></pre>
+<p>The next command in the script <code>03_core_files.R</code> demonstrates the function <code><a href="https://usethis.r-lib.org/reference/github_actions.html">usethis::use_github_actions_badge()</a></code>.</p>
+<p><a href="https://github.com/features/actions">GitHub Actions</a> is a optional
+functionality of the GitHub website that makes it easy to automate workflows
+related to software development, including regular building, testing, and
+deployment of the code hosted in GitHub repositories.</p>
+<p>In this example, we use the function <code><a href="https://usethis.r-lib.org/reference/github_actions.html">usethis::use_github_actions_badge()</a></code> to
+add a badge that will display the result of a GitHub Actions workflow for our
+new package.
+We use the first argument <code>"R-CMD-check-bioc"</code> to declare the name of the
+GitHub Actions workflow.</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/github_actions.html">use_github_actions_badge</a></span><span class="op">(</span><span class="st">"R-CMD-check-bioc"</span><span class="op">)</span></code></pre></div>
+<p>The R console displays some information as the file <code>README.Rmd</code> is edited to
+embed the new badge.</p>
+<pre><code>✔ Setting active project to '/Users/kevin/Desktop/MyBioconductorPackage'
+✔ Adding R-CMD-check-bioc badge to 'README.Rmd'
+• Re-knit 'README.Rmd'</code></pre>
+<p>The last message reminds us to re-compile the file <code>README.Rmd</code> to apply the
+update to the file <code>README.md</code>.</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_readme</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>Note:</p>
+<ul>
+<li>At the moment, the GitHub Actions workflow itself is not defined.
+As a result, the badge may not display properly.
+This is entirely normal and acceptable, as the functionality of the package
+itself is in no way impacted by the contents of the file <code>README.md</code>.</li>
+</ul>
 </div>
-<div id="further-reading" class="section level2" number="6.19">
+<div id="enable-unit-tests" class="section level2" number="6.19">
 <h2>
-<span class="header-section-number">6.19</span> Further reading<a class="anchor" aria-label="anchor" href="#further-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.19</span> Enable unit tests<a class="anchor" aria-label="anchor" href="#enable-unit-tests"><i class="fas fa-link"></i></a>
 </h2>
-<div id="biocthis" class="section level3" number="6.19.1">
+<p>Separately from the code that create new functionality in a package,
+unit tests allow package developers to write additional code that invokes
+functions defined in the package, and verifies that they produce the expected
+results in given scenarios.</p>
+<p>In this example, we use the function <code><a href="https://usethis.r-lib.org/reference/use_testthat.html">usethis::use_testthat()</a></code></p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_testthat.html">use_testthat</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console displays some information as sub-directories and files are
+created and edited.</p>
+<pre><code>✔ Adding 'testthat' to Suggests field in DESCRIPTION
+✔ Setting Config/testthat/edition field in DESCRIPTION to '3'
+✔ Creating 'tests/testthat/'
+✔ Writing 'tests/testthat.R'
+• Call `use_test()` to initialize a basic test file and open it for editing.</code></pre>
+<p>In this example, the file <code>DESCRIPTION</code> is edited to declare that our package
+now depends on the CRAN package <em><a href="https://CRAN.R-project.org/package=testthat">testthat</a></em> for writing
+and running tests, specifically version 3 of the testthat package.</p>
+<pre><code>Suggests: 
+    testthat (&gt;= 3.0.0)
+Config/testthat/edition: 3</code></pre>
+<p>Simultaneously, a sub-directory <code>tests</code> and script file <code>tests/testthat.R</code> are
+created.
+That script is the entry point that is used to start the execution of any test
+that we may write in the future.
+At the moment, there is not test in the package.</p>
+<p>Even though our package does not contain any code that we can test yet,
+in this example, we use the function <code><a href="https://usethis.r-lib.org/reference/use_r.html">usethis::use_test()</a></code> to demonstrate the
+creation of a test script in the package.
+We use the first argument <code>"example_test"</code> to declare the name of the
+test file.</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_r.html">use_test</a></span><span class="op">(</span><span class="st">"example_test"</span><span class="op">)</span></code></pre></div>
+<p>The R console displays some information as a sub-directory and a file are
+created.</p>
+<pre><code>✔ Writing 'tests/testthat/test-example_test.R'
+• Modify 'tests/testthat/test-example_test.R'</code></pre>
+<p>When the command completes, the new file <code>tests/testthat/test-example_test.R</code>
+is open in the source panel of the RStudio application.
+The script contains an example test that is designed to verify whether
+R correctly returns the value 4 when asked to multiply 2 by 2.</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">"multiplication works"</span>, <span class="op">{</span>
+  <span class="fu">expect_equal</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
+<p>This example is trivial and merely a placeholder that we will ultimately replace
+by tests specifically tailored to verify that our own package functions behave
+as expected.
+For now, it is entirely acceptable to keep this example test, for the purpose
+of setting up our package infrastructure.</p>
+<p>Tied with the notion of tests is the notion of coverage.
+Coverage is a metric in software testing that measures the fraction of source
+code in a package that is traversed at least once during the execution the
+entire series of tests in that package.</p>
+<p>In this example, we use the function <code><a href="https://usethis.r-lib.org/reference/use_coverage.html">usethis::use_coverage()</a></code> to set up files
+and default settings for the execution and reporting of test coverage in our
+package.</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_coverage.html">use_coverage</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>In this example, the CRAN package <em><a href="https://CRAN.R-project.org/package=covr">covr</a></em> is not
+installed yet, so we are prompted to install it first.
+We choose the option to consent.</p>
+<pre><code>ℹ The package `covr` is required.
+✖ Would you like to install it?
+
+1: Yes
+2: No
+
+Selection: 1</code></pre>
+<p>When packages are installed, the command will proceed to create and edit files,
+displaying information in the R console as it does so.</p>
+<pre><code>✔ Adding 'covr' to Suggests field in DESCRIPTION
+✔ Writing 'codecov.yml'
+✔ Adding '^codecov\\.yml$' to '.Rbuildignore'
+✔ Adding Codecov test coverage badge to 'README.Rmd'
+• Re-knit 'README.Rmd'
+• Call `use_github_action("test-coverage")` to continuously monitor test coverage.</code></pre>
+<p>First, the CRAN package <em><a href="https://CRAN.R-project.org/package=covr">covr</a></em> is added to the
+dependencies of our package in the file <code>DESCRIPTION</code>.
+Then, a file <code>codecov.yml</code> is created with default options that control the
+execution and reporting of the test coverage.
+That new file is added to the file <code>.Rbuildignore</code>, to avoid warnings during
+future builds of the package.
+Another badge is added to the file <code>README.Rmd</code>, for reporting test coverage.</p>
+<p>As a result of that last edit, we are reminded to re-compile the file
+<code>README.Rmd</code>, to apply the updates to the file <code>README.md</code>.</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build_rmd.html">build_readme</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="create-a-template-vignette" class="section level2" number="6.20">
+<h2>
+<span class="header-section-number">6.20</span> Create a template vignette<a class="anchor" aria-label="anchor" href="#create-a-template-vignette"><i class="fas fa-link"></i></a>
+</h2>
+<p>Package vignettes are a requirement for Bioconductor packages, providing
+high-quality documentation and a thorough demonstration of the functionality
+in the package.</p>
+<p>In this example, we use the function <code>biocthis::use_bioc_vignette()</code> to
+initialise a template vignette that we can examine and edit as needed.</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pkg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/proj_utils.html">proj_get</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_vignette</span><span class="op">(</span><span class="va">pkg</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Introduction to"</span>, <span class="va">pkg</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>The R console displays information as package dependencies required for the
+compilation of the template vignette are added to the file <code>DESCRIPTION</code>.
+Simultaneously, a sub-directory <code>vignette/</code> is created,
+and a R Markdown file <code>MyBioconductorPackage.Rmd</code> is created within that new
+sub-directory.
+Additionally, the file <code>.gitignore</code> is edited to add entry <code>inst/doc</code> that
+excludes compiled vignettes from version control, as those will be compiled
+automatically on the Bioconductor repository.
+Another file <code>.gitignore</code> is created within the sub-directory <code>vignettes/</code>,
+to ignore HTML files and R scripts specifically within that sub-directory.</p>
+<pre><code>✔ Adding 'knitr' to Suggests field in DESCRIPTION
+• Use `requireNamespace("knitr", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `knitr::fun()`
+✔ Adding 'BiocStyle' to Suggests field in DESCRIPTION
+• Use `requireNamespace("BiocStyle", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `BiocStyle::fun()`
+✔ Adding 'RefManageR' to Suggests field in DESCRIPTION
+• Use `requireNamespace("RefManageR", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `RefManageR::fun()`
+✔ Adding 'sessioninfo' to Suggests field in DESCRIPTION
+• Use `requireNamespace("sessioninfo", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `sessioninfo::fun()`
+✔ Setting VignetteBuilder field in DESCRIPTION to 'knitr'
+✔ Adding 'inst/doc' to '.gitignore'
+✔ Creating 'vignettes/'
+✔ Adding '*.html', '*.R' to 'vignettes/.gitignore'
+✔ Adding 'rmarkdown' to Suggests field in DESCRIPTION
+• Use `requireNamespace("rmarkdown", quietly = TRUE)` to test if package is installed
+• Then directly refer to functions with `rmarkdown::fun()`
+✔ Writing 'vignettes/MyBioconductorPackage.Rmd'
+• Modify 'vignettes/MyBioconductorPackage.Rmd'</code></pre>
+<p>When the command completes, the source vignette file
+<code>vignettes/MyBioconductorPackage.Rmd</code> is automatically opened in the source pane
+of the RStudio application.</p>
+<p>In this example, in the header section of the file, we replace the placeholder
+values in the author field.</p>
+<pre><code>  - name: Kevin Rue-Albrecht
+    affiliation:
+    - University of Oxford
+    email: kevin.rue-albrecht@imm.ox.ac.uk</code></pre>
+<p>Note:</p>
+<ul>
+<li>Multiple authors can be added as additional entries in that section.</li>
+</ul>
+<p>The template vignette is somewhat large to include in this chapter.
+We encourage you to read the contents carefully, editing, removing, and adding
+contents as you see fit.
+Vignette are live documents that can be updated either to reflect updates
+to the package source code, or in their own right, to refine the documentation
+distributed with the package.</p>
+<p>In this example, we leave the rest of the template vignette to its original
+contents.</p>
+</div>
+<div id="create-a-template-github-actions" class="section level2" number="6.21">
+<h2>
+<span class="header-section-number">6.21</span> Create a template GitHub Actions<a class="anchor" aria-label="anchor" href="#create-a-template-github-actions"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the earlier section
+<a href="bioc-package.html#add-badges-to-the-readme-file">Add badges to the README file</a>,
+we added a badge that reports the status of a
+<a href="https://github.com/features/actions">GitHub Actions</a> workflow that we are only
+about to create now.</p>
+<p>In this example, we use the function <code>biocthis::use_bioc_github_action()</code> to
+initialise a template GitHub Actions workflow that includes a number of actions
+typically performed during software development to verify the integrity and
+functionality of software package.
+This process – called continuous integration – is extremely valuable to
+identify issues as early as possible in the software development process,
+preferably as part as automated testing, and before those issues reach users.</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">biocthis</span><span class="fu">::</span><span class="fu">use_bioc_github_action</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The R console displays information as a sub-directory <code>.github/workflows/</code> and
+a file <code>check-bioc.yml</code> within that sub-directory.</p>
+<pre><code>✔ Creating '.github/workflows/'
+✔ Writing '.github/workflows/check-bioc.yml'</code></pre>
+<p>The new file <code>.github/workflows/check-bioc.yml</code> is somewhat large to display in
+this chapter (300+ lines).</p>
+<p>In this example, we use the RStudio “Find and Replace” functionality to replace
+all occurrences of <code>refs/heads/master</code> in the file by <code>refs/heads/main</code>.
+This is because the default branch of our repository is called <code>main</code>, not
+<code>master</code>.</p>
+<p>Note:</p>
+<ul>
+<li>In our example, there were 5 occurrences to replace.</li>
+</ul>
+<p>In this example, we keep the strategy matrix to use R version <code>4.1</code> and
+Bioconductor version <code>3.14</code>.
+Those specification represent the version of R and Bioconductor that will be
+used to run the GitHub Action workflow, including the installation of package
+dependencies, which in turn may impact the outcome of the unit tests.</p>
+<p>Notes:</p>
+<ul>
+<li>Bioconductor packages should be tested in an environment that uses the
+development version of R (“R-Devel”) and the development version of
+Bioconductor (“Bioc Devel”).</li>
+<li>A new version of R is typically released annually in April/May</li>
+<li>A new version of Bioconductor is typically released bi-annually; in April/May
+(shortly after the R release) and in October.</li>
+<li>You will need to update the version of R and Bioconductor specified in the
+GitHub Actions workflow as new versions of R and Bioconductor are released.</li>
+</ul>
+<p>In this example, in the section named <code>Run CMD check</code>, we also replace
+<code>error_on = "warning"</code> by <code>error_on = "error"</code>.
+This change allows <code>R CMD check</code> to report a successful build build even in the
+presence of warning messages.</p>
+<pre><code>          rcmdcheck::rcmdcheck(
+              args = c("--no-manual", "--no-vignettes", "--timings"),
+              build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
+              error_on = "error",
+              check_dir = "check"
+          )</code></pre>
+<p>Note:</p>
+<ul>
+<li>Bioconductor recommends that packages should pass <code>R CMD check</code> without any
+WARNING nor ERROR message.</li>
+</ul>
+</div>
+<div id="using-github-actions" class="section level2" number="6.22">
+<h2>
+<span class="header-section-number">6.22</span> Using GitHub Actions<a class="anchor" aria-label="anchor" href="#using-github-actions"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this example, we have regularly made commits to the git repository as we
+progressed through each section.
+We make a new commit now, all the files that we have recently created and
+edited, and we push the new git commit to GitHub.
+This can be done through a set of commands typed on the command line in a
+Terminal (e.g., the <code>Terminal</code> panel of the RStudio application), or using the
+<code>Git</code> panel of the RStudio application.</p>
+<div id="using-git-on-terminal-command-line" class="section level3" number="6.22.1">
 <h3>
-<span class="header-section-number">6.19.1</span> <code>biocthis</code><a class="anchor" aria-label="anchor" href="#biocthis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.22.1</span> Using Git on Terminal command line<a class="anchor" aria-label="anchor" href="#using-git-on-terminal-command-line"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb73"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb73-1"><a href="bioc-package.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb73-2"><a href="bioc-package.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"add template files"</span></span>
+<span id="cb73-3"><a href="bioc-package.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
+</div>
+<div id="using-the-rstudio-git-panel" class="section level3" number="6.22.2">
+<h3>
+<span class="header-section-number">6.22.2</span> Using the RStudio Git panel<a class="anchor" aria-label="anchor" href="#using-the-rstudio-git-panel"><i class="fas fa-link"></i></a>
+</h3>
+<p>We click the <code>Git</code> tab, then the <code>Diff</code> button, and in the popup, we type a
+commit message that describes the changes that we are making in this commit.
+Then we click the <code>Commit</code> button, and the <code>Push</code> button.</p>
+<div class="figure">
+<img src="images/rstudio-git-github-actions.png" alt=""><p class="caption">RStudio Git panel</p>
+</div>
+<p>When the commit reaches the GitHub repository, the presence of the file
+<code>.github/workflows/check-bioc.yml</code> prompts GitHub to execute the GitHub Action
+workflow.</p>
+<p>The log file produced by the GitHub Action workflow can be watched as it is
+being generated, in the “Actions” section of the GitHub repository:
+<a href="https://github.com/kevinrue/MyBioconductorPackage/runs/6388422844?check_suite_focus=true" class="uri">https://github.com/kevinrue/MyBioconductorPackage/runs/6388422844?check_suite_focus=true</a>.</p>
+<p>In this example, when the GitHub Action workflow completes, we see that it
+reports a single ERROR message that occurred during the step running
+<code>BiocCheck::BiocCheck()</code>.</p>
+<p>The full report is fairly large; only the ERROR message is displayed below.</p>
+<pre><code>* Checking for non-trivial biocViews...
+    * ERROR: Add biocViews other than Software</code></pre>
+<p>To resolve that ERROR message, in this example, we open the file <code>DESCRIPTION</code>
+and add the term <code>Infrastructure</code> to the section <code>biocViews</code>.</p>
+<pre><code>biocViews: Software,
+    Infrastructure</code></pre>
+<p>Then, we make another commit and push the updated repository to GitHub.</p>
+<div class="figure">
+<img src="images/rstudio-git-biocviews-error.png" alt=""><p class="caption">Make a commit that fixes an ERROR in the GitHub Actions workflow.</p>
+</div>
+<p>When the push to the GitHub repository completes, the GitHub Actions workflow
+is automatically triggered.
+In this example, we are pleased to see that the previous ERROR message does not
+appear in the new report.</p>
+<p>However, we see that an issue is now reported, specifically on the Ubuntu
+platform.
+We will address this issue in the next section.</p>
+</div>
+</div>
+<div id="add-r-code" class="section level2" number="6.23">
+<h2>
+<span class="header-section-number">6.23</span> Add R code<a class="anchor" aria-label="anchor" href="#add-r-code"><i class="fas fa-link"></i></a>
+</h2>
+<p>So far – in this example – we have been developing the infrastructure of our
+new package, without adding any source code to the sub-directory <code>R/</code>.
+As such, the package does not provide any new functionality.</p>
+<p>Moreover, despite the fix introduced in the previous section, the absence of
+code still causes an issue during the execution GitHub Action workflow,
+specifically on the Ubuntu platform</p>
+<p>The relevant GitHub Actions report is available at:
+<a href="https://github.com/kevinrue/MyBioconductorPackage/runs/6388447895?check_suite_focus=true" class="uri">https://github.com/kevinrue/MyBioconductorPackage/runs/6388447895?check_suite_focus=true</a></p>
+<div class="figure">
+<img src="images/github-action-error-ubuntu.png" alt=""><p class="caption">GitHub Actions failing specifically on the Ubuntu platform.</p>
+</div>
+<p>Specifically, the relevant part of the report is displayed below.</p>
+<pre><code>&gt; Run covr::codecov()
+Error in file(con, "r") : cannot open the connection
+Calls: &lt;Anonymous&gt; -&gt; package_coverage -&gt; add_hooks -&gt; readLines -&gt; file
+In addition: Warning message:
+In file(con, "r") :
+  cannot open file '/tmp/RtmpSRVmSc/R_LIBSa203b2bd7d4/MyBioconductorPackage/R/MyBioconductorPackage': No such file or directory
+Execution halted
+Error: Process completed with exit code 1.</code></pre>
+<p>To address this issue, we create an R script <code>example.R</code> in the <code>R/</code>
+sub-directory of our package, and we write a simple function in that package.</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## example.R</span>
+<span class="va">my_bioc_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span><span class="op">(</span><span class="st">"This is an example function"</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="va">y</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<p>We save the file, and then we commit and push it to the GitHub repository.</p>
+<div class="figure">
+<img src="rstudio-git-add-script.png" alt=""><p class="caption">Add an R script in the <code>R/</code> sub-directory.</p>
+</div>
+<p>When the GitHub Action completes, we gladly see that the previous error message
+has now disappeared.
+The report is available at:
+<a href="https://github.com/kevinrue/MyBioconductorPackage/runs/6388803864?check_suite_focus=true" class="uri">https://github.com/kevinrue/MyBioconductorPackage/runs/6388803864?check_suite_focus=true</a>.</p>
+<p>Unfortunately, we also notice that another issue has now occurred later in the
+workflow.
+We will address this issue in the next section.</p>
+</div>
+<div id="github-pages" class="section level2" number="6.24">
+<h2>
+<span class="header-section-number">6.24</span> GitHub Pages<a class="anchor" aria-label="anchor" href="#github-pages"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the GitHub Actions report produced by our changes in the previous section,
+we see that an error is reported in the section <code>Build and deploy pkgdown site</code>.</p>
+<p>The error messsage is copied below.</p>
+<pre><code>&gt; Run git config --local user.name "$GITHUB_ACTOR"
+Run git config --local user.name "$GITHUB_ACTOR"
+Running git checkout --orphan gh-pages
+Switched to a new branch 'gh-pages'
+Running git rm -rf --quiet .
+Running git commit --allow-empty -m 'Initializing gh-pages branch'
+[gh-pages (root-commit) 513d36d] Initializing gh-pages branch
+Running git push origin 'HEAD:gh-pages'
+remote: Permission to kevinrue/MyBioconductorPackage.git denied to github-actions[bot].
+fatal: unable to access 'https://github.com/kevinrue/MyBioconductorPackage/': The requested URL returned error: 403
+
+Error: &lt;system_command_status_error in callr::run("git", c(...), echo_cmd = echo_cmd, echo = echo, error_on_status ...:
+ System command 'git' failed, exit status: 128, stdout &amp; stderr were printed&gt;
+
+Stack trace:
+ 1. pkgdown::deploy_to_branch(new_process = FALSE)
+ 2. pkgdown:::git("push", remote, paste0("HEAD:", branch))
+ 3. callr::run("git", c(...), echo_cmd = echo_cmd, echo = echo, error_on_status ...
+ 4. throw(new_process_error(res, call = sys.call(), echo = echo,  ...
+
+ x System command 'git' failed, exit status: 128, stdout &amp; stderr were printed 
+Execution halted
+Error: Process completed with exit code 1.</code></pre>
+<p>This error message is somewhat dense and not entirely straightforward to
+interpret.</p>
+<p>However, the solution to this issue is to run the following set of commands in
+the R console of the RStudio application.</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu">deploy_to_branch</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>Note:</p>
+<ul>
+<li>The function <code>pkgdown::deploy_to_branch()</code> is the same as the GitHub Action
+workflow tries to run.
+However, it must be run once manually to set things up, in such a way that
+the GitHub Action workflow can use that setup to perform its function
+in subsequent runs.</li>
+<li>Even when run in the R console of the RStudio application, the function will
+conclude with an error message.
+However, even then, it will have done what we needed it to do; namely, create
+a branch named <code>gh-pages</code> in the git repository, and push that branch to the
+GitHub clone of the repository.
+The harmless error message is shown below.</li>
+</ul>
+<pre><code>-- RMarkdown error ------------------------------------------------------------------------------
+Quitting from lines 2-22 (MyBioconductorPackage.Rmd) 
+Error in packageVersion(pkg) : 
+  there is no package called 'MyBioconductorPackage'
+-------------------------------------------------------------------------------------------------
+Error in !trace_length(trace) : invalid argument type</code></pre>
+<p>Furthermore, we also need to change some settings in the GitHub repository,
+allowing the automated GitHub Actions workflow to push changes to the newly
+created branch <code>gh-pages</code>.</p>
+<p>We navigate to the <code>Settings</code> tab of the GitHub repository, then under the
+<code>Actions</code> and <code>General</code> sub-sections, we scroll down to the section
+<code>Workflow permissions</code> and tick the option <code>Read and write permissions</code>.
+Finally, we click the <code>Save</code> button at the bottom of the page.</p>
+<div class="figure">
+<img src="images/github-settings-allow-bot.png" alt=""><p class="caption">Give GitHub Actions workflows read and write permissions to the repository.</p>
+</div>
+<p>At this point, we can force GitHub to re-run the failed workflow, in the
+<code>Actions</code> tab of the repository.</p>
+<div class="figure">
+<img src="images/github-actions-rerun-workflow.png" alt=""><p class="caption">Re-run failed GitHub Actions workflows.</p>
+</div>
+<p>In this example, when the GitHub Actions workflow completes, we see now our
+first fully successful build report!</p>
+<div class="figure">
+<img src="images/github-github-action-success.png" alt=""><p class="caption">First fully successful GitHub Actions report.</p>
+</div>
+<p>An exciting output of this section is the online deployment of the package
+documentation on GitHub Pages.
+Specifically, the contents of the branch <code>gh-pages</code> are available for each
+GitHub repository at a URL built as <code>&lt;username&gt;.github.io/&lt;repository&gt;</code>.</p>
+<p>In this example, that is <a href="https://kevinrue.github.io/MyBioconductorPackage/" class="uri">https://kevinrue.github.io/MyBioconductorPackage/</a>.</p>
+<p>In doubt, one way to identify that address for your own repository is to
+navigate to the <code>Settings</code> tab, in the <code>Pages</code> section, and you will find
+the URL at the top of that page.</p>
+<div class="figure">
+<img src="images/github-pages-link.png" alt=""><p class="caption">URL of GitHub Pages for the repository.</p>
+</div>
+<p>Navigate to that URL to find the online version of your package documentation!</p>
+<div class="figure">
+<img src="images/pkgdown-github-pages.png" alt=""><p class="caption">Package documentation deployed using <code>pkgdown</code></p>
+</div>
+</div>
+<div id="continue-developing-the-package" class="section level2" number="6.25">
+<h2>
+<span class="header-section-number">6.25</span> Continue developing the package<a class="anchor" aria-label="anchor" href="#continue-developing-the-package"><i class="fas fa-link"></i></a>
+</h2>
+<p>At this point, all the essential components of our new Bioconductor-friendly
+package are in place.</p>
+<p>We are now in a place where we can safely focus more of our attention to the
+source code and documentation of the package.
+Those are topics that will be covered in more details in other sections of this
+book.</p>
+<p>In the meantime, the takeaways from this chapter are:</p>
+<ul>
+<li>Updates to a package often require edits across multiple files:
+<ul>
+<li>The version of the package is defined in the file <code>DESCRIPTION</code>.</li>
+<li>A description of the changes in each version is added to the file
+<code>inst/NEWS.md</code>
+</li>
+<li>Source code is added in the sub-directory <code>R/</code>.</li>
+<li>Unit tests are added in the sub-directory <code>tests/testthat</code>.</li>
+<li>Vignettes are added in the sub-directory <code>vignettes/</code>.</li>
+<li>Updates affecting the file <code>README.Rmd</code> requires you to re-compile that
+file, to apply those changes to the file <code>README.md</code>.</li>
+</ul>
+</li>
+<li>The template GitHub Actions workflow is run every time the repository is
+pushed.</li>
+<li>Use the GitHub Actions report to identify and monitor issues that you should
+fix in your package.</li>
+<li>Many aspects of software development are subject to changes,
+from Bioconductor best practices and requirements, to packages intended to
+facilitate your work – e.g. <em><a href="https://CRAN.R-project.org/package=usethis">usethis</a></em>
+and <em><a href="https://bioconductor.org/packages/3.16/biocthis">biocthis</a></em>.
+You may need to stay informed and willing to adapt the contents of your
+package to match new requirements.</li>
+<li>This chapter describes a number of optional components, and an opinionated
+workflow to set up the infrastructure of a Bioconductor-friendly package.
+Once you are familiar with the components that are essential or optional for
+a Bioconductor package, you are entirely free to devise your own workflow to
+achieve a working Bioconductor-friendly package!</li>
+</ul>
+<p>Finally, a regular reminder that you are very welcome to join the Bioconductor
+community and communicate with fellow package users and developers on the
+<a href="https://bioc-community.herokuapp.com/">Bioconductor Slack workspace</a> and the
+<a href="https://support.bioconductor.org/">Bioconductor Support site</a>.</p>
+</div>
+<div id="further-reading" class="section level2" number="6.26">
+<h2>
+<span class="header-section-number">6.26</span> Further reading<a class="anchor" aria-label="anchor" href="#further-reading"><i class="fas fa-link"></i></a>
+</h2>
+<div id="biocthis" class="section level3" number="6.26.1">
+<h3>
+<span class="header-section-number">6.26.1</span> <code>biocthis</code><a class="anchor" aria-label="anchor" href="#biocthis"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
-<li>2021-01-28 <a href="https://youtu.be/3fLNsLchPnI">two minute video</a> in Spanish for ConectaR 2021. <a href="https://speakerdeck.com/lcolladotor/biocthis-conectar2021">Slides in Spanish</a>.</li>
-<li>2020-11-05 <a href="https://speakerdeck.com/lcolladotor/biocthis-tab">slides in English</a> for the Bioconductor Technical Advisory Board.</li>
-<li>2020-09-10 <a href="https://youtu.be/aMTxkYsM-8o">55 minute video in English</a>. <a href="https://speakerdeck.com/lcolladotor/making-bioc-packages-with-biocthis">Slides in English</a>.</li>
-</ul>
-</div>
-</div>
-<div id="resources" class="section level2" number="6.20">
-<h2>
-<span class="header-section-number">6.20</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
-</h2>
-<blockquote>
-<p>Contribute!</p>
-<p>Introduce and discuss the links below.</p>
-</blockquote>
+<li>
+<a href="https://youtu.be/3fLNsLchPnI">biocthis para ConectaR2021 - Leonardo Collado Torres (2020-01-28; 2 min video; Spanish)</a> for ConectaR 2021.
 <ul>
-<li><a href="TODO">Link to Kayla’s from Bioc2020</a></li>
-<li><a href="TODO">BJ’s Boston Meetup</a></li>
-<li><a href="TODO">Saskia’s video</a></li>
-<li><a href="https://github.com/kevinrue/BiocPackageSofwareTemplate">Template Bioconductor package (in development)</a></li>
-<li><a href="https://github.com/kevinrue/bioc_package_guide">Bioconductor Package Guidelines for Developers and Reviewers</a></li>
-<li><a href="https://github.com/SaskiaFreytag/making_bioconductor_pkg">Building a Bioconductor package using RStudio</a></li>
-<li><a href="https://github.com/lshep/MakeAPackage">lshep/MakeAPackage</a></li>
+<li>
+<a href="https://speakerdeck.com/lcolladotor/biocthis-conectar2021">Slides (Spanish)</a>.</li>
 </ul>
+</li>
+<li>
+<a href="https://speakerdeck.com/lcolladotor/biocthis-tab">biocthis slides - Leonardo Collado Torres (2020-11-05; English)</a> for the Bioconductor Technical Advisory Board.</li>
+<li>
+<a href="https://youtu.be/aMTxkYsM-8o">Making R/Bioconductor packages with biocthis: recount3 use case - Leonardo Collado Torres (2020-09-10; 55 min video; English)</a>.
+<ul>
+<li>
+<a href="https://speakerdeck.com/lcolladotor/making-bioc-packages-with-biocthis">Slides (English)</a>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="making-a-bioconductor-package" class="section level3" number="6.26.2">
+<h3>
+<span class="header-section-number">6.26.2</span> Making a Bioconductor package<a class="anchor" aria-label="anchor" href="#making-a-bioconductor-package"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><a href="https://github.com/kevinrue/MyBioconductorPackage">kevinrue/MyBioconductorPackage - GitHub repository created in this chapter (2022-05-11)</a></li>
+<li><a href="https://www.youtube.com/watch?v=fq3kx6FZ6lY">Create and submit a package to Bioconductor - Kayla Interdonato (2020-09-10; workshop; English)</a></li>
+<li><a href="https://www.meetup.com/Boston-R-Bioconductor-for-genomics/events/254563803/">Creating a Bioconductor Package - Benjamin Stubbs (2018-11-20; Boston Meetup)</a></li>
+<li><a href="https://www.youtube.com/watch?v=ua-lEaPbCyo&amp;ab_channel=Bioconductor">Workshop - Building a Bioconductor Package - Saskia Freytag (2021-01-19; English)</a></li>
+<li><a href="http://contributions.bioconductor.org/">Bioconductor Packages: Development, Maintenance, and Peer Review (2021-present; book)</a></li>
+<li><a href="https://github.com/SaskiaFreytag/making_bioconductor_pkg">SaskiaFreytag/making_bioconductor_pkg - GitHub repository created in a workshop (2020)</a></li>
+<li><a href="https://github.com/lshep/MakeAPackage">lshep/MakeAPackage - Lori Shepherd (2017)</a></li>
+</ul>
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -954,10 +1452,24 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <li><a class="nav-link" href="#create-a-github-issue-template"><span class="header-section-number">6.16</span> Create a GitHub issue template</a></li>
 <li><a class="nav-link" href="#create-a-citation-template"><span class="header-section-number">6.17</span> Create a CITATION template</a></li>
 <li><a class="nav-link" href="#add-badges-to-the-readme-file"><span class="header-section-number">6.18</span> Add badges to the README file</a></li>
+<li><a class="nav-link" href="#enable-unit-tests"><span class="header-section-number">6.19</span> Enable unit tests</a></li>
+<li><a class="nav-link" href="#create-a-template-vignette"><span class="header-section-number">6.20</span> Create a template vignette</a></li>
+<li><a class="nav-link" href="#create-a-template-github-actions"><span class="header-section-number">6.21</span> Create a template GitHub Actions</a></li>
 <li>
-<a class="nav-link" href="#further-reading"><span class="header-section-number">6.19</span> Further reading</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#biocthis"><span class="header-section-number">6.19.1</span> biocthis</a></li></ul>
+<a class="nav-link" href="#using-github-actions"><span class="header-section-number">6.22</span> Using GitHub Actions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#using-git-on-terminal-command-line"><span class="header-section-number">6.22.1</span> Using Git on Terminal command line</a></li>
+<li><a class="nav-link" href="#using-the-rstudio-git-panel"><span class="header-section-number">6.22.2</span> Using the RStudio Git panel</a></li>
+</ul>
 </li>
-<li><a class="nav-link" href="#resources"><span class="header-section-number">6.20</span> Resources</a></li>
+<li><a class="nav-link" href="#add-r-code"><span class="header-section-number">6.23</span> Add R code</a></li>
+<li><a class="nav-link" href="#github-pages"><span class="header-section-number">6.24</span> GitHub Pages</a></li>
+<li><a class="nav-link" href="#continue-developing-the-package"><span class="header-section-number">6.25</span> Continue developing the package</a></li>
+<li>
+<a class="nav-link" href="#further-reading"><span class="header-section-number">6.26</span> Further reading</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#biocthis"><span class="header-section-number">6.26.1</span> biocthis</a></li>
+<li><a class="nav-link" href="#making-a-bioconductor-package"><span class="header-section-number">6.26.2</span> Making a Bioconductor package</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -975,7 +1487,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Bioconductor Guidelines for Mentors and Mentees</strong>" was written by Kevin Rue-Albrecht. It was last built on 2022-05-10.</p>
+    <p>"<strong>Bioconductor Guidelines for Mentors and Mentees</strong>" was written by Kevin Rue-Albrecht. It was last built on 2022-05-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
